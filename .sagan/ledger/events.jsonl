@@ -8,3 +8,13 @@
 {"event":"critique.verdict","ticket":"T-001","round":2,"critic":"critic-claude-fresh","verdict":"APPROVED","findings":0,"artifact_sha":"03f2d22","ts":"2026-08-06"}
 {"event":"decision.needed","ticket":"T-001","gate":"promote","state":"awaiting-promote","evidence_sha":"03f2d22","ts":"2026-08-06"}
 {"event":"decision.made","ticket":"T-001","gate":"promote","decision":"promote","by":"randy","ts":"2026-08-06"}
+{"event":"run.started","ticket":"WHA-131","store":"linear","pm":"claude-code-session","ts":"2026-08-06"}
+{"event":"lane.updated","ticket":"WHA-131","lane":"design","phase":"dispatched","builder":"frontend-claude-subagent","pack":".sagan/refs/wha-131-pack.md","ts":"2026-08-06"}
+{"event":"lane.updated","ticket":"WHA-131","lane":"design","phase":"built","artifact":"design/wha-131-frame/index.html","flags":["cta-hrefs-placeholder","grid-overlay-default-off","375-clause-overridden-by-pack","ink-alignment-js-skipped"],"ts":"2026-08-06"}
+{"event":"lane.updated","ticket":"WHA-131","lane":"critique","phase":"dispatched","critic":"critic-claude-fresh","round":1,"isolation":"artifact-plus-renders","ts":"2026-08-06"}
+{"event":"critique.verdict","ticket":"WHA-131","round":1,"critic":"critic-claude-fresh","verdict":"NEEDS_EVIDENCE","findings":4,"evidence_needed":"grid-overlay-on renders","ts":"2026-08-06"}
+{"event":"evidence.recorded","ticket":"WHA-131","producer":"pm-render","artifacts":[".sagan/refs/wha-131-renders/light-grid-on.png",".sagan/refs/wha-131-renders/dark-grid-on.png"],"for":"AC5 grid-overlay + ink-alignment judgment","ts":"2026-08-06"}
+{"event":"lane.updated","ticket":"WHA-131","lane":"critique","phase":"dispatched","critic":"critic-claude-fresh","round":2,"isolation":"artifact-plus-renders-plus-grid-evidence","ts":"2026-08-06"}
+{"event":"critique.verdict","ticket":"WHA-131","round":2,"critic":"critic-claude-fresh","verdict":"APPROVED","findings":4,"blocking":0,"ts":"2026-08-06"}
+{"event":"decision.needed","ticket":"WHA-131","gate":"art-direction-approval","state":"awaiting-randy","ts":"2026-08-06"}
+{"event":"decision.made","ticket":"WHA-131","gate":"art-direction-approval","decision":"approve","by":"randy","ts":"2026-08-06"}

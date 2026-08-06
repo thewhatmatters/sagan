@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Sagan — Mission Documentation · 01</title>
+<style>
+/* ============================================================
+   WHA-131 · sagan.run art-direction frame
+   Direction: "Sagan as mission documentation" — the site as the
+   standard's printed spec. Translated from the technical-manual
+   moodboard: mono index header, vast negative space, the content
+   as a floating printed sheet, numbered clauses, real artifacts
+   as typographic texture, dashed rules, page-number footer.
+   Grid: 12 col · 24 gutter · 72 margin · 1296 type area · 8px
+   baseline (leading = 3×). Toggle the overlay with G.
+   Type: Geist 400/500/600 · Geist Mono 400 (vendored, OFL).
+   Palette: warm cream sheet on cool putty ground, ink navy.
+   No accent color — hierarchy is weight, scale, mono vs sans.
+   ============================================================ */
+
+@font-face{font-family:"Geist";src:url("fonts/Geist-Regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:"Geist";src:url("fonts/Geist-Medium.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap;}
+@font-face{font-family:"Geist";src:url("fonts/Geist-SemiBold.woff2") format("woff2");font-weight:600;font-style:normal;font-display:swap;}
+@font-face{font-family:"Geist Mono";src:url("fonts/GeistMono-Regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap;}
+
+:root{
+  /* grid — one source of truth */
+  --cols:12; --bl:8px; --lh:24px; --gutter:24px; --margin:72px; --maxw:1296px;
+  /* scheme: warm paper on cool putty ground (light) */
+  --ground:#d3d4cf;
+  --ground-ink:#34374b;
+  --ground-soft:#6a6d75;
+  --sheet:#f8f5e6;
+  --panel:#efeada;
+  --ink:#23284a;
+  --ink-soft:#5d6076;
+  --hair:rgba(35,40,74,.26);
+  --hair-strong:rgba(35,40,74,.45);
+  --shadow:0 2px 6px rgba(28,30,48,.10), 0 32px 64px rgba(28,30,48,.17);
+  --sheet-edge:transparent;
+  --grain-opacity:.11;
+  --grain-invert:0;
+  /* overlay diagnostics (instrumentation, not palette) */
+  --g-col:rgba(228,0,43,.07); --g-edge:rgba(228,0,43,.38);
+  --g-base:rgba(0,150,140,.30); --g-base-min:rgba(0,150,140,.10);
+  color-scheme:light dark;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    /* instrument panel */
+    --ground:#101114;
+    --ground-ink:#c6c5ba;
+    --ground-soft:#83837b;
+    --sheet:#1d1f25;
+    --panel:#262931;
+    --ink:#e9e7da;
+    --ink-soft:#a19f94;
+    --hair:rgba(233,231,218,.22);
+    --hair-strong:rgba(233,231,218,.42);
+    --shadow:0 2px 6px rgba(0,0,0,.55), 0 32px 72px rgba(0,0,0,.5);
+    --sheet-edge:rgba(233,231,218,.08);
+    --grain-opacity:.14;
+    --grain-invert:1;
+  }
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+html{background:var(--ground);}
+body{
+  background:var(--ground);
+  color:var(--ink);
+  font:400 16px/24px "Geist",-apple-system,"Helvetica Neue",Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  position:relative;
+}
+/* paper grain on the ground — anisotropic, faint vertical streak */
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="280" height="280"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9 0.12" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.55 0"/></filter><rect width="280" height="280" filter="url(%23n)"/></svg>');
+  opacity:var(--grain-opacity);
+  filter:invert(var(--grain-invert));
+}
+::selection{background:var(--ink);color:var(--sheet);}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px;}
+
+.mono{font-family:"Geist Mono",ui-monospace,"SF Mono",Menlo,monospace;}
+
+/* ---- page frame ---------------------------------------------- */
+.wrap{
+  position:relative;z-index:1;
+  max-width:calc(var(--maxw) + 2*var(--margin));
+  margin:0 auto;
+  padding:48px var(--margin) 96px;
+}
+
+/* ---- ground index header (the moodboard's "05 - DATA SYNC") -- */
+.idx{
+  display:flex;align-items:baseline;justify-content:space-between;
+  color:var(--ground-ink);
+}
+.idx-title{
+  font-family:"Geist Mono",ui-monospace,monospace;
+  font-size:20px;line-height:24px;font-weight:400;
+  letter-spacing:.14em;text-transform:uppercase;
+}
+.idx-meta{
+  display:flex;gap:16px;align-items:baseline;
+  font-family:"Geist Mono",ui-monospace,monospace;
+  font-size:11px;line-height:16px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ground-soft);
+}
+.idx-meta button{
+  font:inherit;color:inherit;letter-spacing:inherit;text-transform:inherit;
+  background:none;border:1px solid var(--ground-soft);
+  padding:3px 10px;cursor:pointer;border-radius:2px;
+}
+.idx-meta button[aria-pressed="true"]{color:var(--ground-ink);border-color:var(--ground-ink);}
+
+/* second-section ground header */
+.idx--02{margin-top:160px;margin-bottom:40px;}
+
+/* ---- the vast negative space above the first sheet ----------- */
+.void{height:400px;}
+
+/* ---- the printed sheet --------------------------------------- */
+.sheet{
+  position:relative;
+  margin-inline:-48px;            /* paper bleeds 48px past the type area */
+  padding:64px 48px 56px;         /* interior content box == 1296 grid   */
+  background:var(--sheet);
+  border:1px solid var(--sheet-edge);
+  border-radius:16px;
+  box-shadow:var(--shadow);
+}
+.sheet::before{
+  content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;
+  background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="280" height="280"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9 0.12" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.55 0"/></filter><rect width="280" height="280" filter="url(%23n)"/></svg>');
+  opacity:.05;filter:invert(var(--grain-invert));
+}
+.sheet>*{position:relative;}
+
+/* ---- grid bands (place by column line) ----------------------- */
+.band{
+  display:grid;
+  grid-template-columns:repeat(var(--cols),1fr);
+  column-gap:var(--gutter);
+  align-items:start;
+}
+.c-1-6{grid-column:1/6;}
+.c-6-10{grid-column:6/10;}
+.c-10-13{grid-column:10/13;}
+.c-1-7{grid-column:1/7;}
+.c-7-13{grid-column:7/13;}
+.c-1-13{grid-column:1/-1;}
+@supports not (display:grid){.band{display:block;}}
+
+/* dashed vertical dividers, centered in the gutter */
+.div-l{border-left:1px dashed var(--hair);margin-left:-12px;padding-left:11px;}
+
+/* ---- type ----------------------------------------------------- */
+.eyebrow{
+  font-family:"Geist Mono",ui-monospace,monospace;
+  font-size:12px;line-height:16px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink-soft);
+}
+h1{
+  font-size:96px;line-height:96px;font-weight:600;letter-spacing:-.035em;
+  margin-top:24px;
+}
+.tagline{
+  font-size:28px;line-height:40px;font-weight:400;letter-spacing:-.015em;
+  margin-top:24px;max-width:19ch;
+}
+.abstract{
+  margin-top:32px;max-width:50ch;color:var(--ink-soft);
+}
+.stamp{
+  display:inline-block;margin-top:32px;
+  font-family:"Geist Mono",ui-monospace,monospace;
+  font-size:12px;line-height:16px;letter-spacing:.1em;text-transform:uppercase;
+  border:1px solid var(--hair-strong);border-radius:2px;
+  padding:11px 15px;
+}
+.ctas{margin-top:32px;display:flex;gap:16px;flex-wrap:wrap;}
+.cta{
+  font-family:"Geist Mono",ui-monospace,monospace;
+  font-size:12px;line-height:16px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink);text-decoration:none;
+  border:1px solid var(--hair-strong);border-radius:2px;
+  padding:11px 15px;
+}
+.cta:hover{background:var(--panel);}
+
+h2{
+  font-size:44px;line-height:48px;font-weight:600;letter-spacing:-.02em;
+  margin-top:16px;
+}
+.clause{
+  font-size:16px;line-height:24px;font-weight:600;
+  display:flex;gap:12px;align-items:baseline;
+}
+.clause .cnum{
+  font-family:"Geist Mono",ui-monospace,monospace;
+  font-size:13px;font-weight:400;color:var(--ink-soft);
+}
+.body{margin-top:16px;color:var(--ink-soft);max-width:44ch;}
+.body strong{color:var(--ink);font-weight:500;}
+
+/* ---- figure / specimen panels -------------------------------- */
+.fig-head{
+  display:flex;justify-content:space-between;align-items:baseline;
+  margin-bottom:16px;
+}
+.fig-head .t{font-size:14px;line-height:16px;font-weight:500;}
+.fig-head .f{
+  font-family:"Geist Mono",ui-monospace,monospace;
+  font-size:11px;line-height:16px;letter-spacing:.08em;color:var(--ink-soft);
+}
+.panel{
+  background:var(--panel);border-radius:8px;padding:24px;
+}
+.ledger{
+  font-family:"Geist Mono",ui-monospace,monospace;
+  font-size:11px;line-height:16px;
+  color:var(--ink-soft);
+  white-space:pre;overflow-x:auto;
+}
+.ledger b{font-weight:400;color:var(--ink);}
+.caption{
+  margin-top:16px;
+  font-family:"Geist Mono",ui-monospace,monospace;
+  font-size:10px;line-height:16px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink-soft);
+}
+
+/* ---- rule / verdict lists ------------------------------------ */
+.rules{list-style:none;margin-top:16px;}
+.rules li{padding:8px 0;}
+.rules li + li{border-top:1px solid var(--hair);padding-top:7px;}
+.rules strong{display:block;font-size:14px;line-height:16px;font-weight:500;}
+.rules span{display:block;font-size:13px;line-height:16px;color:var(--ink-soft);}
+
+.verdicts{list-style:none;margin-top:16px;max-width:44ch;}
+.verdicts li{padding:12px 0;}
+.verdicts li + li{border-top:1px solid var(--hair);padding-top:11px;}
+.verdict{
+  display:inline-block;
+  font-family:"Geist Mono",ui-monospace,monospace;
+  font-size:11px;line-height:16px;letter-spacing:.1em;
+  border:1px solid var(--hair-strong);border-radius:2px;
+  padding:3px 8px;
+}
+.verdicts span{display:block;margin-top:8px;font-size:13px;line-height:16px;color:var(--ink-soft);}
+
+/* ---- loop diagram (engraving) -------------------------------- */
+.engraving{display:block;margin:0 auto;color:var(--ink);}
+.engraving text{
+  font-family:"Geist Mono",ui-monospace,monospace;
+  letter-spacing:.1em;fill:currentColor;
+}
+.engraving .soft{opacity:.62;}
+
+/* ---- sheet footers ------------------------------------------- */
+.continue{
+  margin-top:48px;
+  border-top:1px dashed var(--hair);
+  padding-top:15px;
+  font-family:"Geist Mono",ui-monospace,monospace;
+  font-size:10px;line-height:16px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-soft);text-align:center;
+}
+.doc-foot{
+  margin-top:48px;
+  border-top:1px solid var(--hair);
+  padding-top:15px;
+  display:flex;justify-content:space-between;
+  font-family:"Geist Mono",ui-monospace,monospace;
+  font-size:10px;line-height:16px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-soft);
+}
+.continue + .doc-foot{margin-top:24px;}
+
+/* ---- ground tail --------------------------------------------- */
+.tail{
+  margin-top:64px;
+  font-family:"Geist Mono",ui-monospace,monospace;
+  font-size:11px;line-height:16px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ground-soft);
+}
+
+/* ---- grid overlay (toggle: G) — same content box as content -- */
+.guides{position:absolute;inset:0;pointer-events:none;z-index:60;opacity:0;transition:opacity .26s ease;}
+body.grid-on .guides{opacity:1;}
+.guides .cols{
+  position:absolute;top:0;bottom:0;left:var(--margin);right:var(--margin);
+  display:grid;grid-template-columns:repeat(var(--cols),1fr);column-gap:var(--gutter);
+}
+.guides .col{background:var(--g-col);box-shadow:inset 1px 0 0 var(--g-edge),inset -1px 0 0 var(--g-edge);position:relative;}
+.guides .col span{position:absolute;top:32px;left:0;right:0;text-align:center;font:10px/1 monospace;color:var(--g-edge);}
+.guides .rows{
+  position:absolute;left:var(--margin);right:var(--margin);top:0;bottom:0;
+  background-image:
+    repeating-linear-gradient(to bottom,var(--g-base) 0 1px,transparent 1px var(--lh)),
+    repeating-linear-gradient(to bottom,var(--g-base-min) 0 1px,transparent 1px var(--bl));
+}
+.guides .mline{position:absolute;top:0;bottom:0;width:1px;background:var(--g-edge);}
+.guides .mline.l{left:var(--margin);}
+.guides .mline.r{right:var(--margin);}
+
+/* ---- narrow safety only — this is a 1440 desktop frame ------- */
+@media (max-width:1100px){
+  .wrap{padding-inline:24px;}
+  .void{height:160px;}
+  .sheet{margin-inline:-16px;padding:40px 24px;}
+  .band{display:block;}
+  .band>*+*{margin-top:48px;}
+  .div-l{border-left:0;margin-left:0;padding-left:0;}
+  h1{font-size:56px;line-height:56px;}
+  .tagline{font-size:22px;line-height:32px;}
+  h2{font-size:32px;line-height:40px;}
+  .engraving{width:100%;height:auto;}
+  .guides{display:none;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ground index header -->
+  <header class="idx">
+    <p class="idx-title">01 — Sagan</p>
+    <p class="idx-meta">
+      <span>Mission documentation · Rev 0</span>
+      <button id="gridToggle" type="button" aria-pressed="false" title="Toggle the layout grid (G)">Grid · G</button>
+    </p>
+  </header>
+
+  <!-- deliberate negative space: the top half belongs to the ground -->
+  <div class="void" aria-hidden="true"></div>
+
+  <main>
+    <!-- ============ sheet 01 · hero ============ -->
+    <section class="sheet" aria-label="01 — Sagan">
+      <div class="band">
+
+        <div class="c-1-6">
+          <p class="eyebrow">Evidence-based multi-agent orchestration</p>
+          <h1>Sagan</h1>
+          <p class="tagline">Extraordinary claims require extraordinary evidence.</p>
+          <p class="abstract">One accountable PM agent dispatches stateless
+            specialist workers — frontend, backend, research — against tickets
+            whose acceptance criteria are written before any work starts.
+            Nothing user-visible ships without a fresh critic&rsquo;s verdict and a
+            non-builder verifier recording commands, exit codes, and screenshots
+            at a git SHA. It installs as a self-contained
+            <span class="mono">.sagan/</span> directory; humans stay in the loop
+            at per-ticket promote gates.</p>
+          <p class="stamp">Approved = verified — not plausible</p>
+          <div class="ctas">
+            <a class="cta" href="#repo">&rarr; GitHub repository</a>
+            <a class="cta" href="#quick-start">&rarr; Quick-start</a>
+          </div>
+        </div>
+
+        <figure class="c-6-10 div-l">
+          <div class="fig-head">
+            <span class="t">Evidence records</span>
+            <span class="f">jsonl</span>
+          </div>
+          <div class="panel">
+<pre class="ledger">{"event":"critique.verdict","ticket":"T-001",
+ "round":1,"critic":"critic-claude-fresh",
+ "verdict":<b>"NEEDS_EVIDENCE"</b>,"findings":4,
+ "artifact_sha":"03f2d22","ts":"2026-08-06"}
+
+{"event":"evidence.recorded","ticket":"T-001",
+ "sha":"03f2d2299976eeb269f0452ff111fbbb1e9ca5e4",
+ "verifier":"verify-claude",
+ "checks":[
+   {"ac_ref":"AC5","result":<b>"PASS"</b>,
+    "how":"Playwright chromium screenshots at
+      375x800 and 1280x900 (light+dark);
+      scrollWidth evaluated at 375px",
+    "output":"scrollWidth=375 == innerWidth=375
+      (light and dark); all sections legible"},
+   ⋮  six further checks, AC1–AC7 — all <b>"PASS"</b>
+ ],
+ "overall":<b>"PASS"</b>,"not_verified":[]}
+
+{"event":"critique.verdict","ticket":"T-001",
+ "round":2,"critic":"critic-claude-fresh",
+ "verdict":<b>"APPROVED"</b>,"findings":0,
+ "artifact_sha":"03f2d22","ts":"2026-08-06"}
+
+{"event":"decision.made","ticket":"T-001",
+ "gate":"promote","decision":"promote",
+ "by":"randy","ts":"2026-08-06"}</pre>
+          </div>
+          <figcaption class="caption">Fig. 01 — .sagan/ledger/events.jsonl · ticket T-001, abridged · evidence bound @ 03f2d22</figcaption>
+        </figure>
+
+        <div class="c-10-13 div-l">
+          <h2 class="clause"><span class="cnum">1.1</span> The rules</h2>
+          <ul class="rules">
+            <li><strong>AC before dispatch</strong>
+              <span>Critic without AC is opinion; critic against AC is a contract.</span></li>
+            <li><strong>Flags, never fixes</strong>
+              <span>The critic judges; the builder fixes; nobody self-approves.</span></li>
+            <li><strong>Builder &ne; verifier</strong>
+              <span>Structural, not cultural — the verifier is never the builder.</span></li>
+            <li><strong>Reading is not judging</strong>
+              <span>NEEDS_EVIDENCE exists so render and runtime claims require execution output.</span></li>
+            <li><strong>Approved = verified</strong>
+              <span>Ship requires critic approval and non-builder evidence at a git SHA.</span></li>
+            <li><strong>Caps are circuit breakers</strong>
+              <span>Round limits escalate to a human, never silent approval.</span></li>
+            <li><strong>Decisions surface structurally</strong>
+              <span>Open decisions arrive as batched questions with recommended defaults — never buried in prose.</span></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <footer class="doc-foot">
+        <span>Sagan — Mission documentation · Rev 0</span>
+        <span>01</span>
+      </footer>
+    </section>
+
+    <!-- ground index header, section 02 -->
+    <header class="idx idx--02">
+      <p class="idx-title">02 — The Loop</p>
+    </header>
+
+    <!-- ============ sheet 02 · the loop (top) ============ -->
+    <section class="sheet" aria-label="02 — The Loop">
+      <div class="band">
+
+        <div class="c-1-7">
+          <p class="eyebrow">Section 02</p>
+          <h2>The Loop</h2>
+
+          <h3 class="clause" style="margin-top:48px;"><span class="cnum">2.1</span> The circuit</h3>
+          <p class="body">Acceptance criteria are written first. A role-bound
+            builder produces the artifact at a digest; a fresh, artifact-only
+            critic judges it against the AC. <strong>NEEDS_EVIDENCE</strong>
+            routes to a verifier that executes — never the builder — and binds
+            evidence to a git SHA. <strong>APPROVED</strong> moves the artifact
+            to a human promote gate. Every dispatch, verdict, and evidence
+            record lands in the ledger.</p>
+
+          <h3 class="clause" style="margin-top:48px;"><span class="cnum">2.2</span> Verdicts</h3>
+          <ul class="verdicts">
+            <li><code class="verdict">APPROVED</code>
+              <span>Verified, not plausible — critic approval plus non-builder evidence at a git SHA.</span></li>
+            <li><code class="verdict">REVISE</code>
+              <span>The critic flags; the builder fixes; nobody self-approves.</span></li>
+            <li><code class="verdict">NEEDS_EVIDENCE</code>
+              <span>Reading is not judging — render and runtime claims require execution output.</span></li>
+            <li><code class="verdict">ESCALATE</code>
+              <span>Round caps are circuit breakers — limits route to a human, never silent approval.</span></li>
+          </ul>
+        </div>
+
+        <figure class="c-7-13 div-l">
+          <div class="fig-head">
+            <span class="t">One ticket through the loop</span>
+            <span class="f">svg</span>
+          </div>
+          <div class="panel">
+            <svg class="engraving" width="544" height="560" viewBox="0 0 680 700"
+                 role="img" aria-labelledby="fig2t fig2d">
+              <title id="fig2t">The Sagan loop, drawn as a thin-line engraving</title>
+              <desc id="fig2d">A circular circuit of four stations — ticket plus
+                acceptance criteria, build, critique, promote gate — with a
+                verify satellite exchanging evidence with critique, a REVISE
+                return arc, an ESCALATE ray to a human, and radial lines binding
+                every station to the ledger at the center, in the manner of the
+                Voyager Golden Record cover.</desc>
+              <defs>
+                <path id="arw" d="M-9 -3.5 L0 0 L-9 3.5" fill="none" stroke="currentColor" stroke-width="1"/>
+              </defs>
+              <g fill="none" stroke="currentColor">
+
+                <!-- instrument bezel -->
+                <circle cx="310" cy="320" r="252" stroke-width="1" stroke-dasharray="1 11" opacity=".28"/>
+
+                <!-- hub: the ledger, engraved as record grooves -->
+                <g stroke-width=".7">
+                  <circle cx="310" cy="320" r="38" opacity=".9"/>
+                  <circle cx="310" cy="320" r="32" opacity=".75"/>
+                  <circle cx="310" cy="320" r="26" opacity=".6"/>
+                  <circle cx="310" cy="320" r="20" opacity=".5"/>
+                  <circle cx="310" cy="320" r="14" opacity=".4"/>
+                  <circle cx="310" cy="320" r="8"  opacity=".35"/>
+                </g>
+                <line x1="310" y1="320" x2="329" y2="287" stroke-width=".5" opacity=".7"/>
+                <circle cx="310" cy="320" r="1.6" fill="currentColor" stroke="none"/>
+                <!-- hub leader + label -->
+                <line x1="252" y1="252" x2="283" y2="293" stroke-width=".4" opacity=".55"/>
+                <text x="247" y="247" text-anchor="end" font-size="9" class="soft">.SAGAN/LEDGER/</text>
+                <text x="247" y="261" text-anchor="end" font-size="9" class="soft">EVENTS.JSONL</text>
+
+                <!-- radial filings: every station reports to the ledger -->
+                <g stroke-width=".6" opacity=".42">
+                  <g transform="rotate(0,310,320)"><line x1="310" y1="272" x2="310" y2="146"/></g>
+                  <g transform="rotate(90,310,320)"><line x1="310" y1="272" x2="310" y2="146"/></g>
+                  <g transform="rotate(180,310,320)"><line x1="310" y1="272" x2="310" y2="184"/></g>
+                  <g transform="rotate(270,310,320)"><line x1="310" y1="272" x2="310" y2="146"/></g>
+                  <g transform="rotate(145,310,320)"><line x1="310" y1="272" x2="310" y2="160"/></g>
+                </g>
+                <!-- binary ticks along the filings -->
+                <g stroke-width=".8" opacity=".55">
+                  <g transform="rotate(0,310,320)">
+                    <line x1="305" y1="256" x2="315" y2="256"/><line x1="305" y1="248" x2="315" y2="248"/><line x1="305" y1="232" x2="315" y2="232"/>
+                  </g>
+                  <g transform="rotate(90,310,320)">
+                    <line x1="305" y1="256" x2="315" y2="256"/><line x1="305" y1="240" x2="315" y2="240"/><line x1="305" y1="232" x2="315" y2="232"/><line x1="305" y1="216" x2="315" y2="216"/>
+                  </g>
+                  <g transform="rotate(180,310,320)">
+                    <line x1="305" y1="248" x2="315" y2="248"/><line x1="305" y1="224" x2="315" y2="224"/>
+                  </g>
+                  <g transform="rotate(270,310,320)">
+                    <line x1="305" y1="256" x2="315" y2="256"/><line x1="305" y1="244" x2="315" y2="244"/><line x1="305" y1="236" x2="315" y2="236"/>
+                  </g>
+                  <g transform="rotate(145,310,320)">
+                    <line x1="305" y1="252" x2="315" y2="252"/><line x1="305" y1="244" x2="315" y2="244"/><line x1="305" y1="228" x2="315" y2="228"/><line x1="305" y1="212" x2="315" y2="212"/>
+                  </g>
+                </g>
+
+                <!-- the ring: AC → BUILD → CRITIQUE → PROMOTE → (shipped) -->
+                <g stroke-width="1">
+                  <path d="M334.4 121.5 A200 200 0 0 1 508.5 295.6"/>
+                  <path d="M508.5 344.4 A200 200 0 0 1 334.4 518.5"/>
+                  <path d="M285.6 518.5 A200 200 0 0 1 111.5 344.4"/>
+                  <path d="M111.5 295.6 A200 200 0 0 1 285.6 121.5"/>
+                </g>
+                <use href="#arw" transform="translate(451.4,178.6) rotate(45)"/>
+                <use href="#arw" transform="translate(451.4,461.4) rotate(135)"/>
+                <use href="#arw" transform="translate(168.6,461.4) rotate(225)"/>
+                <use href="#arw" transform="translate(168.6,178.6) rotate(315)"/>
+                <text x="466" y="163" font-size="9.5" class="soft">DISPATCH</text>
+                <text x="466" y="486" font-size="9.5" class="soft">ARTIFACT @ DIGEST</text>
+                <text x="154" y="486" text-anchor="end" font-size="9.5" class="soft">APPROVED</text>
+                <text x="154" y="163" text-anchor="end" font-size="9.5" class="soft">SHIPPED @ SHA</text>
+
+                <!-- REVISE: inner return arc, critique → build -->
+                <path d="M330 505 A170 170 0 0 1 495 340" stroke-width=".9" stroke-dasharray="3 5"/>
+                <use href="#arw" transform="translate(495,340) rotate(-5)"/>
+                <text x="0" y="0" font-size="9.5" class="soft" text-anchor="middle"
+                      transform="translate(368,378) rotate(-45)">REVISE</text>
+
+                <!-- stations -->
+                <g stroke-width="1">
+                  <circle cx="310" cy="120" r="13"/><circle cx="310" cy="120" r="8.5" stroke-width=".6" opacity=".7"/><circle cx="310" cy="120" r="1.3" fill="currentColor" stroke="none"/>
+                  <circle cx="510" cy="320" r="13"/><circle cx="510" cy="320" r="8.5" stroke-width=".6" opacity=".7"/><circle cx="510" cy="320" r="1.3" fill="currentColor" stroke="none"/>
+                  <circle cx="310" cy="520" r="13"/><circle cx="310" cy="520" r="8.5" stroke-width=".6" opacity=".7"/><circle cx="310" cy="520" r="1.3" fill="currentColor" stroke="none"/>
+                  <circle cx="110" cy="320" r="13"/><circle cx="110" cy="320" r="8.5" stroke-width=".6" opacity=".7"/><circle cx="110" cy="320" r="1.3" fill="currentColor" stroke="none"/>
+                  <circle cx="505" cy="598" r="13"/><circle cx="505" cy="598" r="8.5" stroke-width=".6" opacity=".7"/><circle cx="505" cy="598" r="1.3" fill="currentColor" stroke="none"/>
+                </g>
+                <text x="310" y="78" text-anchor="middle" font-size="10.5">TICKET + AC</text>
+                <text x="310" y="92" text-anchor="middle" font-size="8.5" class="soft">WRITTEN BEFORE ANY WORK</text>
+                <text x="532" y="316" font-size="10.5">BUILD</text>
+                <text x="532" y="330" font-size="8.5" class="soft">ROLE-BOUND WORKER</text>
+                <text x="310" y="483" text-anchor="middle" font-size="10.5">CRITIQUE</text>
+                <text x="310" y="497" text-anchor="middle" font-size="8.5" class="soft">FRESH · ARTIFACT-ONLY</text>
+                <text x="88" y="316" text-anchor="end" font-size="10.5">PROMOTE GATE</text>
+                <text x="88" y="330" text-anchor="end" font-size="8.5" class="soft">HUMAN DECISION</text>
+                <text x="505" y="632" text-anchor="middle" font-size="10.5">VERIFY</text>
+                <text x="505" y="646" text-anchor="middle" font-size="8.5" class="soft">EXECUTES · NEVER THE BUILDER</text>
+
+                <!-- critique ⇄ verify: the evidence exchange -->
+                <g stroke-width=".9">
+                  <line x1="323.4" y1="529.6" x2="488.6" y2="595.8"/>
+                  <line x1="491.6" y1="588.4" x2="326.4" y2="522.2"/>
+                </g>
+                <use href="#arw" transform="translate(488.6,595.8) rotate(21.8) scale(.85)"/>
+                <use href="#arw" transform="translate(326.4,522.2) rotate(201.8) scale(.85)"/>
+                <text x="0" y="0" font-size="9" class="soft" text-anchor="middle"
+                      transform="translate(416,580) rotate(21.8)">NEEDS_EVIDENCE</text>
+                <text x="0" y="0" font-size="9" class="soft" text-anchor="middle"
+                      transform="translate(400,541) rotate(21.8)">EVIDENCE @ SHA</text>
+
+                <!-- ESCALATE: ray out of the system, to a human -->
+                <line x1="293" y1="536" x2="140" y2="625" stroke-width=".9"/>
+                <g stroke-width=".8" opacity=".6">
+                  <line x1="222" y1="572.5" x2="226" y2="579.5"/>
+                  <line x1="206.7" y1="581.5" x2="210.7" y2="588.5"/>
+                  <line x1="191.5" y1="590.5" x2="195.5" y2="597.5"/>
+                </g>
+                <rect x="128" y="625" width="12" height="12" stroke-width="1"/>
+                <text x="134" y="662" text-anchor="middle" font-size="10.5">ESCALATE</text>
+                <text x="134" y="676" text-anchor="middle" font-size="8.5" class="soft">ROUND CAPS &rarr; A HUMAN</text>
+
+              </g>
+            </svg>
+          </div>
+          <figcaption class="caption">Fig. 02 — the loop, engraved · every station files to the ledger at center · after the Voyager Golden Record</figcaption>
+        </figure>
+
+      </div>
+
+      <p class="continue">Continued — 03 · The Rules&ensp;&middot;&ensp;04 · The Receipts&ensp;&middot;&ensp;05 · Install</p>
+      <footer class="doc-foot">
+        <span>Sagan — Mission documentation · Rev 0</span>
+        <span>02</span>
+      </footer>
+    </section>
+  </main>
+
+  <p class="tail">A fleet of small vessels, steered by evidence. — sagan.run</p>
+
+  <!-- grid overlay: same content box as the content -->
+  <div class="guides" aria-hidden="true">
+    <div class="cols"></div>
+    <div class="rows"></div>
+    <div class="mline l"></div>
+    <div class="mline r"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var btn=document.getElementById('gridToggle');
+  function setGrid(on){
+    document.body.classList.toggle('grid-on',on);
+    if(btn) btn.setAttribute('aria-pressed',on?'true':'false');
+  }
+  if(btn) btn.addEventListener('click',function(){
+    setGrid(!document.body.classList.contains('grid-on'));
+  });
+  document.addEventListener('keydown',function(e){
+    if((e.key==='g'||e.key==='G')&&!e.metaKey&&!e.ctrlKey&&!e.altKey
+       &&!/^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName))
+      setGrid(!document.body.classList.contains('grid-on'));
+  });
+  var host=document.querySelector('.guides .cols');
+  if(host){
+    var n=parseInt(getComputedStyle(document.documentElement).getPropertyValue('--cols'),10)||12;
+    for(var i=1;i<=n;i++){
+      var c=document.createElement('div');c.className='col';
+      var s=document.createElement('span');s.textContent=i;
+      c.appendChild(s);host.appendChild(c);
+    }
+  }
+})();
+</script>
+</body>
+</html>
