@@ -50,6 +50,6 @@ memory:
   promote_to: AGENTS.md
 
 ticket:
-  store: local-files                # tickets/T-*.md; Linear deferred
+  store: linear                     # Linear project "Sagan" (Whatmatters); local tickets/ kept for T-000/T-001 history
   blocks: [ac, frontend, qa, decisions]
   required_fields: [ac, builder_id, verifier_id, evidence_sha]
