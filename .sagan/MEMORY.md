@@ -30,27 +30,34 @@
   validation would have rejected it — the spec and the validator need to
   agree on the envelope.
 
-## From WHA-130/131 staging (2026-08-06) — captured for the sagan PM skill
+## From the second run's staging (sagan.run site, 2026-08-06) — captured for the sagan PM skill
 
 - **Dispatch access check (PM checklist item):** every pointer in a
   context pack must resolve *for the worker receiving it*. Inaccessible
-  sources (JS-walled pages like cosmos.so, auth-gated Linear attachments)
-  get materialized into local artifacts before dispatch; the PM's written
-  read supplements the original, never substitutes for it (v3.2
-  anti-paraphrase rule). Case: WHA-131 moodboard — image pulled from the
-  Linear attachment to a gitignored local path + a structural read logged
-  on the ticket; workers receive both.
+  sources (JS-walled pages, auth-gated tracker attachments) get
+  materialized into local artifacts before dispatch; the PM's written
+  read supplements the original, never substitutes for it (the
+  anti-paraphrase rule). Case: an art-direction moodboard on a JS-walled
+  site — the image was materialized from the ticket attachment to a
+  gitignored local path, with a structural read logged on the ticket;
+  workers receive both.
 - **Third-party reference imagery never gets committed to a public
   repo** — it lives on the ticket and in a transient gitignored path.
-- **Linear MCP quirk:** save_issue silently ignores a nonexistent
-  project name — no error, no auto-create. Create the project first,
-  then attach; and verify the response echoes `project` before claiming
-  it. (Claim-vs-evidence applies to the PM's own tool calls.)
+- **Linear MCP quirk (when Linear is the ticket store):** save_issue
+  silently ignores a nonexistent project name — no error, no
+  auto-create. Create the project first, then attach; and verify the
+  response echoes `project` before claiming it. (Claim-vs-evidence
+  applies to the PM's own tool calls.)
 - **AC amendments are dated Decisions entries plus an edited AC block**
   (marked "Amended — see Decisions") — never a silent edit, never a
-  Decisions-only note that leaves the AC stale. Case: WHA-130 Astro
-  amendment.
+  Decisions-only note that leaves the AC stale. Case: amending the site
+  ticket's AC to permit a build-time framework while keeping runtime
+  constraints.
 - **Startup sequence to codify in the skill:** read sagan.yaml → fetch
   ticket → check AC exists / blockers / gates → surface open decisions as
   structured questions → log run start to ledger → dispatch with pointer
   packs.
+- **Memory hygiene in a public reference repo:** entries here are read
+  by adopters, not just this fleet — cite in-repo artifacts (T-001) or
+  write cases self-describing; private tracker IDs stay in the private
+  tracker.
