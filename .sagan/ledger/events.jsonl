@@ -18,3 +18,5 @@
 {"event":"critique.verdict","ticket":"WHA-131","round":2,"critic":"critic-claude-fresh","verdict":"APPROVED","findings":4,"blocking":0,"ts":"2026-08-06"}
 {"event":"decision.needed","ticket":"WHA-131","gate":"art-direction-approval","state":"awaiting-randy","ts":"2026-08-06"}
 {"event":"decision.made","ticket":"WHA-131","gate":"art-direction-approval","decision":"approve","by":"randy","ts":"2026-08-06"}
+{"event":"lane.updated","ticket":"WHA-130","lane":"frontend","phase":"dispatched","builder":"frontend-claude-subagent","pack":".sagan/refs/wha-130-pack.md","frame_contract":"design/wha-131-frame@392bd2b","ts":"2026-08-06"}
+{"event":"lane.updated","ticket":"WHA-130","lane":"frontend","phase":"built","artifact":"site/","dist_bytes":529968,"flags":["engraving-inner-scroll-375","no-literal-quickstart-commands","footer-honest-unshipped","favicon-added"],"ts":"2026-08-06"}

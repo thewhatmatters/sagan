@@ -1,0 +1,442 @@
+/* ============================================================
+   WHA-130 · sagan.run v1 — extends the approved WHA-131 frame
+   ("Sagan as mission documentation"). All tokens, the sheet
+   formula, the type scale, and the grid are the frame's values —
+   carried over, not reinvented. New in this build: sections
+   03/04/05 components, site footer, designed 375px pass,
+   reduced-motion guards, evidence-figure styles.
+   Grid: 12 col · 24 gutter · 72 margin · 1296 type area · 8px
+   baseline (leading = 3×). Toggle the overlay with G (desktop).
+   Type: Geist 400/500/600 · Geist Mono 400 (vendored, OFL).
+   Palette: warm cream sheet on cool putty ground, ink navy.
+   No accent color — hierarchy is weight, scale, mono vs sans.
+   ============================================================ */
+
+@font-face{font-family:"Geist";src:url("/fonts/Geist-Regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:"Geist";src:url("/fonts/Geist-Medium.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap;}
+@font-face{font-family:"Geist";src:url("/fonts/Geist-SemiBold.woff2") format("woff2");font-weight:600;font-style:normal;font-display:swap;}
+@font-face{font-family:"Geist Mono";src:url("/fonts/GeistMono-Regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap;}
+
+:root{
+  /* grid — one source of truth */
+  --cols:12; --bl:8px; --lh:24px; --gutter:24px; --margin:72px; --maxw:1296px;
+  /* scheme: warm paper on cool putty ground (light) */
+  --ground:#d3d4cf;
+  --ground-ink:#34374b;
+  --ground-soft:#6a6d75;
+  --sheet:#f8f5e6;
+  --panel:#efeada;
+  --ink:#23284a;
+  --ink-soft:#5d6076;
+  --hair:rgba(35,40,74,.26);
+  --hair-strong:rgba(35,40,74,.45);
+  --shadow:0 2px 6px rgba(28,30,48,.10), 0 32px 64px rgba(28,30,48,.17);
+  --sheet-edge:transparent;
+  --grain-opacity:.11;
+  --grain-invert:0;
+  /* overlay diagnostics (instrumentation, not palette) */
+  --g-col:rgba(228,0,43,.07); --g-edge:rgba(228,0,43,.38);
+  --g-base:rgba(0,150,140,.30); --g-base-min:rgba(0,150,140,.10);
+  color-scheme:light dark;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    /* instrument panel — accepted by the human gate; kept as the frame has it */
+    --ground:#101114;
+    --ground-ink:#c6c5ba;
+    --ground-soft:#83837b;
+    --sheet:#1d1f25;
+    --panel:#262931;
+    --ink:#e9e7da;
+    --ink-soft:#a19f94;
+    --hair:rgba(233,231,218,.22);
+    --hair-strong:rgba(233,231,218,.42);
+    --shadow:0 2px 6px rgba(0,0,0,.55), 0 32px 72px rgba(0,0,0,.5);
+    --sheet-edge:rgba(233,231,218,.08);
+    --grain-opacity:.14;
+    --grain-invert:1;
+  }
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+html{background:var(--ground);}
+@media (prefers-reduced-motion:no-preference){
+  html{scroll-behavior:smooth;}
+}
+body{
+  background:var(--ground);
+  color:var(--ink);
+  font:400 16px/24px "Geist",-apple-system,"Helvetica Neue",Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  position:relative;
+}
+/* paper grain on the ground — anisotropic, faint vertical streak */
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="280" height="280"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9 0.12" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.55 0"/></filter><rect width="280" height="280" filter="url(%23n)"/></svg>');
+  opacity:var(--grain-opacity);
+  filter:invert(var(--grain-invert));
+}
+::selection{background:var(--ink);color:var(--sheet);}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px;}
+
+.mono{font-family:"Geist Mono",ui-monospace,"SF Mono",Menlo,monospace;}
+
+/* ---- page frame ---------------------------------------------- */
+.wrap{
+  position:relative;z-index:1;
+  max-width:calc(var(--maxw) + 2*var(--margin));
+  margin:0 auto;
+  padding:48px var(--margin) 96px;
+}
+
+/* ---- ground index header ("01 — SAGAN") ---------------------- */
+.idx{
+  display:flex;align-items:baseline;justify-content:space-between;
+  gap:16px;flex-wrap:wrap;
+  color:var(--ground-ink);
+}
+.idx-title{
+  font-family:"Geist Mono",ui-monospace,monospace;
+  font-size:20px;line-height:24px;font-weight:400;
+  letter-spacing:.14em;text-transform:uppercase;
+}
+.idx-meta{
+  display:flex;gap:16px;align-items:baseline;
+  font-family:"Geist Mono",ui-monospace,monospace;
+  font-size:11px;line-height:16px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ground-soft);
+}
+.idx-meta button{
+  font:inherit;color:inherit;letter-spacing:inherit;text-transform:inherit;
+  background:none;border:1px solid var(--ground-soft);
+  padding:3px 10px;cursor:pointer;border-radius:2px;
+}
+.idx-meta button[aria-pressed="true"]{color:var(--ground-ink);border-color:var(--ground-ink);}
+
+/* section-break ground headers */
+.idx--sect{margin-top:160px;margin-bottom:40px;}
+
+/* ---- the vast negative space above the first sheet ----------- */
+.void{height:400px;}
+
+/* ---- the printed sheet --------------------------------------- */
+.sheet{
+  position:relative;
+  margin-inline:-48px;            /* paper bleeds 48px past the type area */
+  padding:64px 48px 56px;         /* interior content box == 1296 grid   */
+  background:var(--sheet);
+  border-radius:16px;
+  /* dark-mode edge as an inset ring, not a border — the border-box
+     border inset the sheet interior 1px off the lattice (carried
+     critique finding); box-shadow takes no layout space */
+  box-shadow:inset 0 0 0 1px var(--sheet-edge), var(--shadow);
+}
+.sheet::before{
+  content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;
+  background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="280" height="280"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9 0.12" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.55 0"/></filter><rect width="280" height="280" filter="url(%23n)"/></svg>');
+  opacity:.05;filter:invert(var(--grain-invert));
+}
+.sheet>*{position:relative;}
+
+/* ---- grid bands (place by column line) ----------------------- */
+.band{
+  display:grid;
+  grid-template-columns:repeat(var(--cols),1fr);
+  column-gap:var(--gutter);
+  align-items:start;
+}
+.band + .band{margin-top:64px;}
+.c-1-6{grid-column:1/6;}
+.c-6-10{grid-column:6/10;}
+.c-10-13{grid-column:10/13;}
+.c-1-7{grid-column:1/7;}
+.c-7-13{grid-column:7/13;}
+.c-6-13{grid-column:6/13;}
+.c-1-4{grid-column:1/4;}
+.c-4-9{grid-column:4/9;}
+.c-9-13{grid-column:9/13;}
+.c-1-13{grid-column:1/-1;}
+@supports not (display:grid){.band{display:block;}}
+
+/* dashed vertical dividers, centered in the gutter */
+.div-l{border-left:1px dashed var(--hair);margin-left:-12px;padding-left:11px;}
+
+/* ---- type ----------------------------------------------------- */
+.eyebrow{
+  font-family:"Geist Mono",ui-monospace,monospace;
+  font-size:12px;line-height:16px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink-soft);
+}
+h1{
+  font-size:96px;line-height:96px;font-weight:600;letter-spacing:-.035em;
+  margin-top:24px;
+}
+.tagline{
+  font-size:28px;line-height:40px;font-weight:400;letter-spacing:-.015em;
+  margin-top:24px;max-width:19ch;
+}
+.abstract{
+  margin-top:32px;max-width:50ch;color:var(--ink-soft);
+}
+.stamp{
+  display:inline-block;margin-top:32px;
+  font-family:"Geist Mono",ui-monospace,monospace;
+  font-size:12px;line-height:16px;letter-spacing:.1em;text-transform:uppercase;
+  border:1px solid var(--hair-strong);border-radius:2px;
+  padding:11px 15px;
+}
+.ctas{margin-top:32px;display:flex;gap:16px;flex-wrap:wrap;}
+.cta{
+  font-family:"Geist Mono",ui-monospace,monospace;
+  font-size:12px;line-height:16px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink);text-decoration:none;
+  border:1px solid var(--hair-strong);border-radius:2px;
+  padding:11px 15px;
+}
+.cta:hover{background:var(--panel);}
+
+h2{
+  font-size:44px;line-height:48px;font-weight:600;letter-spacing:-.02em;
+  margin-top:16px;
+}
+.clause{
+  font-size:16px;line-height:24px;font-weight:600;
+  display:flex;gap:12px;align-items:baseline;
+}
+.clause .cnum{
+  font-family:"Geist Mono",ui-monospace,monospace;
+  font-size:13px;font-weight:400;color:var(--ink-soft);
+}
+.clause--gap{margin-top:48px;}
+.body{margin-top:16px;color:var(--ink-soft);max-width:44ch;}
+.body strong{color:var(--ink);font-weight:500;}
+.body a{color:var(--ink);text-decoration-color:var(--hair-strong);text-underline-offset:3px;}
+
+/* ---- figure / specimen panels -------------------------------- */
+.fig-head{
+  display:flex;justify-content:space-between;align-items:baseline;
+  margin-bottom:16px;gap:16px;
+}
+.fig-head .t{font-size:14px;line-height:16px;font-weight:500;}
+.fig-head .f{
+  font-family:"Geist Mono",ui-monospace,monospace;
+  font-size:11px;line-height:16px;letter-spacing:.08em;color:var(--ink-soft);
+}
+.panel{
+  background:var(--panel);border-radius:8px;padding:24px;
+}
+.panel--scroll{overflow-x:auto;}
+.ledger{
+  font-family:"Geist Mono",ui-monospace,monospace;
+  font-size:11px;line-height:16px;
+  color:var(--ink-soft);
+  white-space:pre;overflow-x:auto;
+}
+.ledger b{font-weight:400;color:var(--ink);}
+.caption{
+  margin-top:16px;
+  font-family:"Geist Mono",ui-monospace,monospace;
+  font-size:10px;line-height:16px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink-soft);
+}
+
+/* ---- rule / verdict lists (hero + loop) ---------------------- */
+.rules{list-style:none;margin-top:16px;}
+.rules li{padding:8px 0;}
+.rules li + li{border-top:1px solid var(--hair);padding-top:7px;}
+.rules strong{display:block;font-size:14px;line-height:16px;font-weight:500;}
+.rules span{display:block;font-size:13px;line-height:16px;color:var(--ink-soft);}
+
+.verdicts{list-style:none;margin-top:16px;max-width:44ch;}
+.verdicts li{padding:12px 0;}
+.verdicts li + li{border-top:1px solid var(--hair);padding-top:11px;}
+.verdict{
+  display:inline-block;
+  font-family:"Geist Mono",ui-monospace,monospace;
+  font-size:11px;line-height:16px;letter-spacing:.1em;
+  border:1px solid var(--hair-strong);border-radius:2px;
+  padding:3px 8px;
+}
+.verdicts span{display:block;margin-top:8px;font-size:13px;line-height:16px;color:var(--ink-soft);}
+
+/* ---- loop diagram (engraving) -------------------------------- */
+.engraving{display:block;margin:0 auto;color:var(--ink);max-width:100%;}
+.engraving text{
+  font-family:"Geist Mono",ui-monospace,monospace;
+  letter-spacing:.06em;fill:currentColor;
+}
+.engraving .soft{opacity:.62;}
+
+/* ---- 03 · the rules as clauses ------------------------------- */
+.rt-head{
+  font-family:"Geist Mono",ui-monospace,monospace;
+  font-size:10px;line-height:16px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-soft);
+  padding-bottom:15px;border-bottom:1px solid var(--hair-strong);
+}
+.rt{list-style:none;}
+.rt>li{padding:24px 0 23px;border-bottom:1px solid var(--hair);}
+.rt-name{font-size:16px;line-height:24px;font-weight:600;
+  display:flex;gap:12px;align-items:baseline;}
+.rt-name .cnum{
+  font-family:"Geist Mono",ui-monospace,monospace;
+  font-size:13px;font-weight:400;color:var(--ink-soft);
+}
+.rt-mean{color:var(--ink-soft);max-width:44ch;}
+.rt-mean strong{color:var(--ink);font-weight:500;}
+.rt-ref{
+  font-family:"Geist Mono",ui-monospace,monospace;
+  font-size:11px;line-height:16px;
+  color:var(--ink-soft);
+}
+.rt-ref b{font-weight:400;color:var(--ink);}
+.rt-ref .rlabel{
+  display:block;font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  margin-bottom:8px;opacity:.8;
+}
+
+/* ---- 04 · receipts ------------------------------------------- */
+.trail{list-style:none;margin-top:16px;max-width:46ch;}
+.trail li{padding:12px 0;}
+.trail li + li{border-top:1px solid var(--hair);padding-top:11px;}
+.trail span{display:block;margin-top:8px;font-size:13px;line-height:16px;color:var(--ink-soft);}
+.trail span b{font-weight:500;color:var(--ink);}
+
+.ev-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.ev{background:var(--panel);border-radius:8px;padding:16px;}
+.ev img{
+  display:block;width:100%;height:auto;
+  border:1px solid var(--hair);border-radius:4px;
+  background:#fff;
+}
+.ev figcaption{
+  margin-top:8px;
+  font-family:"Geist Mono",ui-monospace,monospace;
+  font-size:10px;line-height:16px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink-soft);
+}
+
+/* ---- 05 · install -------------------------------------------- */
+.steps{list-style:none;margin-top:16px;counter-reset:step;}
+.steps li{padding:12px 0;counter-increment:step;}
+.steps li + li{border-top:1px solid var(--hair);padding-top:11px;}
+.steps strong{
+  display:block;font-size:14px;line-height:16px;font-weight:500;
+}
+.steps strong::before{
+  content:"0" counter(step) "  ";
+  font-family:"Geist Mono",ui-monospace,monospace;
+  font-size:11px;font-weight:400;letter-spacing:.1em;color:var(--ink-soft);
+}
+.steps span{display:block;margin-top:4px;font-size:13px;line-height:16px;color:var(--ink-soft);max-width:40ch;}
+.steps .mono{font-size:12px;}
+
+.status{list-style:none;margin-top:16px;}
+.status li{padding:8px 0;}
+.status li + li{border-top:1px solid var(--hair);padding-top:7px;}
+.status strong{display:block;font-size:14px;line-height:16px;font-weight:500;}
+.status span{display:block;font-size:13px;line-height:16px;color:var(--ink-soft);}
+
+/* ---- sheet footers ------------------------------------------- */
+.doc-foot{
+  margin-top:48px;
+  border-top:1px solid var(--hair);
+  padding-top:15px;
+  display:flex;justify-content:space-between;gap:16px;
+  font-family:"Geist Mono",ui-monospace,monospace;
+  font-size:10px;line-height:16px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-soft);
+}
+
+/* ---- site footer (on the ground) ----------------------------- */
+.foot{
+  margin-top:160px;
+  border-top:1px dashed var(--ground-soft);
+  padding-top:39px;
+  color:var(--ground-ink);
+}
+.foot-grid{
+  display:grid;
+  grid-template-columns:repeat(var(--cols),1fr);
+  column-gap:var(--gutter);row-gap:40px;
+}
+.foot-item{font-size:13px;line-height:16px;}
+.foot-item .fl{
+  display:block;margin-bottom:8px;
+  font-family:"Geist Mono",ui-monospace,monospace;
+  font-size:10px;line-height:16px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ground-soft);
+}
+.foot-item a{color:var(--ground-ink);text-decoration-color:var(--ground-soft);text-underline-offset:3px;}
+.tail{
+  margin-top:64px;
+  font-family:"Geist Mono",ui-monospace,monospace;
+  font-size:11px;line-height:16px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ground-soft);
+}
+
+/* ---- grid overlay (toggle: G) — same content box as content -- */
+.guides{position:absolute;inset:0;pointer-events:none;z-index:60;opacity:0;}
+body.grid-on .guides{opacity:1;}
+@media (prefers-reduced-motion:no-preference){
+  .guides{transition:opacity .26s ease;}
+}
+.guides .cols{
+  position:absolute;top:0;bottom:0;left:var(--margin);right:var(--margin);
+  display:grid;grid-template-columns:repeat(var(--cols),1fr);column-gap:var(--gutter);
+}
+.guides .col{background:var(--g-col);box-shadow:inset 1px 0 0 var(--g-edge),inset -1px 0 0 var(--g-edge);position:relative;}
+.guides .col span{position:absolute;top:32px;left:0;right:0;text-align:center;font:10px/1 monospace;color:var(--g-edge);}
+.guides .rows{
+  position:absolute;left:var(--margin);right:var(--margin);top:0;bottom:0;
+  background-image:
+    repeating-linear-gradient(to bottom,var(--g-base) 0 1px,transparent 1px var(--lh)),
+    repeating-linear-gradient(to bottom,var(--g-base-min) 0 1px,transparent 1px var(--bl));
+}
+.guides .mline{position:absolute;top:0;bottom:0;width:1px;background:var(--g-edge);}
+.guides .mline.l{left:var(--margin);}
+.guides .mline.r{right:var(--margin);}
+
+/* ---- responsive: tablet / narrow desktop --------------------- */
+@media (max-width:1100px){
+  .wrap{padding-inline:32px;}
+  .void{height:200px;}
+  .idx--sect{margin-top:112px;}
+  .sheet{margin-inline:-16px;padding:48px 32px 40px;}
+  .band{display:block;}
+  .band>*+*{margin-top:48px;}
+  .band + .band{margin-top:48px;}
+  .div-l{border-left:0;margin-left:0;padding-left:0;
+    border-top:1px dashed var(--hair);padding-top:47px;}
+  h1{font-size:64px;line-height:64px;}
+  .tagline{font-size:24px;line-height:32px;}
+  h2{font-size:36px;line-height:40px;}
+  .rt>li{padding:16px 0 15px;}
+  .rt>li>*+*{margin-top:8px;}
+  .rt-ref{margin-top:16px;}
+  .rt .div-l{border-top:0;padding-top:0;}
+  .rt-head{display:none;}
+  .foot-grid{display:block;}
+  .foot-grid>*+*{margin-top:32px;}
+  /* the overlay is a desktop drafting instrument */
+  .guides,.idx-meta button{display:none;}
+}
+
+/* ---- responsive: 375px — sheets near-full-bleed, void compresses */
+@media (max-width:560px){
+  .wrap{padding:24px 20px 64px;}
+  .void{height:96px;}
+  .idx--sect{margin-top:80px;margin-bottom:32px;}
+  .idx-title{font-size:16px;line-height:24px;}
+  .sheet{margin-inline:-12px;padding:40px 20px 32px;border-radius:12px;}
+  .band>*+*{margin-top:40px;}
+  .div-l{padding-top:39px;}
+  h1{font-size:56px;line-height:56px;}
+  .tagline{font-size:22px;line-height:32px;}
+  h2{font-size:30px;line-height:32px;}
+  .clause--gap{margin-top:40px;}
+  .ev-grid{grid-template-columns:1fr;gap:16px;}
+  .foot{margin-top:96px;}
+  .tail{margin-top:48px;}
+}

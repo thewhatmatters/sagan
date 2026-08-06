@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- the ledger hub: record grooves + stylus radius, from the Fig. 02 engraving -->
+  <g fill="none" stroke="#5d6076" stroke-width="1.5">
+    <circle cx="16" cy="16" r="13"/>
+    <circle cx="16" cy="16" r="9" stroke-width="1" opacity=".7"/>
+    <circle cx="16" cy="16" r="5" stroke-width="1" opacity=".5"/>
+    <line x1="16" y1="16" x2="23" y2="5" stroke-width="1"/>
+  </g>
+  <circle cx="16" cy="16" r="1.5" fill="#5d6076"/>
+</svg>
