@@ -226,7 +226,22 @@ h2{
 .panel{
   background:var(--panel);border-radius:8px;padding:24px;
 }
-.panel--scroll{overflow-x:auto;}
+.panel--scroll{
+  overflow-x:auto;
+  /* scroll affordance: edge shadows that appear only while content
+     overflows and retire at the reached edge (background-attachment:
+     local trick — the covering panel-color gradients travel with the
+     content; the shadow gradients stay pinned to the box). */
+  background-image:
+    linear-gradient(to right, var(--panel) 50%, transparent),
+    linear-gradient(to left,  var(--panel) 50%, transparent),
+    linear-gradient(to right, var(--hair), transparent),
+    linear-gradient(to left,  var(--hair), transparent);
+  background-position:left center, right center, left center, right center;
+  background-size:48px 100%, 48px 100%, 14px 100%, 14px 100%;
+  background-attachment:local, local, scroll, scroll;
+  background-repeat:no-repeat;
+}
 .ledger{
   font-family:"Geist Mono",ui-monospace,monospace;
   font-size:11px;line-height:16px;
@@ -261,7 +276,9 @@ h2{
 .verdicts span{display:block;margin-top:8px;font-size:13px;line-height:16px;color:var(--ink-soft);}
 
 /* ---- loop diagram (engraving) -------------------------------- */
-.engraving{display:block;margin:0 auto;color:var(--ink);max-width:100%;}
+/* fixed 504×504 (viewBox 720 → 0.7 scale): fits the 509px panel measure
+   at 1280 without shrinking; at 375 it holds size and the panel scrolls */
+.engraving{display:block;margin:0 auto;color:var(--ink);}
 .engraving text{
   font-family:"Geist Mono",ui-monospace,monospace;
   letter-spacing:.06em;fill:currentColor;
@@ -308,7 +325,7 @@ h2{
 .ev img{
   display:block;width:100%;height:auto;
   border:1px solid var(--hair);border-radius:4px;
-  background:#fff;
+  background:var(--sheet); /* scheme-appropriate pre-paint placeholder, not #fff */
 }
 .ev figcaption{
   margin-top:8px;

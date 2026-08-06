@@ -26,3 +26,24 @@
   compile check, not render check" line is a good pattern; making
   static-check allowances explicit per-ticket avoided the T-001-era
   uncertainty about what a builder may verify.
+
+## Round 2
+
+- **Lesson (round 1's real bug):** `max-width:100%` on a fixed-attr
+  SVG silently voids every size-derived claim — the 544px render I
+  computed label sizes from never happened at 1280 (panel measure was
+  509px). If a design claim depends on a rendered size, pin the size;
+  don't let a fluid rule renegotiate it.
+- **Went well:** verify's factual measurement (sublabels 9.2px @1280)
+  reverse-engineered exactly to the container arithmetic (509/720 ×
+  13 = 9.19) — numeric evidence made the root cause provable by hand,
+  no render needed.
+- **Went well (pattern):** `background-attachment:local` scroll
+  shadows give an overflow-only scroll affordance with zero JS and no
+  breakpoint math — it self-covers every band where the panel measure
+  dips below the SVG width, not just 375.
+- **Fought me (again):** enlarging labels in a fixed viewBox is
+  geometry work — the 13→14 nudge pushed an end-anchored label past
+  the box edge and forced a second viewBox widening (−36→−44). Same
+  retro point as round 1, now proven twice: size engraving labels for
+  legibility at the frame stage.
