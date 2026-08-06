@@ -7,3 +7,4 @@
 {"event":"lane.updated","ticket":"T-001","lane":"critique","phase":"dispatched","critic":"critic-claude-fresh","round":2,"isolation":"artifact-plus-evidence","ts":"2026-08-06"}
 {"event":"critique.verdict","ticket":"T-001","round":2,"critic":"critic-claude-fresh","verdict":"APPROVED","findings":0,"artifact_sha":"03f2d22","ts":"2026-08-06"}
 {"event":"decision.needed","ticket":"T-001","gate":"promote","state":"awaiting-promote","evidence_sha":"03f2d22","ts":"2026-08-06"}
+{"event":"decision.made","ticket":"T-001","gate":"promote","decision":"promote","by":"randy","ts":"2026-08-06"}

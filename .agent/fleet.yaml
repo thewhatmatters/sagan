@@ -9,6 +9,12 @@ enforced: []                        # target: [round_caps, critic_isolation, hum
 pm:
   binding: { provider: claude-code }
   state: ledger                     # events.jsonl + ticket files, appended continuously
+  surface_decisions: structured-questions
+  # PROVIDER-NEUTRAL PM REQUIREMENT: at any human gate or open decision,
+  # the PM presents ALL outstanding questions as a structured question set
+  # with a recommended default per question — never buried in prose, never
+  # one-at-a-time when they can batch. In Claude Code this is the
+  # AskUserQuestion tool; any other PM binding must implement an equivalent.
 
 providers:
   claude: { containment: prompt-gated }   # only provider wired at v0

@@ -25,6 +25,11 @@ tiers — with files and subagents, before any Conan runtime work exists.
   `.agent/ledger/events.jsonl`.
 - Retros: each worker writes what went well/wrong to `.agent/memory/`;
   the PM synthesizes into `.agent/MEMORY.md` and prunes the scratch.
+- The PM surfaces outstanding decisions to the human as a structured
+  question set with recommended defaults (the Needs-you queue) — at
+  gates, at run end, and whenever decisions accumulate. This is a PM
+  role requirement across any provider binding, not a Claude Code
+  feature.
 
 ## Layout
 
