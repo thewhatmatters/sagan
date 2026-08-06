@@ -1,4 +1,4 @@
-# agent-fleet v0 test config — mirrors the v3.3 thesis sketch.
+# sagan v0 test config — mirrors the v3.3 thesis sketch.
 # v0 HONESTY: `enforced:` below is aspirational — at v0 the PM (a model)
 # interprets everything. Runtime enforcement is the first real Conan work.
 
@@ -45,8 +45,8 @@ gates:
   promote: per-ticket               # human approves before a ticket closes
 
 memory:
-  scratch: .agent/memory/
-  synthesis: .agent/MEMORY.md
+  scratch: .sagan/memory/
+  synthesis: .sagan/MEMORY.md
   promote_to: AGENTS.md
 
 ticket:

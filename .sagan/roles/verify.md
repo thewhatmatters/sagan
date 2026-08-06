@@ -25,7 +25,7 @@ artifact actually works. You are never the builder.
 
 ## Output contract
 
-Append one JSON line to `.agent/ledger/events.jsonl`:
+Append one JSON line to `.sagan/ledger/events.jsonl`:
 
 ```json
 { "event": "evidence.recorded", "ticket": "...", "sha": "...", "verifier": "verify-claude",
@@ -34,4 +34,4 @@ Append one JSON line to `.agent/ledger/events.jsonl`:
 ```
 
 Also write the human-readable summary into the ticket's `## QA` block,
-and a retro to `.agent/memory/<ticket-id>-verify.md`.
+and a retro to `.sagan/memory/<ticket-id>-verify.md`.

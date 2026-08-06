@@ -22,7 +22,7 @@
   it was an assumption).
 - **Verify practicals:** full-page screenshots satisfy "show all
   sections" in one capture; save evidence under
-  `.agent/ledger/<ticket>/` so images sit next to their events.jsonl
+  `.sagan/ledger/<ticket>/` so images sit next to their events.jsonl
   line; record grep counts and exit codes separately (grep -c exits 1 on
   zero matches).
 - **Contract drift to watch:** round-2 critic added a `notes` field not

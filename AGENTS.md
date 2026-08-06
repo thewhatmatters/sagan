@@ -1,4 +1,4 @@
-# agent-fleet — test bed for the agent-org v3.3 design
+# sagan — reference implementation and test bed for the agent-org v3.3 design
 
 ## What this project is
 
@@ -10,7 +10,7 @@ tiers — with files and subagents, before any Conan runtime work exists.
 
 ## Working agreements (v0)
 
-- The PM (the interactive Claude Code session) reads `.agent/fleet.yaml`
+- The PM (the interactive Claude Code session) reads `.sagan/sagan.yaml`
   and enforces its rules by hand. **Known v0 limitation: enforcement is
   model-interpreted, not runtime code.** This is acceptable only because a
   human supervises every run.
@@ -22,9 +22,9 @@ tiers — with files and subagents, before any Conan runtime work exists.
   APPROVED means verified, not plausible — user-visible artifacts need
   execution evidence recorded at a git SHA before they count as done.
 - Every dispatch, verdict, and evidence record is appended to
-  `.agent/ledger/events.jsonl`.
-- Retros: each worker writes what went well/wrong to `.agent/memory/`;
-  the PM synthesizes into `.agent/MEMORY.md` and prunes the scratch.
+  `.sagan/ledger/events.jsonl`.
+- Retros: each worker writes what went well/wrong to `.sagan/memory/`;
+  the PM synthesizes into `.sagan/MEMORY.md` and prunes the scratch.
 - The PM surfaces outstanding decisions to the human as a structured
   question set with recommended defaults (the Needs-you queue) — at
   gates, at run end, and whenever decisions accumulate. This is a PM
@@ -35,10 +35,10 @@ tiers — with files and subagents, before any Conan runtime work exists.
 
 | Path | What |
 |------|------|
-| `.agent/fleet.yaml` | wiring: bindings, critique policy, caps, gates |
-| `.agent/roles/*.md` | provider-neutral role specs |
-| `.agent/memory/` | per-task retro scratch (pruned after synthesis) |
-| `.agent/MEMORY.md` | rolling project learnings |
-| `.agent/ledger/events.jsonl` | poor-man's event store |
+| `.sagan/sagan.yaml` | wiring: bindings, critique policy, caps, gates |
+| `.sagan/roles/*.md` | provider-neutral role specs |
+| `.sagan/memory/` | per-task retro scratch (pruned after synthesis) |
+| `.sagan/MEMORY.md` | rolling project learnings |
+| `.sagan/ledger/events.jsonl` | poor-man's event store |
 | `tickets/` | local ticket files (Linear stand-in for v0) |
 | `src/` | build output |
