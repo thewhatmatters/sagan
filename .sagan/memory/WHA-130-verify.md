@@ -66,3 +66,39 @@ carried target at 9.69px effective (504/728×14).
    only the four img tags, .ev placeholder, SVG sizing/text, and
    .panel--scroll CSS is what justifies carrying AC2/AC5/AC6/AC7 instead
    of re-running them.
+
+## Round 3 delta (SHA 9be4459, delta_of fee9144)
+
+Delta verify of the structural rework (sticky topbar, merged
+.sheet--doc, .foot-doc, five anchors): PASS. Sticky holds at midscroll;
+all five anchors land exactly 72px below the bar without JS (56px bar at
+1280, 40px at 375, scroll-margin-top 72px); 375 bar compresses to
+numbers-only without overflow; round-2 fixes intact (four eager figures
+paint with no scroll-through in dark, engraving 504×504); reduced motion
+still zero animations.
+
+### Lessons added
+
+9. **`scroll-behavior: smooth` makes anchor checks time-dependent.** A
+   400ms wait after fragment navigation measured targets 300–2200px
+   short of landing and looked like a broken scroll-margin — it was the
+   ~1.3s smooth-scroll animation mid-flight. Before ruling FAIL on any
+   scroll-position assertion, sample position over time (stable page
+   height + converging scrollY = animation, not bug), then measure at
+   settle. Also: same-document goto (URL → URL#frag) doesn't reliably
+   re-trigger fragment scroll in Playwright — use a fresh page per
+   anchor, or click the link.
+10. **Smooth scroll is itself a reduced-motion surface.**
+    `getAnimations()` never counts it. Grep the built CSS: here
+    `scroll-behavior:smooth` was correctly inside
+    `@media (prefers-reduced-motion: no-preference)` — check for that
+    guard explicitly whenever sticky-nav anchors appear.
+11. **"X stays" contract language needs a per-breakpoint reading.** The
+    grid chip is display:none at 375. Recorded as fact for the critic
+    rather than ruled on — verify measures, the critic interprets
+    contract intent.
+
+### Open threads for critic
+
+- Grid chip hidden at 375 vs pack's "the grid-toggle chip stays".
+- Anchor navigation is animated (~1.3s) — acceptable polish or too slow?
