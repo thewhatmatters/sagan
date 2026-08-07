@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Probe a project for wire-sagan installation (read-only).
+"""Probe a project for sagan-wire installation (read-only).
 
 I/O: stdout JSON {project, git, entry_point, sagan, gates, marker_present} ·
 stderr diagnostics · exit 2 on unusable project path. Never writes.
@@ -11,7 +11,10 @@ import re
 import subprocess
 import sys
 
-MARKER_START = "<!-- wire-sagan:start -->"
+MARKER_START = "<!-- sagan-wire:start -->"
+# pre-rename installs (wire-sagan, 2026-08-06/07) carry the legacy marker;
+# treating it as present keeps re-wiring idempotent instead of double-inserting
+MARKER_START_LEGACY = "<!-- wire-sagan:start -->"
 
 
 def sh(args, cwd):
@@ -92,8 +95,11 @@ def main():
             fleet["template_version"] = "unreadable"
 
     marker = False
+    marker_legacy = False
     if target and os.path.isfile(target):
-        marker = MARKER_START in open(target, errors="replace").read()
+        content = open(target, errors="replace").read()
+        marker = MARKER_START in content
+        marker_legacy = MARKER_START_LEGACY in content
 
     payload = {
         "project": root,
@@ -102,7 +108,8 @@ def main():
                         "claude_host": host},
         "sagan": fleet,
         "gates": detect_gates(root),
-        "marker_present": marker,
+        "marker_present": marker or marker_legacy,
+        "marker_legacy": marker_legacy,
     }
     print(f"probe: {kind} · git={'yes' if git_ok else 'NO'} · "
           f".sagan={'present' if fleet['present'] else 'absent'}",

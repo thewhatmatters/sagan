@@ -16,16 +16,16 @@ PM-interpreted.
 This skill follows `~/.claude/skills/skill-architecture.md` patterns A1–A15;
 deliberate notes:
 
-- Three-skill split: **wire-sagan installs, sagan-start opens (mirror +
+- Three-skill split: **sagan-wire installs, sagan-start opens (mirror +
   AC gate + scope + brief), sagan-run drives (dispatch → circuit →
   promote → retro).** Missing overlay is a hard stop with a pointer, never
-  an inline install (single-responsibility, and wire-sagan's consent
+  an inline install (single-responsibility, and sagan-wire's consent
   choreography must not be duplicated); missing brief points to
   /sagan-start the same way.
 - Leading words (spec A14): **circuit**, **pointer pack**, **needs-you** —
   chosen to match the vocabulary already used in `.sagan/` and the fleet
   design doc so ledger entries, role specs, and skill reasoning agree.
-- Agent-definition generation copies wire-sagan's marker-block idiom:
+- Agent-definition generation copies sagan-wire's marker-block idiom:
   consent first, idempotent regeneration, source of truth stays in
   `.sagan/roles/*.md` (the generated file says so in its marker).
 
@@ -85,7 +85,7 @@ See `skill-architecture.md` §B; this skill targets every PASS that applies.
 
 ## 6. Notes
 
-Depends on a wire-sagan-installed overlay; ticket store per sagan.yaml
+Depends on a sagan-wire-installed overlay; ticket store per sagan.yaml
 (Linear MCP or local tickets/). Generated while the 2.1.144 → 2.1.223 docs
 drift is open (new frontmatter fields background/compatibility/
 disallowed-tools/license/metadata); conservative `name` + `description`

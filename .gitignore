@@ -11,6 +11,6 @@ tickets/*.md
 !tickets/T-001.md
 
 # Evidence media (screenshots, captures) stays local; the JSONL audit trail
-# and run briefs are committed (wire-sagan day-one commit policy).
+# and run briefs are committed (sagan-wire day-one commit policy).
 .sagan/ledger/WHA-*/
 __pycache__/

@@ -5,7 +5,7 @@ folder. Type `/sagan-start`.
 
 ## What it is
 
-`wire-sagan` installs Sagan into a project. Nothing ran it. This does: it pulls
+`sagan-wire` installs Sagan into a project. Nothing ran it. This does: it pulls
 your tickets out of Linear into local markdown files, checks each one actually
 says what "done" means, asks you whether you're doing one ticket or a sprint,
 writes the run into the audit trail, and hands you a brief.
@@ -36,7 +36,7 @@ decide. That boundary is the point of v1 — the run opens under your eye.
 
 ## What it needs
 
-- A project with a `.sagan/` folder (run `/wire-sagan` first if not).
+- A project with a `.sagan/` folder (run `/sagan-wire` first if not).
 - `python3` — any 3.x. No pip installs, no API keys, no config.
 - For Linear tickets: the Linear connector enabled in your Claude session.
   The scripts never talk to Linear themselves; the session does, and pipes

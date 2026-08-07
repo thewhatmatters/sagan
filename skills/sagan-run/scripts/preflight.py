@@ -3,7 +3,7 @@
 
 Checks the target project is a wired Sagan project: .sagan/ overlay present,
 sagan.yaml readable, role specs installed, ledger appendable, git repo.
-This skill never installs — SAGAN_MISSING/NO_ROLES point to wire-sagan.
+This skill never installs — SAGAN_MISSING/NO_ROLES point to sagan-wire.
 
 I/O: stdout JSON {overall, checks, summary} · stderr human board · exit 1 only on `down`.
 States per check: ready | degraded | gated | down  (with a gate id).
@@ -18,7 +18,7 @@ def check_overlay(root):
     d = os.path.join(root, ".sagan")
     if not os.path.isdir(d):
         return ("down", "SAGAN_MISSING",
-                "no .sagan/ overlay — run wire-sagan first ('wire this project to sagan')")
+                "no .sagan/ overlay — run sagan-wire first ('wire this project to sagan')")
     return ("ready", None, f".sagan/ present at {d}")
 
 
@@ -43,7 +43,7 @@ def check_roles(root):
     except OSError:
         roles = []
     if not roles:
-        return ("down", "NO_ROLES", "no role specs in .sagan/roles/ — re-run wire-sagan")
+        return ("down", "NO_ROLES", "no role specs in .sagan/roles/ — re-run sagan-wire")
     return ("ready", None, "roles: " + ", ".join(roles))
 
 

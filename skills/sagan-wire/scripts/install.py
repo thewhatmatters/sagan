@@ -78,7 +78,7 @@ def main():
     if args.update:
         if not os.path.isfile(manifest_path):
             print(json.dumps({"status": "error",
-                              "detail": "no manifest — not a wire-sagan install (or NATIVE install); cannot --update safely"}))
+                              "detail": "no manifest — not a sagan-wire install (or NATIVE install); cannot --update safely"}))
             sys.exit(2)
         manifest = json.load(open(manifest_path))
         synced, flagged, missing = [], [], []

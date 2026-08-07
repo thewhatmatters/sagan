@@ -56,7 +56,7 @@ critic hasn't seen, the honest verdict is NEEDS_EVIDENCE.
 
 Evidence media (screenshots, captures) lives under `.sagan/ledger/<ticket>/`
 next to its events — committed policy is the project's `.gitignore` call
-(wire-sagan default: JSONL committed, media ignored).
+(sagan-wire default: JSONL committed, media ignored).
 
 ## Rounds and breakers
 

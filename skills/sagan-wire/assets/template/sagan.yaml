@@ -1,4 +1,4 @@
-# .sagan/sagan.yaml — per-project fleet config (installed by wire-sagan)
+# .sagan/sagan.yaml — per-project fleet config (installed by sagan-wire)
 # Template version: {{TEMPLATE_VERSION}} — probe reports this; --update keys
 # on .sagan/.template-manifest.json, not this line.
 # v0 HONESTY: `enforced:` is aspirational — the PM (a model) interprets

@@ -20,9 +20,9 @@ Say "run sagan" or "run WHA-123 through sagan", or `/sagan-run WHA-123` — norm
 
 ## What it needs
 
-A project already wired by **wire-sagan** (a `.sagan/` directory with
+A project already wired by **sagan-wire** (a `.sagan/` directory with
 `sagan.yaml`, role specs, and a ledger). If that's missing, this skill stops
-and points you to wire-sagan — it never installs.
+and points you to sagan-wire — it never installs.
 
 ## How it works (high level)
 

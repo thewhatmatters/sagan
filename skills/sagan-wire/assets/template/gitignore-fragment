@@ -1,0 +1,4 @@
+# sagan-wire commit policy: audit trail committed, evidence media ignored
+.sagan/ledger/*/
+!.sagan/ledger/events.jsonl
+.sagan/memory/

@@ -15,7 +15,7 @@ description: >-
   this ticket / the brief through sagan", "dispatch WHA-123 through the
   loop", or "/sagan-run [ticket]". NOT the run opener (ticket mirroring,
   AC authoring, scope — that's /sagan-start) and NOT installation (missing
-  .sagan/ → wire-sagan).
+  .sagan/ → sagan-wire).
 ---
 
 # sagan-run
@@ -73,8 +73,8 @@ Two session-dependency probes, both modes (model-side):
 SCRIPTS: `python3 scripts/preflight.py --project=<root>`. Gates:
 
 - `SAGAN_MISSING` (down) — no `.sagan/` overlay. STOP and point to
-  wire-sagan ("wire this project to sagan"); this skill never installs.
-- `NO_ROLES` (down) — `.sagan/roles/` empty or absent; re-run wire-sagan.
+  sagan-wire ("wire this project to sagan"); this skill never installs.
+- `NO_ROLES` (down) — `.sagan/roles/` empty or absent; re-run sagan-wire.
 - `LEDGER_UNWRITABLE` (down) — nothing can be recorded; nothing may run.
 - `CONFIG_UNREADABLE` (down) — sagan.yaml exists but cannot be read; fix
   permissions/encoding before anything runs.

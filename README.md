@@ -114,7 +114,7 @@ Sagan v0 is files + protocol — any capable coding agent session can act as
 the PM by reading `sagan.yaml` and the role specs.
 
 - **With the installer** (a [Claude Code](https://claude.com/claude-code)
-  skill, `wire-sagan`): probes your project's entry point (CLAUDE.md /
+  skill, `sagan-wire`): probes your project's entry point (CLAUDE.md /
   AGENTS.md), captures your real gate commands into `sagan.yaml`, installs
   the overlay, and wires one consent-gated marker block so future sessions
   are Sagan-aware. Supports `--update` resync with local-edit detection.
@@ -126,7 +126,7 @@ Then: copy `tickets/T-000-example.md`, write the AC, and tell your session
 to run the ticket through the loop — tickets can live as files in your repo
 or in Linear.
 
-To open a run, `sagan-start` (the companion skill — `wire-sagan` installs,
+To open a run, `sagan-start` (the companion skill — `sagan-wire` installs,
 this one runs) does the startup sequence in order: read `sagan.yaml`, mirror
 the ticket store, check every ticket's AC, ask whether this is one ticket or a
 sprint, log `run.started`, and hand back a brief. It stops there — dispatch

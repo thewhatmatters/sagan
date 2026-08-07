@@ -1,5 +1,5 @@
 ---
-name: wire-sagan
+name: sagan-wire
 description: >-
   Bolt the Sagan orchestration overlay onto an existing project as a
   self-contained .sagan/ directory (sagan.yaml, role specs, tickets, memory,
@@ -7,7 +7,7 @@ description: >-
   consent-gated marker block. Use when the user wants a project connected to
   the fleet — "wire this project to sagan", "wire this project to the fleet", "add sagan here",
   "install .sagan in this repo", "set up the fleet", "bolt the fleet onto X",
-  "/wire-sagan" — or to refresh an existing overlay ("update the fleet
+  "/sagan-wire" — or to refresh an existing overlay ("update the fleet
   template", "--update"). Probes before touching anything — project entry
   point (root CLAUDE.md, .claude/CLAUDE.md, AGENTS.md-with-import, or none),
   git status, existing .sagan/, and the project's real gate commands
@@ -20,7 +20,7 @@ description: >-
   it only installs and wires.
 ---
 
-# wire-sagan
+# sagan-wire
 
 Bolt the Sagan `.sagan/` overlay onto an existing project and wire its
 Claude entry point with an idempotent, consent-gated marker block.
@@ -29,13 +29,13 @@ Claude entry point with an idempotent, consent-gated marker block.
 
 - **overlay** — the self-contained `.sagan/` directory; one dir to add, one to delete to un-wire. Everything Sagan-owned lives inside it.
 - **entry point** — the file Claude actually loads for this project (root `CLAUDE.md`, `.claude/CLAUDE.md`, or an `AGENTS.md` it imports); probed, never assumed.
-- **marker block** — the `<!-- wire-sagan:start/end -->` block; the only *entry-point* edit this skill makes, always shown for consent first, idempotent on re-run. Exactly one other write lands outside `.sagan/`: the `.gitignore` commit-policy append (Step 4) — both are named in the Step 3 consent round.
+- **marker block** — the `<!-- sagan-wire:start/end -->` block; the only *entry-point* edit this skill makes, always shown for consent first, idempotent on re-run. A legacy `<!-- wire-sagan:start/end -->` block (pre-rename installs) counts as present — probe reports it as `marker_legacy`; on `--update`, offer to migrate the ids in place, never insert a second block. Exactly one other write lands outside `.sagan/`: the `.gitignore` commit-policy append (Step 4) — both are named in the Step 3 consent round.
 - **pinned template** — `assets/template/` version recorded in the installed sagan.yaml; `--update` resyncs unmodified files and flags modified ones, never overwrites local edits.
 
 ## How to run
 
 "wire this project to the fleet", "install .sagan here", or
-`/wire-sagan [--project=PATH]`. Refresh with `/wire-sagan --update`.
+`/sagan-wire [--project=PATH]`. Refresh with `/sagan-wire --update`.
 
 ## Flags
 

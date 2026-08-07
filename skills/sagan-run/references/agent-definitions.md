@@ -45,7 +45,7 @@ pointers. Honor isolation: use only the inputs the role spec allows.
 | critic | Read, Glob, Grep | artifact-only judgment; no edit tools (flag, never fix), no Bash (reading is not judging — execution belongs to verify) |
 | verify | Read, Bash, Glob, Grep, Write | executes builds/renders and writes evidence + ledger lines; never edits source |
 
-Roles beyond the standard three (installed via wire-sagan `--roles=`): map
+Roles beyond the standard three (installed via sagan-wire `--roles=`): map
 tools from the role spec's Output contract — writers get Write, judges
 don't, executors get Bash — and note the mapping in the consent question.
 

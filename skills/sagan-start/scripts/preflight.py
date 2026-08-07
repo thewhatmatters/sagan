@@ -21,10 +21,10 @@ RANK = {"ready": 0, "degraded": 1, "gated": 2, "down": 3}
 def check_overlay(root):
     if not os.path.isdir(S.sagan_dir(root)):
         return ("down", "SAGAN_MISSING",
-                "no .sagan/ in %s — run /wire-sagan first" % root)
+                "no .sagan/ in %s — run /sagan-wire first" % root)
     if not os.path.isfile(S.sagan_yaml(root)):
         return ("down", "SAGAN_MISSING",
-                ".sagan/ exists but sagan.yaml is missing — run /wire-sagan --update")
+                ".sagan/ exists but sagan.yaml is missing — run /sagan-wire --update")
     return ("ready", None, "overlay present")
 
 

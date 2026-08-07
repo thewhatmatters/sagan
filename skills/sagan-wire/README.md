@@ -1,4 +1,4 @@
-# wire-sagan
+# sagan-wire
 
 **What it is:** Bolts the Sagan orchestration overlay onto an existing
 project as a self-contained `.sagan/` directory and wires the project's
@@ -12,13 +12,13 @@ Claude entry point with a small consent-gated marker block.
 - One marker block in your CLAUDE.md (or AGENTS.md) pointing Claude at it,
   plus a short commit-policy append to your `.gitignore` — the only two
   edits made outside `.sagan/`, both shown before you approve.
-- A pinned template version, so `/wire-sagan --update` can refresh unmodified
+- A pinned template version, so `/sagan-wire --update` can refresh unmodified
   files when the fleet protocol improves, without touching your local edits.
 
 ## How to run
 
 Say "wire this project to the fleet" from the project directory, or
-`/wire-sagan --project=~/Development/myapp`. Nothing is written until you
+`/sagan-wire --project=~/Development/myapp`. Nothing is written until you
 approve the plan and the marker block.
 
 ## What it needs

@@ -1,4 +1,4 @@
-# wire-sagan — Handoff & decisions
+# sagan-wire — Handoff & decisions
 
 Living record of what this skill is, the decisions behind it, and any
 non-obvious constraints (spec A12).
@@ -71,3 +71,14 @@ disallowed-tools/license/metadata). Frontmatter here uses the conservative
   `fleet.yaml` → `sagan.yaml`, marker `wire-fleet:*` → `wire-sagan:*`.
   Renamed pre-adoption (zero wired projects) so the cost never recurs.
   "Fleet" survives as concept vocabulary; "Sagan" is the standard's name.
+- 2026-08-07: skill renamed **wire-sagan → sagan-wire** to join the
+  `sagan-*` family (sagan-wire installs, sagan-start opens, sagan-run
+  drives) once the toolkit grew past one skill — for external adopters
+  of this public repo, the sagan-* prefix is the coherence that matters;
+  the house `wire-*` convention (wire-vault) is local. "Wire" kept as the
+  verb: all trigger phrases and copy still say "wire this project to
+  sagan". New marker id is `sagan-wire:start/end`; probe.py recognizes
+  the legacy `wire-sagan:*` marker too, so already-wired projects (conan)
+  stay idempotent — `--update` may offer marker migration, never a
+  duplicate block. Adoption still ~zero; the published install one-liner
+  on sagan.run/README updated in the same commit.

@@ -6,7 +6,7 @@ description: >-
   markdown, check every ticket's acceptance criteria, ask the human whether
   this is one ticket or a sprint, log the run, and hand back a dispatch-ready
   brief. Also carries repo-owned ticket blocks back to Linear word for word
-  (--writeback). Companion to wire-sagan, which installs the overlay but never
+  (--writeback). Companion to sagan-wire, which installs the overlay but never
   runs the loop. User-invoked: /sagan-start.
 ---
 
@@ -61,7 +61,7 @@ the AC gate ran as judgment rather than as an exit code.
 ## Step 1 — Preflight
 
 `python3 scripts/preflight.py --project=<path>`. `down` → STOP (no overlay:
-suggest `/wire-sagan`). `MIRROR_NOT_IGNORED` is a **Setup Gate**: mirroring a
+suggest `/sagan-wire`). `MIRROR_NOT_IGNORED` is a **Setup Gate**: mirroring a
 private tracker into a repo commits its ticket ids. Offer *add the ignore rule
 / commit them deliberately / skip* — under `--agent`, add the rule and record it.
 `LINEAR_FETCH_UNVERIFIED` is expected: only Step 2 can prove the store is live.
@@ -149,7 +149,7 @@ would run to dispatch, so the boundary is explicit rather than a silent halt.
   description out of every session's context is the trade taken deliberately.
 - Keyless and offline except the Linear MCP calls in Steps 2 and write-back —
   which the *session* makes, never a script. No secrets touch these files.
-- Composes with wire-sagan (installs the overlay this skill runs against) and
+- Composes with sagan-wire (installs the overlay this skill runs against) and
   curate-vault (harvests `.sagan/MEMORY.md` after a run).
 - Writes only inside `.sagan/`, the configured `tickets/` dir, and — with
   consent at the Step 1 gate — one `.gitignore` line.
