@@ -211,7 +211,7 @@ h1{
 h2{
   font-size:44px;line-height:48px;font-weight:600;letter-spacing:-.02em;
 }
-.body{margin-top:16px;color:var(--ink-soft);max-width:44ch;}
+.body{margin-top:8px;color:var(--ink-soft);max-width:44ch;}
 .body strong{color:var(--ink);font-weight:500;}
 .body a,.doclist a{color:var(--ink);text-decoration-color:var(--hair-strong);text-underline-offset:3px;}
 
