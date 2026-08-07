@@ -1,10 +1,11 @@
 ---
 // WHA-130 · sagan.run v1 — single page, static, zero client JS required.
-// Round 4b: canonical content script laid in verbatim (hero + 01 Get
-// started · 02 How it works · 03 The rules · 04 A real run · footer);
-// one continuous paper surface site-wide (no ground/sheet split, no
-// void); navigation rebuilt as a document-native pinned index row on
-// the paper. Engraving, evidence figures, grid, type system carried.
+// Round 4d: canonical content script laid in verbatim (hero + 01 Get
+// started · 02 How it works · 03 The rules · footer — section 04 cut
+// per gate feedback); one continuous paper surface site-wide (no
+// ground/sheet split, no void); navigation is a document-native pinned
+// index row on the paper. Engraving, grid, type system carried;
+// vertical dashed dividers removed (design).
 import '../styles/global.css';
 ---
 <!doctype html>
@@ -33,8 +34,6 @@ import '../styles/global.css';
         <a href="#how-it-works"><span class="tb-num">02</span><span class="tb-label"> How it works</span></a>
         <span class="tb-sep" aria-hidden="true">·</span>
         <a href="#rules"><span class="tb-num">03</span><span class="tb-label"> The rules</span></a>
-        <span class="tb-sep" aria-hidden="true">·</span>
-        <a href="#real-run"><span class="tb-num">04</span><span class="tb-label"> A real run</span></a>
       </nav>
       <button id="gridToggle" type="button" aria-pressed="false" title="Toggle the layout grid (G)">Grid · G</button>
     </div>
@@ -69,25 +68,26 @@ import '../styles/global.css';
       <span id="install" class="alias" aria-hidden="true"></span><!-- alias anchor: README links to #install -->
       <header class="doc-idx">
         <span>01 · Get started</span>
-        <span aria-hidden="true">01 / 04</span>
+        <span aria-hidden="true">01 / 03</span>
       </header>
       <div class="band">
         <div class="c-1-5">
           <h2>Get started</h2>
           <p class="body">Three steps, one directory.</p>
         </div>
-        <ol class="doclist doclist--num doclist--split c-5-13 div-l">
+        <ol class="doclist doclist--num doclist--split c-5-13">
           <li><strong>Install</strong>
             <span>The command above adds the <span class="mono">wire-sagan</span>
-              installer to your agent setup.</span></li>
+              installer to your Claude Code setup.</span></li>
           <li><strong>Wire your project</strong>
             <span>Say &ldquo;wire this project to sagan.&rdquo; It probes your
               repo, captures your real test/build commands, and installs a
               self-contained <span class="mono">.sagan/</span> folder. One
               directory in; delete it to walk away.</span></li>
           <li><strong>Run your first ticket</strong>
-            <span>Copy the example ticket, write what &ldquo;done&rdquo; means,
-              and tell your agent session to run it through the loop.</span></li>
+            <span>Copy the <a href="https://github.com/thewhatmatters/sagan/blob/main/tickets/T-000-example.md">example ticket</a>, write what &ldquo;done&rdquo; means,
+              and tell your agent session to run it through the loop &mdash;
+              tickets can live as files in your repo or in Linear.</span></li>
         </ol>
       </div>
     </section>
@@ -96,7 +96,7 @@ import '../styles/global.css';
     <section class="doc-sect" id="how-it-works" aria-label="02 — How it works">
       <header class="doc-idx">
         <span>02 · How it works</span>
-        <span aria-hidden="true">02 / 04</span>
+        <span aria-hidden="true">02 / 03</span>
       </header>
       <div class="band">
 
@@ -132,7 +132,7 @@ import '../styles/global.css';
             this).</p>
         </div>
 
-        <figure class="c-7-13 div-l">
+        <figure class="c-7-13">
           <div class="fig-head">
             <span class="t">One ticket through the circuit</span>
             <span class="f">svg</span>
@@ -275,14 +275,14 @@ import '../styles/global.css';
     <section class="doc-sect" id="rules" aria-label="03 — The rules">
       <header class="doc-idx">
         <span>03 · The rules</span>
-        <span aria-hidden="true">03 / 04</span>
+        <span aria-hidden="true">03 / 03</span>
       </header>
       <div class="band">
         <div class="c-1-5">
           <h2>The rules</h2>
           <p class="body">Seven rules make it hold:</p>
         </div>
-        <ul class="doclist doclist--split c-5-13 div-l">
+        <ul class="doclist doclist--split c-5-13">
           <li><strong>Criteria before work.</strong>
             <span>A review without criteria is an opinion.</span></li>
           <li><strong>Critics flag, builders fix.</strong>
@@ -300,104 +300,6 @@ import '../styles/global.css';
             <span>Open calls are surfaced as clear options, never buried in a
               wall of text.</span></li>
         </ul>
-      </div>
-    </section>
-
-    <!-- ============ 04 · A real run ================================ -->
-    <section class="doc-sect" id="real-run" aria-label="04 — A real run">
-      <header class="doc-idx">
-        <span>04 · A real run</span>
-        <span aria-hidden="true">04 / 04</span>
-      </header>
-      <div class="band">
-
-        <div class="c-1-6">
-          <h2>A real run</h2>
-          <p class="body body--wide">This site&rsquo;s repo ran the standard on
-            itself. Ticket T-001 asked for a web page; the critic refused to
-            approve what it couldn&rsquo;t see running; the verifier loaded the
-            page at two sizes in light and dark, measured it, and recorded
-            everything at commit <strong class="mono">03f2d22</strong>. Then
-            &mdash; and only then &mdash; it was approved.</p>
-        </div>
-
-        <figure class="c-6-13 div-l">
-          <div class="fig-head">
-            <span class="t">What the verifier checked</span>
-            <span class="f">png · @ 03f2d22</span>
-          </div>
-          <div class="ev-grid">
-            <figure class="ev">
-              <img src="/evidence/t-001/1280-light.png" width="1280" height="900" decoding="sync"
-                   alt="Verify's screenshot of the T-001 page at 1280 by 900, light scheme: an Agent Fleet header, the heading 'A minimal test bed for contract-driven agent orchestration', a status pill reading 'v0 test run · T-001', three feature cards — Dispatch, Critique, Evidence — side by side, and a footer with the repo path." />
-              <figcaption>Checked at 1280&times;900, light &mdash; cards three across, nothing clipped · passed</figcaption>
-            </figure>
-            <figure class="ev">
-              <img src="/evidence/t-001/1280-dark.png" width="1280" height="900" decoding="sync"
-                   alt="The same T-001 page at 1280 by 900 in the dark scheme: near-black background, light text, the three feature cards still side by side — a visibly distinct dark palette, per AC7." />
-              <figcaption>Checked at 1280&times;900, dark &mdash; distinct dark palette · passed</figcaption>
-            </figure>
-            <figure class="ev">
-              <img src="/evidence/t-001/375-light.png" width="375" height="1062" decoding="sync"
-                   alt="T-001 at 375 pixels wide, light scheme: the Dispatch, Critique, and Evidence cards stack vertically and the footer repo path wraps onto two lines — no content clipped, no horizontal scroll." />
-              <figcaption>Checked at 375 wide, light &mdash; cards stack, nothing lost · passed</figcaption>
-            </figure>
-            <figure class="ev">
-              <img src="/evidence/t-001/375-dark.png" width="375" height="1062" decoding="sync"
-                   alt="T-001 at 375 pixels wide, dark scheme: the same stacked single-column layout on the dark palette; scrollWidth measured equal to the 375-pixel viewport." />
-              <figcaption>Checked at 375 wide, dark &mdash; no sideways scroll, measured · passed</figcaption>
-            </figure>
-          </div>
-          <figcaption class="caption">Verify&rsquo;s screenshots, committed at .sagan/ledger/T-001/ · evidence bound @ 03f2d22</figcaption>
-        </figure>
-
-      </div>
-
-      <div class="band">
-
-        <figure class="c-1-7">
-          <div class="fig-head">
-            <span class="t">The audit trail</span>
-            <span class="f">jsonl</span>
-          </div>
-          <div class="panel">
-<pre class="ledger" is:raw>{"event":"critique.verdict","ticket":"T-001",
- "round":1,"critic":"critic-claude-fresh",
- "verdict":<b>"NEEDS_EVIDENCE"</b>,"findings":4,
- "artifact_sha":"03f2d22","ts":"2026-08-06"}
-
-{"event":"evidence.recorded","ticket":"T-001",
- "sha":"03f2d2299976eeb269f0452ff111fbbb1e9ca5e4",
- "verifier":"verify-claude",
- "checks":[
-   {"ac_ref":"AC5","result":<b>"PASS"</b>,
-    "how":"Playwright chromium screenshots at
-      375x800 and 1280x900 (light+dark);
-      scrollWidth evaluated at 375px",
-    "output":"scrollWidth=375 == innerWidth=375
-      (light and dark); all sections legible"},
-   ⋮  six further checks, AC1–AC7 — all <b>"PASS"</b>
- ],
- "overall":<b>"PASS"</b>,"not_verified":[]}
-
-{"event":"critique.verdict","ticket":"T-001",
- "round":2,"critic":"critic-claude-fresh",
- "verdict":<b>"APPROVED"</b>,"findings":0,
- "artifact_sha":"03f2d22","ts":"2026-08-06"}
-
-{"event":"decision.made","ticket":"T-001",
- "gate":"promote","decision":"promote",
- "by":"randy","ts":"2026-08-06"}</pre>
-          </div>
-          <figcaption class="caption">This is the audit trail the loop writes · .sagan/ledger/events.jsonl · ticket T-001, abridged</figcaption>
-        </figure>
-
-        <div class="c-7-13 div-l">
-          <p class="closer">Every run leaves this trail. That&rsquo;s the
-            point: you can always answer who built this, who checked it, and
-            what proof they had.</p>
-        </div>
-
       </div>
     </section>
 

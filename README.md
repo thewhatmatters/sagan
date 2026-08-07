@@ -96,7 +96,8 @@ the PM by reading `sagan.yaml` and the role specs.
   project context at it.
 
 Then: copy `tickets/T-000-example.md`, write the AC, and tell your session
-to run the ticket through the loop.
+to run the ticket through the loop — tickets can live as files in your repo
+or in Linear.
 
 ## Status — v0, honest
 

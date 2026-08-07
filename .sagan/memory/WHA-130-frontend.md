@@ -105,3 +105,38 @@
   the existing inks passed on #f3f0e2 (5.40 soft) and only the panel
   value needed choosing against the 4.5 floor (4.89). Always compute
   before swapping surface colors; the answer may be "keep the ink".
+
+## Round 4c
+
+- **Lesson (the actual bug):** descendant selectors on generic
+  elements (`.doclist span`) are landmines in copy that nests inline
+  spans — `display:block` reached two levels down and fragmented
+  approved sentences. Structural list styling should always use
+  child combinators (`>li>span`); reserve descendant scope for
+  inheritable text properties only.
+- **Gotcha (specificity ripple):** scoping one selector up (0-1-1 →
+  0-1-2) silently breaks sibling overrides still written at the old
+  specificity — `.doclist--split span{margin-top:0}` would have lost
+  to the fix and re-broken the split alignment. When tightening a
+  selector, grep for every other rule targeting the same element and
+  re-check the cascade, not just the rule you're editing.
+- **Cheap pattern:** "style like existing links" = extend the
+  existing rule's selector list (`.body a` → `.body a,.doclist a`),
+  not a new rule — one source of truth for the link look.
+
+## Round 4d
+
+- **Lesson (cut means sweep):** removing a section is three deletions,
+  not one — markup + its assets (`public/` files ship even when
+  unreferenced; Astro copies public/ wholesale) + its now-dead CSS.
+  Grep class usage across .astro sources before deleting rules:
+  `.c-7-13` looked 04-only but 02's figure uses it.
+- **Gotcha (divider trick nets to zero):** the `div-l` gutter-divider
+  used a −12px margin / +11px padding pair, so deleting the class
+  restores the plain 24px gutter with no rebalancing needed — but its
+  responsive overrides lived in two other media blocks; a divider is
+  never one rule.
+- **Verification cheap-trick:** `grep -c "real-run\|evidence/t-001"`
+  against dist/index.html is a 1-second post-build contract check;
+  beware false positives ("504" matches "04") — locate hits before
+  trusting a nonzero count.

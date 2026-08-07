@@ -200,29 +200,20 @@ h1{
 }
 .band + .band{margin-top:64px;}
 .c-1-5{grid-column:1/5;}
-.c-1-6{grid-column:1/6;}
 .c-1-7{grid-column:1/7;}
 .c-1-8{grid-column:1/8;}
 .c-5-13{grid-column:5/13;}
-.c-6-13{grid-column:6/13;}
 .c-7-13{grid-column:7/13;}
 .c-1-13{grid-column:1/-1;}
 @supports not (display:grid){.band{display:block;}}
-
-/* dashed vertical dividers, centered in the gutter */
-.div-l{border-left:1px dashed var(--hair);margin-left:-12px;padding-left:11px;}
 
 /* ---- type ----------------------------------------------------- */
 h2{
   font-size:44px;line-height:48px;font-weight:600;letter-spacing:-.02em;
 }
 .body{margin-top:16px;color:var(--ink-soft);max-width:44ch;}
-.body--wide{max-width:48ch;}
 .body strong{color:var(--ink);font-weight:500;}
-.body a{color:var(--ink);text-decoration-color:var(--hair-strong);text-underline-offset:3px;}
-.closer{
-  font-size:20px;line-height:32px;color:var(--ink);max-width:36ch;
-}
+.body a,.doclist a{color:var(--ink);text-decoration-color:var(--hair-strong);text-underline-offset:3px;}
 
 /* ---- document lists (steps · circuit · rules) ---------------- */
 .doclist{list-style:none;}
@@ -230,7 +221,7 @@ h2{
 .doclist>li:first-child{padding-top:0;}
 .doclist>li + li{border-top:1px solid var(--hair);}
 .doclist strong{display:block;font-size:16px;line-height:24px;font-weight:600;}
-.doclist span{display:block;margin-top:8px;font-size:16px;line-height:24px;color:var(--ink-soft);max-width:52ch;}
+.doclist>li>span{display:block;margin-top:8px;font-size:16px;line-height:24px;color:var(--ink-soft);max-width:52ch;}
 .doclist span .mono{font-size:14px;}
 /* numbered variant — mono figures, document idiom */
 .doclist--num{counter-reset:dstep;}
@@ -243,7 +234,7 @@ h2{
 /* split variant — name | meaning, spec-table feel (desktop) */
 @media (min-width:1101px){
   .doclist--split>li{display:grid;grid-template-columns:2fr 3fr;column-gap:var(--gutter);}
-  .doclist--split span{margin-top:0;}
+  .doclist--split>li>span{margin-top:0;}
 }
 
 /* coda — the four verdict words, inline in running text */
@@ -286,13 +277,6 @@ h2{
   background-attachment:local, local, scroll, scroll;
   background-repeat:no-repeat;
 }
-.ledger{
-  font-family:"Geist Mono",ui-monospace,monospace;
-  font-size:11px;line-height:16px;
-  color:var(--ink-soft);
-  white-space:pre;overflow-x:auto;
-}
-.ledger b{font-weight:400;color:var(--ink);}
 .caption{
   margin-top:16px;
   font-family:"Geist Mono",ui-monospace,monospace;
@@ -309,21 +293,6 @@ h2{
   letter-spacing:.06em;fill:currentColor;
 }
 .engraving .soft{opacity:.62;}
-
-/* ---- evidence figures (04) ----------------------------------- */
-.ev-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
-.ev{background:var(--panel);border:1px solid var(--hair);border-radius:8px;padding:16px;}
-.ev img{
-  display:block;width:100%;height:auto;
-  border:1px solid var(--hair);border-radius:4px;
-  background:var(--paper); /* scheme-appropriate pre-paint placeholder */
-}
-.ev figcaption{
-  margin-top:8px;
-  font-family:"Geist Mono",ui-monospace,monospace;
-  font-size:10px;line-height:16px;letter-spacing:.08em;text-transform:uppercase;
-  color:var(--ink-soft);
-}
 
 /* ---- footer — same paper, one closing rule ------------------- */
 .foot{
@@ -379,8 +348,6 @@ body.grid-on .guides{opacity:1;}
   .band{display:block;}
   .band>*+*{margin-top:48px;}
   .band + .band{margin-top:48px;}
-  .div-l{border-left:0;margin-left:0;padding-left:0;
-    border-top:1px dashed var(--hair);padding-top:47px;}
   h1{font-size:64px;line-height:64px;}
   .tagline{font-size:24px;line-height:32px;}
   .pitch{font-size:18px;line-height:28px;}
@@ -399,12 +366,10 @@ body.grid-on .guides{opacity:1;}
   .doc-sect{margin-top:72px;}
   .doc-idx{font-size:12px;margin-bottom:32px;padding-top:19px;}
   .band>*+*{margin-top:40px;}
-  .div-l{padding-top:39px;}
   h1{font-size:56px;line-height:56px;}
   .tagline{font-size:22px;line-height:32px;}
   .chip{display:flex;}
   h2{font-size:30px;line-height:32px;}
   .doclist>li{padding:16px 0 15px;}
-  .ev-grid{grid-template-columns:1fr;gap:16px;}
   .foot{margin-top:80px;}
 }

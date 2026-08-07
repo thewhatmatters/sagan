@@ -102,3 +102,40 @@ still zero animations.
 
 - Grid chip hidden at 375 vs pack's "the grid-toggle chip stays".
 - Anchor navigation is animated (~1.3s) — acceptable polish or too slow?
+
+## Round 4 delta (SHA f3ba049, delta_of 9be4459)
+
+Delta verify of round 4b (canonical script, single-paper surface, paper-
+native pinned nav, rebuilt hero, JSONL figure to section 04): PASS on
+all nine protocol checks. Builder's contrast claims reproduced to the
+hundredth (12.47/5.40/4.89 light, 14.42/6.74/5.76 dark). All five
+anchors (incl. the #install alias span) land 88 ≥ bar 56 without JS.
+Install chip select-all verified by actual click + getSelection —
+returned the full npx command exactly, `$` prompt excluded via
+user-select:none. Script sentences 3/3; "WHA-130"/"Receipts" zero hits.
+
+### Lessons added
+
+12. **Know which "soft" you're measuring.** The page has two soft-text
+    mechanisms: the `--ink-soft` token (what the AC and builder claims
+    mean — passes at 5.40/4.89) and an `.soft{opacity:.62}` class used
+    only inside the engraving SVG, which blends to 4.04/3.87 in light.
+    A naive `.soft` querySelector grabbed the wrong one first and
+    initially returned full-ink numbers; verify the CSS rule behind a
+    class before trusting its computed color, and compute opacity
+    blends over the actual backdrop.
+13. **`user-select: all` is verifiable, not just inspectable.** Click
+    the element and read `window.getSelection().toString()` — this also
+    catches the sibling `$` prompt correctly carrying
+    `user-select:none` so copied text is exactly the runnable command.
+14. **Anchor aliases need their own scroll-margin.** The zero-height
+    `#install` alias span carries its own `scroll-margin-top` (88px) —
+    measure the alias element itself, not its parent section.
+
+### Open threads for critic
+
+- SVG engraving `.soft` annotations at 4.04 (paper) / 3.87 (panel)
+  effective contrast in light scheme — illustration-internal text in a
+  `role=img` SVG with title+desc; below 4.5 if judged as page text.
+- Grid chip still `display:none` at 375 (pack: "grid chip where it
+  was").
