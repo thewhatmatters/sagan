@@ -1,25 +1,29 @@
 ---
-name: start-sagan
+name: sagan-run
 description: >-
-  Start and drive one Sagan run in a project already wired with the .sagan/
-  overlay — the PM-side run loop. Reads sagan.yaml, resolves the ticket
-  (Linear store or local tickets/), requires an AC block before any dispatch,
-  surfaces open decisions as structured questions with recommended defaults,
-  logs run.start to the ledger, then drives the circuit: builder → fresh
-  artifact-only critic (APPROVED/REVISE/NEEDS_EVIDENCE/ESCALATE) → verifier
+  Drive one Sagan run through the circuit in a project already wired with
+  the .sagan/ overlay — the PM-side dispatch loop that picks up where
+  /sagan-start's run brief ends. Requires an AC-gated ticket, surfaces open
+  decisions as structured questions with recommended defaults, then drives:
+  builder dispatch with pointer packs → fresh artifact-only critic
+  (APPROVED/REVISE/NEEDS_EVIDENCE/ESCALATE, envelope validated) → verifier
   (never the builder, evidence bound to a git SHA) → human promote gate →
-  retro synthesis. Also configures the agents a run needs: consent-gated,
-  idempotent generation of .claude/agents/sagan-<role>.md from
-  .sagan/roles/*.md. Use when the user says "start sagan", "run sagan",
-  "do a sagan run", "sagan test run", "run this ticket through sagan",
-  "run T-123 / WHA-123 through the loop", or "/start-sagan [ticket]".
-  NOT installation — if .sagan/ is missing, stop and point to wire-sagan.
+  retro synthesis, every event ledgered. Also configures the agents a run
+  needs: consent-gated, idempotent generation of .claude/agents/
+  sagan-<role>.md from .sagan/roles/*.md. Use when the user says "run
+  sagan", "do a sagan run", "sagan test run", "drive the circuit", "run
+  this ticket / the brief through sagan", "dispatch WHA-123 through the
+  loop", or "/sagan-run [ticket]". NOT the run opener (ticket mirroring,
+  AC authoring, scope — that's /sagan-start) and NOT installation (missing
+  .sagan/ → wire-sagan).
 ---
 
-# start-sagan
+# sagan-run
 
-Start and drive one Sagan run: startup checks, agent configuration, and the
-build → critique → verify → promote **circuit**, PM-interpreted (v0).
+Drive one Sagan run: agent configuration and the build → critique → verify
+→ promote **circuit**, PM-interpreted (v0). Opener is `/sagan-start`; this
+skill consumes its run brief and owns everything from first dispatch to
+`run.completed`.
 
 ## Leading words
 
@@ -35,14 +39,16 @@ build → critique → verify → promote **circuit**, PM-interpreted (v0).
 
 ## How to run
 
-"start sagan", "run this ticket through sagan", or `/start-sagan [ticket-id]`.
+"run sagan", "drive the circuit on this brief", or `/sagan-run [ticket-id]`.
+Normal sequence: `/sagan-start` produces the run brief → this skill runs it.
 
 ## Flags
 
 | Flag | Meaning |
 |------|---------|
 | `--agent` | non-interactive; no prompts/pauses (spec A7b/A9). Gates cannot be crossed: the run stops at the first needs-you or promote gate and reports what it needs |
-| `--ticket=ID` | ticket to run (else: surfaced as a needs-you question over open tickets) |
+| `--brief=PATH` | run brief from sagan-start (default: newest `.sagan/ledger/*/run-brief.md`) |
+| `--ticket=ID` | shortcut without a brief — legal only when the ticket already carries an AC block |
 | `--project=PATH` | wired project root (default: cwd) |
 | `--skip-agents` | skip the agent-configuration offer (Step 2) |
 | `--dry-run` | run Steps 0–4, print the run plan (stations, pointers, gates); dispatch nothing, write nothing |
@@ -87,22 +93,26 @@ or `--skip-agents` — is fine: dispatch falls back to generic subagents
 handed the role-spec path in the pointer pack. `--agent`: never writes;
 prints what it would generate.
 
-## Step 3 — Resolve ticket + AC gate
+## Step 3 — Load the brief + AC gate
 
-Read `ticket.store` from sagan.yaml. `linear` → fetch by id (quirk: the API
-silently ignores a nonexistent project name — verify responses echo the
-expected project). `local` → `tickets/<id>.md`. Then the hard gate:
-**no AC block, no dispatch.** If AC is missing or ambiguous, draft it with
-the human via needs-you questions first. AC amendments later in the run are
-a dated entry in the ticket's Decisions block plus the AC block edited and
-marked "Amended — see Decisions"; never a silent edit.
+Load the run brief (`--brief`, else the newest
+`.sagan/ledger/*/run-brief.md`); it names the ticket mirror(s) at
+`tickets/<ID>.md`. No brief and no `--ticket` → point to `/sagan-start` and
+stop. With `--ticket` alone, read the mirror directly. Either way, re-check
+the hard gate before dispatch: **no AC block, no dispatch** — sagan-start
+gates AC at open time, but the mirror may have changed since. AC amendments
+mid-run are a dated entry in the ticket's Decisions block plus the AC block
+edited and marked "Amended — see Decisions"; never a silent edit. Writeback
+of repo-owned blocks to Linear goes through `/sagan-start --writeback=ID`
+(verbatim), never ad-hoc API edits.
 
 ## Step 4 — Needs-you round + run.start
 
-Collect every open decision (ticket choice, AC ambiguities, gate policy for
-this run) into one structured question set with recommended defaults. Then
-append `run.start` to `.sagan/ledger/events.jsonl` and proceed. `--dry-run`
-stops here with the run plan.
+Collect every open decision left by the brief (AC ambiguities, gate policy
+for this run, round-cap overrides) into one structured question set with
+recommended defaults. If sagan-start already logged this run's `run.start`,
+do not double-log — append `dispatch` events from here on. Otherwise append
+`run.start` now. `--dry-run` stops here with the run plan.
 
 ## Step 5 — Drive the circuit
 

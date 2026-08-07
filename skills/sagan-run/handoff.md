@@ -1,4 +1,4 @@
-# start-sagan — Handoff & decisions
+# sagan-run — Handoff & decisions
 
 Living record of what this skill is, the decisions behind it, and any
 non-obvious constraints (spec A12).
@@ -16,10 +16,12 @@ PM-interpreted.
 This skill follows `~/.claude/skills/skill-architecture.md` patterns A1–A15;
 deliberate notes:
 
-- Companion split mirrors wire-vault/curate-vault: **wire-sagan installs,
-  start-sagan runs.** Missing overlay is a hard stop with a pointer, never
+- Three-skill split: **wire-sagan installs, sagan-start opens (mirror +
+  AC gate + scope + brief), sagan-run drives (dispatch → circuit →
+  promote → retro).** Missing overlay is a hard stop with a pointer, never
   an inline install (single-responsibility, and wire-sagan's consent
-  choreography must not be duplicated).
+  choreography must not be duplicated); missing brief points to
+  /sagan-start the same way.
 - Leading words (spec A14): **circuit**, **pointer pack**, **needs-you** —
   chosen to match the vocabulary already used in `.sagan/` and the fleet
   design doc so ledger entries, role specs, and skill reasoning agree.
@@ -29,6 +31,16 @@ deliberate notes:
 
 ## 3. Decision log
 
+- 2026-08-07: renamed start-sagan → sagan-run after a concurrent-session
+  collision: another session shipped `sagan-start` (run opener: ticket
+  mirror with one-writer-per-field, script-enforced AC gate, scope
+  question, run brief; v1 deliberately stops before dispatch) minutes
+  before this skill landed. The two split cleanly — opener vs driver —
+  so this skill dropped its duplicated opener steps (ticket fetch, AC
+  authoring) and now consumes sagan-start's run brief. Trigger modes
+  differ deliberately: sagan-start is user-invoked (/sagan-start);
+  sagan-run stays model-invoked so "do a sagan run" routes here, and its
+  Step 3 redirects to /sagan-start when no brief exists.
 - 2026-08-07: scaffolded by generate-skill, codifying the startup sequence
   recorded in `.sagan/MEMORY.md` ("read sagan.yaml → fetch ticket → check
   AC/blockers/gates → surface decisions as structured questions → log run

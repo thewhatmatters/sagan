@@ -1,8 +1,9 @@
-# start-sagan
+# sagan-run
 
-**What it is:** Start and drive one Sagan run in a wired project — startup
-checks, agent configuration, and the build → critique → verify → promote
-circuit, PM-interpreted.
+**What it is:** Drive one Sagan run through the circuit — agent
+configuration and build → critique → verify → promote, PM-interpreted.
+Companion to `/sagan-start` (the run opener that mirrors the ticket and
+gates AC); this skill consumes its run brief.
 
 ## What you get
 
@@ -15,7 +16,7 @@ circuit, PM-interpreted.
 
 ## How to run
 
-Say "start sagan" or "run WHA-123 through sagan", or `/start-sagan WHA-123`.
+Say "run sagan" or "run WHA-123 through sagan", or `/sagan-run WHA-123` — normally after `/sagan-start` has produced the run brief.
 
 ## What it needs
 
@@ -28,9 +29,9 @@ and points you to wire-sagan — it never installs.
 1. Checks the overlay is present and the ledger is writable.
 2. Offers to generate per-role agent definitions from the role specs
    (consent-gated; skippable).
-3. Fetches the ticket from the store sagan.yaml names (Linear or local
-   `tickets/`) and refuses to dispatch until an Acceptance Criteria block
-   exists.
+3. Loads the run brief from sagan-start (or a `--ticket` mirror that
+   already carries AC) and refuses to dispatch until an Acceptance
+   Criteria block exists.
 4. Surfaces every open decision to you as structured questions with
    recommended defaults, logs `run.start`, then drives builder → fresh
    critic → verifier rounds within the configured caps.

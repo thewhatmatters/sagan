@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Readiness check for start-sagan (spec A6).
+"""Readiness check for sagan-run (spec A6).
 
 Checks the target project is a wired Sagan project: .sagan/ overlay present,
 sagan.yaml readable, role specs installed, ledger appendable, git repo.
@@ -95,7 +95,7 @@ def main():
         if RANK[s] > RANK[overall]:
             overall = s
 
-    print("start-sagan readiness", file=sys.stderr)
+    print("sagan-run readiness", file=sys.stderr)
     for n, (s, g, d) in checks.items():
         suffix = f"  [{g}]" if g else ""
         print(f"  {MARK[s]} {n:<8} {d}{suffix}", file=sys.stderr)
