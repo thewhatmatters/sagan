@@ -1,5 +1,36 @@
 # Project memory — rolling synthesis
 
+## From WHA-151 (2026-08-07) — first run through the sagan-start → sagan-run skill flow
+
+- **The two-skill flow held end to end** (opener: mirror + seeded AC +
+  enforced precheck + brief; driver: dispatch → verify → critique →
+  promote → writeback). Round-1 APPROVED with zero blocking findings —
+  and the first run ever with a **schema-clean critic envelope**
+  (validate_verdict.py passed; drift warning in the dispatch prompt +
+  PM-side validation did what runtime enforcement will do later).
+- **Round-1 predictable evidence works.** Verify ran between build and
+  critique with the full AC sweep; the critic approved in one round
+  instead of returning NEEDS_EVIDENCE. Standing order confirmed: when AC
+  items are execution-shaped, dispatch verify before the critic.
+- **Fully mechanical AC pays for itself** — exact label, href, position,
+  and separator idiom specified verbatim left the builder zero
+  interpretation (builder retro: "the most likely source of drift"
+  was pre-removed). Keep pinning idioms, not just strings.
+- **Role-spec gaps found:** (1) frontend rubric's blanket "no external
+  network resources of any kind" predates real sites and conflicts with
+  AC-level "no NEW external resources" — reconcile the template rubric
+  (critic had to arbitrate). (2) Clarify that running the ticket's own
+  build AC is in-bounds for the builder even though render checks are not.
+- **Verify practicals (Playwright via npx):** `npx playwright --version`
+  succeeding ≠ importable — it resolves from the npx cache, not the
+  project's node_modules, and ESM ignores NODE_PATH (copy the script next
+  to the cached install); a cached runtime may want a browser build that
+  isn't downloaded (explicit `executablePath` to an older cached headless
+  shell works). Diff-scans for "no new external URLs" must eyeball
+  re-flowed lines — moving a `</p>` re-emits a pre-existing URL as an
+  added line. Assert exact labels from DOM textContent, never from
+  pixels (CSS text-transform lies).
+
 ## From T-001 (2026-08-06) — first full loop: build → critique → evidence → approve
 
 - **The loop worked as designed.** Round-1 critic returned NEEDS_EVIDENCE
