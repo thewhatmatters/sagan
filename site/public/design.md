@@ -64,10 +64,11 @@ The type roles, exactly:
 - **Section index (`.doc-idx`):** Mono 13/16, uppercase, tracking .14em, soft ink, above a strong hairline — the running head of each numbered section ("01 · Get started" left, "01 / 03" right).
 - **Labels and nav:** Mono 11–13/16, uppercase, tracking .1–.22em (wider tracking for the brand mark).
 - **Captions:** Mono 10/16, uppercase, tracking .08em, soft ink, set below figures like a plate caption.
+- **Specimen text:** Mono 12/20, full ink, only inside panels (`pre`); annotations within a specimen dim to soft ink via `.soft`.
 
 Sentence case for headings and rules; uppercase belongs to mono apparatus only. Numbered lists use the document idiom: mono two-digit counters ("01", "02") set small before a semibold term. Links underline with hairline-colored decoration and 3px offset — no color shift.
 
-Spacing is relational and baseline-true: heading to first paragraph close (16px), items within a list separated by hairlines with 20px padding, section turns large (128px desktop, 88/72 down the breakpoints), the footer preceded by the largest gap on the page (144px) and one closing rule.
+Spacing is relational and baseline-true: a heading and its lede are one unit (8px), a list following that unit steps clearly off it (32px), items within a list separated by hairlines with 20px padding, section turns large (128px desktop, 88/72 down the breakpoints), the footer preceded by the largest gap on the page (144px) and one closing rule.
 
 ## Rules, panels, and document furniture
 
