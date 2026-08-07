@@ -71,31 +71,31 @@ import '../styles/global.css';
         <span aria-hidden="true">01 / 03</span>
       </header>
       <div class="band">
-        <div class="c-1-5">
+
+        <div class="c-1-7">
           <h2>Get started</h2>
           <p class="body">Three steps, one directory.</p>
+          <ol class="doclist doclist--num">
+            <li><strong>Install</strong>
+              <span>The command above adds the <span class="mono">sagan-wire</span>
+                installer to your Claude Code setup.</span></li>
+            <li><strong>Wire your project</strong>
+              <span>Say &ldquo;wire this project to sagan.&rdquo; It probes your
+                repo, captures your real test/build commands, and installs a
+                self-contained <span class="mono">.sagan/</span> folder. One
+                directory in; delete it to walk away.</span></li>
+            <li><strong>Run your first ticket</strong>
+              <span>Copy the <a href="https://github.com/thewhatmatters/sagan/blob/main/tickets/T-000-example.md">example ticket</a>, write what &ldquo;done&rdquo; means,
+                then say <span class="mono">/sagan-start</span> to bring your
+                tickets into the repo and refuse any that don&rsquo;t say what
+                done means &mdash; and <span class="mono">/sagan-run</span> to
+                drive the circuit: build, critique, verify, and a promote
+                decision that stays yours. Tickets can live as files in your
+                repo or in Linear.</span></li>
+          </ol>
         </div>
-        <ol class="doclist doclist--num doclist--split c-5-13">
-          <li><strong>Install</strong>
-            <span>The command above adds the <span class="mono">sagan-wire</span>
-              installer to your Claude Code setup.</span></li>
-          <li><strong>Wire your project</strong>
-            <span>Say &ldquo;wire this project to sagan.&rdquo; It probes your
-              repo, captures your real test/build commands, and installs a
-              self-contained <span class="mono">.sagan/</span> folder. One
-              directory in; delete it to walk away.</span></li>
-          <li><strong>Run your first ticket</strong>
-            <span>Copy the <a href="https://github.com/thewhatmatters/sagan/blob/main/tickets/T-000-example.md">example ticket</a>, write what &ldquo;done&rdquo; means,
-              then say <span class="mono">/sagan-start</span> to bring your
-              tickets into the repo and refuse any that don&rsquo;t say what
-              done means &mdash; and <span class="mono">/sagan-run</span> to
-              drive the circuit: build, critique, verify, and a promote
-              decision that stays yours. Tickets can live as files in your
-              repo or in Linear.</span></li>
-        </ol>
-      </div>
-      <div class="band">
-        <figure class="c-5-13">
+
+        <figure class="c-7-13">
           <div class="fig-head">
             <span class="t">What a ticket looks like</span>
             <span class="f">md</span>
@@ -105,28 +105,30 @@ import '../styles/global.css';
 id: WHA-151
 title: Footer design.md link on sagan.run
 status: Done
-<span class="soft"># repo-owned — set by the run, carried across every fetch</span>
+<span class="soft"># repo-owned — set by the run, kept across fetches</span>
 builder_id: frontend-claude-r1
-verifier_id: verify-claude-r1     <span class="soft"># never the builder</span>
-evidence_sha: d4e6fc9             <span class="soft"># proof binds to this commit</span>
+verifier_id: verify-claude-r1   <span class="soft"># never the builder</span>
+evidence_sha: d4e6fc9           <span class="soft"># proof binds here</span>
 ---
 
-<span class="soft">&lt;!-- sagan:linear-owned:start — regenerated on every fetch --&gt;</span>
+<span class="soft">&lt;!-- sagan:linear-owned:start — regenerated on fetch --&gt;</span>
 The description, mirrored verbatim from the tracker.
 <span class="soft">&lt;!-- sagan:linear-owned:end --&gt;</span>
 
-<span class="soft">&lt;!-- sagan:repo-owned:start — agents write here; a fetch never touches it --&gt;</span>
+<span class="soft">&lt;!-- sagan:repo-owned:start — agents write here --&gt;</span>
 ## AC
-1. Exact visible label `design.md`, href `/design.md`, placed after
-   the sagan.run link, using the row's existing separator idiom.
-2. `npm run build` exits 0; dist contains `href="/design.md"`.
-3. At 375px and 1280px: all three links, no horizontal overflow.
+1. Exact visible label `design.md`, href `/design.md`,
+   after the sagan.run link, using the row&rsquo;s existing
+   separator idiom.
+2. `npm run build` exits 0; dist contains
+   `href="/design.md"`.
+3. At 375px and 1280px: all three links, no overflow.
 
 ## Frontend
-r1 build note — what was built, key choices, nothing self-approved.
+r1 build note — built what, key choices, no self-approval.
 
 ## QA
-r1 verify — per-AC PASS/FAIL with evidence at `d4e6fc9`.
+r1 verify — per-AC PASS/FAIL, evidence at `d4e6fc9`.
 
 ## Decisions
 2026-08-07 — promote gate (human): promote.
@@ -134,6 +136,7 @@ r1 verify — per-AC PASS/FAIL with evidence at `d4e6fc9`.
           </div>
           <figcaption class="caption">Abridged from WHA-151 &mdash; the ticket that shipped this page&rsquo;s footer link &middot; full anatomy: tickets/T-000-example.md</figcaption>
         </figure>
+
       </div>
     </section>
 
