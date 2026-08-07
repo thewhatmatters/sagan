@@ -94,6 +94,47 @@ import '../styles/global.css';
               repo or in Linear.</span></li>
         </ol>
       </div>
+      <div class="band">
+        <figure class="c-5-13">
+          <div class="fig-head">
+            <span class="t">What a ticket looks like</span>
+            <span class="f">md</span>
+          </div>
+          <div class="panel panel--scroll">
+<pre>---
+id: WHA-151
+title: Footer design.md link on sagan.run
+status: Done
+<span class="soft"># repo-owned — set by the run, carried across every fetch</span>
+builder_id: frontend-claude-r1
+verifier_id: verify-claude-r1     <span class="soft"># never the builder</span>
+evidence_sha: d4e6fc9             <span class="soft"># proof binds to this commit</span>
+---
+
+<span class="soft">&lt;!-- sagan:linear-owned:start — regenerated on every fetch --&gt;</span>
+The description, mirrored verbatim from the tracker.
+<span class="soft">&lt;!-- sagan:linear-owned:end --&gt;</span>
+
+<span class="soft">&lt;!-- sagan:repo-owned:start — agents write here; a fetch never touches it --&gt;</span>
+## AC
+1. Exact visible label `design.md`, href `/design.md`, placed after
+   the sagan.run link, using the row's existing separator idiom.
+2. `npm run build` exits 0; dist contains `href="/design.md"`.
+3. At 375px and 1280px: all three links, no horizontal overflow.
+
+## Frontend
+r1 build note — what was built, key choices, nothing self-approved.
+
+## QA
+r1 verify — per-AC PASS/FAIL with evidence at `d4e6fc9`.
+
+## Decisions
+2026-08-07 — promote gate (human): promote.
+<span class="soft">&lt;!-- sagan:repo-owned:end --&gt;</span></pre>
+          </div>
+          <figcaption class="caption">Abridged from WHA-151 &mdash; the ticket that shipped this page&rsquo;s footer link &middot; full anatomy: tickets/T-000-example.md</figcaption>
+        </figure>
+      </div>
     </section>
 
     <!-- ============ 02 · How it works ============================== -->

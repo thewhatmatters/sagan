@@ -142,6 +142,45 @@ The toolkit is three skills, one per phase:
   instead of quietly shipping — and stops at the promote gate, which is
   yours. Retros synthesize into `.sagan/MEMORY.md` when the run closes.
 
+### What a ticket looks like
+
+One markdown file per ticket, frontmatter split by owner, two regions —
+the tracker's and the repo's. Abridged from WHA-151, the run that shipped
+the site's footer link (full anatomy: [`tickets/T-000-example.md`](tickets/T-000-example.md)):
+
+```markdown
+---
+id: WHA-151
+title: Footer design.md link on sagan.run
+status: Done
+# repo-owned — set by the run, carried across every fetch
+builder_id: frontend-claude-r1
+verifier_id: verify-claude-r1     # never the builder
+evidence_sha: d4e6fc9             # proof binds to this commit
+---
+
+<!-- sagan:linear-owned:start — regenerated on every fetch -->
+The description, mirrored verbatim from the tracker.
+<!-- sagan:linear-owned:end -->
+
+<!-- sagan:repo-owned:start — agents write here; a fetch never touches it -->
+## AC
+1. Exact visible label `design.md`, href `/design.md`, placed after
+   the sagan.run link, using the row's existing separator idiom.
+2. `npm run build` exits 0; dist contains `href="/design.md"`.
+3. At 375px and 1280px: all three links, no horizontal overflow.
+
+## Frontend
+r1 build note — what was built, key choices, nothing self-approved.
+
+## QA
+r1 verify — per-AC PASS/FAIL with evidence at `d4e6fc9`.
+
+## Decisions
+2026-08-07 — promote gate (human): promote.
+<!-- sagan:repo-owned:end -->
+```
+
 ## Status — v0, honest
 
 - ✅ Validated: the contract-shaped loop (AC-first, isolated critique,
