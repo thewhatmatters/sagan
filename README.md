@@ -122,22 +122,33 @@ the PM by reading `sagan.yaml` and the role specs.
   tickets, set your gate commands in `sagan.yaml`, and point your agent's
   project context at it.
 
-Then: copy `tickets/T-000-example.md`, write the AC, and tell your session
-to run the ticket through the loop — tickets can live as files in your repo
-or in Linear.
+Then: copy `tickets/T-000-example.md`, write the AC, and run it through the
+loop with the two run skills — tickets can live as files in your repo or in
+Linear.
 
-To open a run, `sagan-start` (the companion skill — `sagan-wire` installs,
-this one runs) does the startup sequence in order: read `sagan.yaml`, mirror
-the ticket store, check every ticket's AC, ask whether this is one ticket or a
-sprint, log `run.started`, and hand back a brief. It stops there — dispatch
-stays a human decision. `--writeback=<ID>` sends a ticket's repo blocks back to
-the tracker verbatim.
+The toolkit is three skills, one per phase:
+
+- **`sagan-wire` installs** (above).
+- **`sagan-start` opens.** The startup sequence in order: read
+  `sagan.yaml`, mirror the ticket store into local markdown, check every
+  ticket's AC (no criteria → non-zero exit, not a reminder), ask whether
+  this is one ticket or a sprint, log `run.started`, and hand back a
+  dispatch-ready brief. `--writeback=<ID>` sends a ticket's repo blocks
+  back to the tracker verbatim.
+- **`sagan-run` drives.** It consumes the brief and owns the circuit:
+  dispatches the builder with pointer packs, a fresh artifact-only critic
+  (verdict envelope schema-validated), a verifier that is never the
+  builder and binds evidence to a git SHA, round caps that escalate
+  instead of quietly shipping — and stops at the promote gate, which is
+  yours. Retros synthesize into `.sagan/MEMORY.md` when the run closes.
 
 ## Status — v0, honest
 
 - ✅ Validated: the contract-shaped loop (AC-first, isolated critique,
   evidence-bound verification, promote gates, memory tiers) — proven by
-  the T-001 run.
+  the T-001 run, and re-proven skill-driven end to end by WHA-151 (the
+  first `sagan-start` → `sagan-run` circuit: round-1 APPROVED on real
+  evidence, with a schema-clean critic envelope).
 - ⚠️ Mostly not built yet: **runtime enforcement.** Round caps, critic
   isolation and gates are still interpreted by the PM model, not enforced by
   code. The one exception is `ac_before_dispatch`: when a run opens through
