@@ -96,3 +96,16 @@ rejections, 1 persona-test debut. Consolidated lessons for the PM skill:
 - **Same-finding circuit breaker never tripped** across 5 rounds — every
   round's findings were new, which is what healthy iteration looks like
   in the ledger.
+
+## From the Conan Sagan overlay retro-QA (2026-08-07)
+
+- The fleet overlay installed at `489e004` on `main-v2` of
+  `thewhatmatters/conan` was merged without a PR gate. Retroactive QA
+  re-ran at the current tip `73c0d29` (which includes the overlay):
+  root `npm run typecheck` clean, root `npm test` 206/206, `ui/`
+  `npm run typecheck` clean, `ui/` `npm run build` clean. Recorded as
+  `evidence.recorded` on the Sagan ledger under WHA-137.
+- Note: `conan/ui/package.json` has no `test` script; the UI tests are
+  reached through the root test runner (`ui/src/lib/worklog.test.ts` and
+  `ui/src/data/whatsNew.test.ts`). A standalone `cd ui && npm run test`
+  is not a valid gate for this repo.
