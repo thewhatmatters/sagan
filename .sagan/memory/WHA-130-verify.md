@@ -139,3 +139,44 @@ user-select:none. Script sentences 3/3; "WHA-130"/"Receipts" zero hits.
   `role=img` SVG with title+desc; below 4.5 if judged as page text.
 - Grid chip still `display:none` at 375 (pack: "grid chip where it
   was").
+
+## Round 5 delta (SHA 51a79e1, delta_of f3ba049)
+
+Delta verify of rounds 4c+4d (`.doclist>li>span` scoping, "Claude Code
+setup" wording, T-000 example-ticket hyperlink, vertical dividers out,
+section 04 + evidence PNGs + JSONL figure cut, nav 01·02·03, README
+Linear clause): PASS on all 13 checks. Dist dropped 514KB → 248KB with
+the PNG removal; `real-run` grep 0 everywhere; sentence-flow confirmed
+via innerText line-split (the r4c fragmentation cannot recur silently —
+this check is now in the delta script).
+
+### Lessons added
+
+15. **Grep multi-line-wrapped prose with the file open, not the
+    pattern.** The README clause exists verbatim but wraps across two
+    source lines ("…in your repo\nor in Linear."); a single-line grep
+    returned 0 and looked like a FAIL. For prose clauses, grep a short
+    unbreakable fragment or read the section — don't rule on a full-
+    sentence pattern.
+16. **A "pass" condition can be wrong even when most results are
+    right.** First anchor run used `elTop >= barBottom` alone, which
+    passes for any target still *below the fold* — three anchors
+    "passed" while actually unscrolled (smooth scroll mid-flight,
+    lesson 9 again). The FAIL on the fourth exposed it. Anchor
+    assertions need both bounds: landed near the anchor
+    (elTop ≤ margin+tolerance) AND clear of the bar.
+17. **Playwright `wait_for_function` doesn't await Promise-returning
+    predicates reliably** — a settle-wait built on `new Promise` timed
+    out despite the condition holding. Poll from Python (evaluate in a
+    loop until N stable samples) for scroll-settle waits.
+18. **Removal checks are two greps, not one.** "Section 04 is gone"
+    needed both the id (`real-run`) in html+css AND the human-visible
+    string ("A real run") — an orphaned CSS rule or a re-worded heading
+    would each slip past a single grep.
+
+### Open threads for critic
+
+- Engraving `.soft` annotation contrast (4.04/3.87 light) — carried,
+  unchanged by 4c+4d.
+- Grid chip display:none at 375 — carried.
+- Divider-removal gap rebalance: measured absent, aesthetics uncalled.
