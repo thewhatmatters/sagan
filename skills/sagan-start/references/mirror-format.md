@@ -88,10 +88,11 @@ issue.
 
 ## Ids and hygiene
 
-Mirror filenames are the tracker identifier (`WHA-133.md`). Legacy local
-tickets (`T-000-example.md`, `T-001.md`) predate the mirror, have no
-frontmatter `id`, and are left alone — `precheck.py` reads them, `mirror.py`
-never touches them.
+Mirror filenames are the tracker identifier (`WHA-133.md`).
+`T-000-example.md` is the worked sample of this anatomy (copy it to author a
+local-store ticket); `T-001.md` is a legacy pre-mirror ticket kept as run
+history. `precheck.py` reads both; `mirror.py` touches neither — it only
+writes files for ids fetched from the tracker.
 
 A live mirror puts private tracker ids in the working tree. In a public repo,
 keep `ticket.mirror.commit: ignore` in `sagan.yaml` and let the Step 1 gate add
