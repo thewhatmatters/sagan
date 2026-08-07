@@ -217,6 +217,7 @@ h2{
 
 /* ---- document lists (steps · circuit · rules) ---------------- */
 .doclist{list-style:none;}
+.body + .doclist{margin-top:32px;} /* title+lede are one unit; the list is the next */
 .doclist>li{padding:20px 0 19px;}
 .doclist>li:first-child{padding-top:0;}
 .doclist>li + li{border-top:1px solid var(--hair);}
