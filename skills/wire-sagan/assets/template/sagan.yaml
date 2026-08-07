@@ -62,3 +62,22 @@ ticket:
   store: {{TICKET_STORE}}           # local-files (.sagan/tickets/) or linear
   blocks: [ac, frontend, qa, decisions]
   required_fields: [ac, builder_id, verifier_id, evidence_sha]
+  mirror:                           # tracker -> local markdown (read by /sagan-start),
+    path: .sagan/tickets            #   so every worker resolves the ticket as a POINTER
+    commit: ignore                  #   ignore | commit — live tracker ids in the repo
+    writeback: verbatim             #   verbatim | off. Never "summary": a summarized
+                                    #   write-back is the paraphrase this design forbids.
+    # ONE WRITER PER FIELD. The tracker owns intent (title/status/priority/
+    # assignee/description); the repo owns execution (the blocks below +
+    # builder_id, verifier_id, evidence_sha). A fetch regenerates the first and
+    # never touches the second.
+    owned_by_repo: [ac, frontend, qa, decisions]
+
+scope:
+  modes: [ticket, sprint]
+  default: ticket
+  sprint: planning-only             # batch AC authoring + the decision round across
+                                    # N tickets; builds still run ONE AT A TIME.
+                                    # Concurrent builders need worktrees, a
+                                    # file-disjointness check and a sprint-level
+                                    # round cap — none of which exist at v0.

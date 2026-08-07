@@ -1,3 +1,11 @@
 .DS_Store
 .sagan/refs/
 .vercel
+
+# Live ticket mirrors. This repo is a public reference implementation, so
+# private tracker ids stay in the private tracker (see .sagan/MEMORY.md,
+# "Memory hygiene in a public reference repo"). The two committed tickets
+# below are the worked example and predate the mirror.
+tickets/*.md
+!tickets/T-000-example.md
+!tickets/T-001.md

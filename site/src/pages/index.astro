@@ -86,8 +86,11 @@ import '../styles/global.css';
               directory in; delete it to walk away.</span></li>
           <li><strong>Run your first ticket</strong>
             <span>Copy the <a href="https://github.com/thewhatmatters/sagan/blob/main/tickets/T-000-example.md">example ticket</a>, write what &ldquo;done&rdquo; means,
-              and tell your agent session to run it through the loop &mdash;
-              tickets can live as files in your repo or in Linear.</span></li>
+              then say <span class="mono">/sagan-start</span>. It brings your
+              tickets into the repo, refuses any that don&rsquo;t say what
+              done means, and asks whether you&rsquo;re running one ticket or a
+              sprint &mdash; tickets can live as files in your repo or in
+              Linear.</span></li>
         </ol>
       </div>
     </section>
@@ -130,6 +133,10 @@ import '../styles/global.css';
             <code class="verdict">NEEDS_EVIDENCE</code> (run it and show me), or
             <code class="verdict">ESCALATE</code> (a human needs to look at
             this).</p>
+          <p class="coda">Tickets from a tracker are mirrored into the repo as
+            files, so every agent reads the same words you wrote &mdash; not a
+            version retyped into a prompt along the way. Notes travel back to
+            the tracker word for word.</p>
         </div>
 
         <figure class="c-7-13">

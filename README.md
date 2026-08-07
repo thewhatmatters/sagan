@@ -65,6 +65,33 @@ Verdicts: `APPROVED | REVISE | NEEDS_EVIDENCE | ESCALATE`.
 
 One directory to add; delete it to un-wire.
 
+## Tickets are mirrored, not paraphrased
+
+Context packs are **pointers** — a path and a ticket id, never a retyped copy.
+That only works if the pointer resolves for the worker receiving it, so when
+the ticket store is a tracker, Sagan mirrors each ticket to `tickets/<ID>.md`
+and hands workers the file. Two things fall out of it: the acceptance criteria
+sit in git at the same commit as the evidence, and no agent ever reads a
+ticket that a PM retyped from memory.
+
+The mirror has exactly **one writer per field**:
+
+| | Owns | On fetch |
+|---|---|---|
+| **Tracker** | title, status, priority, assignee, description | regenerated |
+| **Repo** | AC, Frontend, QA, Decisions, `builder_id`, `verifier_id`, `evidence_sha` | never touched |
+
+Two writable copies of one field have no merge algorithm, so no field has two
+writers. Going back the other way, repo blocks return to the tracker **word for
+word** with the git SHA — a summarized write-back would reintroduce, at the
+sync boundary, exactly the paraphrase the pointer rule exists to prevent.
+
+Sprint scope batches the *planning* — AC authoring and the decision round
+across several tickets at once — and still builds one ticket at a time.
+Concurrent builders need worktrees, a file-disjointness check, and a
+sprint-level round cap; none of those exist yet, and nothing at v0 would catch
+two agents editing the same file.
+
 ## Worked example: T-001
 
 This repo ran its own first ticket. The trail is committed:
@@ -99,14 +126,24 @@ Then: copy `tickets/T-000-example.md`, write the AC, and tell your session
 to run the ticket through the loop — tickets can live as files in your repo
 or in Linear.
 
+To open a run, `sagan-start` (the companion skill — `wire-sagan` installs,
+this one runs) does the startup sequence in order: read `sagan.yaml`, mirror
+the ticket store, check every ticket's AC, ask whether this is one ticket or a
+sprint, log `run.started`, and hand back a brief. It stops there — dispatch
+stays a human decision. `--writeback=<ID>` sends a ticket's repo blocks back to
+the tracker verbatim.
+
 ## Status — v0, honest
 
 - ✅ Validated: the contract-shaped loop (AC-first, isolated critique,
   evidence-bound verification, promote gates, memory tiers) — proven by
   the T-001 run.
-- ⚠️ Not built yet: **runtime enforcement.** Round caps and gates are
-  currently interpreted by the PM model, not enforced by code. The design
-  treats that as the first real infrastructure work — nothing
+- ⚠️ Mostly not built yet: **runtime enforcement.** Round caps, critic
+  isolation and gates are still interpreted by the PM model, not enforced by
+  code. The one exception is `ac_before_dispatch`: when a run opens through
+  `sagan-start`, a ticket with no enumerated acceptance criteria fails with a
+  non-zero exit code rather than a reminder. Dispatch by hand and nothing
+  checks it. That asymmetry is the point of the roadmap item — nothing
   safety-critical should depend on a model remembering to stop.
 - Roadmap: enforced tier (caps, isolation, containment floors as code),
   provider-heterogeneous bindings (Claude / Codex / Grok / Kimi with

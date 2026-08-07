@@ -104,7 +104,10 @@ overwrite a local edit.
 
 Installed tree, entry point wired or block-printed, gates captured, template
 version, and the un-wire line (`delete .sagan/ + remove the marker block`).
-Suggest the first ticket: copy `.sagan/tickets/T-000-example.md`.
+Suggest the first ticket: copy `.sagan/tickets/T-000-example.md`. Then point at
+`/sagan-start` — the companion skill that opens a run against this overlay
+(mirrors the ticket store, gates on AC, scopes ticket-vs-sprint). Installing
+does not run anything.
 
 ## Conventions this skill follows
 

@@ -1,10 +1,14 @@
 # sagan v0 test config — mirrors the v3.3 thesis sketch.
-# v0 HONESTY: `enforced:` below is aspirational — at v0 the PM (a model)
-# interprets everything. Runtime enforcement is the first real Conan work.
+# v0 HONESTY: everything NOT listed in `enforced:` is interpreted by the PM
+# model, not checked by code. Runtime enforcement is the first real Conan work.
 
 runtime: claude-code-session        # v0 stand-in; target is conan
 validation: pm-interpreted          # target: fail-closed schema validation
-enforced: []                        # target: [round_caps, critic_isolation, human_gates, containment_floors]
+enforced: [ac_before_dispatch]      # ONLY when a run opens via /sagan-start:
+                                    # precheck.py exits 2 on a ticket with no
+                                    # enumerated AC. Dispatch by hand and nothing
+                                    # checks it. Target adds: round_caps,
+                                    # critic_isolation, human_gates, containment_floors
 
 pm:
   binding: { provider: claude-code }
@@ -51,5 +55,25 @@ memory:
 
 ticket:
   store: linear                     # Linear project "Sagan" (Whatmatters); local tickets/ kept for T-000/T-001 history
+  project: Sagan                    # the Linear project the mirror fetch is scoped to
   blocks: [ac, frontend, qa, decisions]
   required_fields: [ac, builder_id, verifier_id, evidence_sha]
+  mirror:                           # tracker -> local markdown, so every worker
+    path: tickets                   #   can resolve the ticket as a POINTER
+    commit: ignore                  #   ignore | commit — live tracker ids in the repo
+    writeback: verbatim             #   verbatim | off. Never "summary": a summarized
+                                    #   write-back is the paraphrase this design forbids.
+    # ONE WRITER PER FIELD. Linear owns intent (title/status/priority/assignee/
+    # description); the repo owns execution (the blocks below + builder_id,
+    # verifier_id, evidence_sha). A fetch regenerates the first and never touches
+    # the second — enforced in sagan-start's mirror.py, not remembered by the PM.
+    owned_by_repo: [ac, frontend, qa, decisions]
+
+scope:
+  modes: [ticket, sprint]
+  default: ticket
+  sprint: planning-only             # batch AC authoring + the decision round across
+                                    # N tickets; builds still run ONE AT A TIME.
+                                    # Concurrent builders need worktrees, a
+                                    # file-disjointness check and a sprint-level
+                                    # round cap — none of which exist at v0.
