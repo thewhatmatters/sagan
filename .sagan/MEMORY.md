@@ -61,3 +61,38 @@
   by adopters, not just this fleet — cite in-repo artifacts (T-001) or
   write cases self-describing; private tracker IDs stay in the private
   tracker.
+
+## From the sagan.run site run (2026-08-06) — wrap-up synthesis
+
+Shipped: sagan.run (Astro, 248KB, zero third-party requests) through the
+full loop — 2 tickets + deploy, ~16 agents, 5 build rounds, 2 human gate
+rejections, 1 persona-test debut. Consolidated lessons for the PM skill:
+
+- **Copy is a gated artifact.** The decisive quality jump came when the
+  human approved a README-style content script BEFORE layout; builders
+  lay approved words, they don't write them. Mandate script-first for
+  any communication-bearing page.
+- **A frame gate approves a frame, not a rhythm.** Showcase site runs
+  need a structure/scroll-rhythm artifact gated alongside the visual
+  frame — extending one approved sheet five times produced "slides".
+- **Persona-test before human gates on user-facing work.** Its debut
+  produced two approved copy amendments and caught a checklist hole;
+  its trust-read predicted the human's reaction imperfectly (proof
+  section) — the gate outranks it, but it belongs in the standing
+  pipeline.
+- **Ship predictable evidence with round 1** (overlay-on renders,
+  no-scroll figure captures) — saved a full critique round when applied.
+- **Verify deltas must re-execute what CSS-token changes could break**
+  (the carried 375-scroll claim went stale); "diff-confined" reasoning
+  needs a runtime-surface map, not a file list.
+- **Critic contract drift is chronic** (3× `notes` field) — sync repo
+  role specs from the wire-sagan template; schema enforcement will kill
+  this class.
+- **PM-direct execution is legitimate for credentialed infra** (authed
+  Vercel account exceeds agent containment) — log builder_id pm-direct
+  with rationale; verify stays separate.
+- **Public-page hygiene = memory hygiene**: no private tracker IDs in
+  shipped copy (footer leak caught by the human gate).
+- **Same-finding circuit breaker never tripped** across 5 rounds — every
+  round's findings were new, which is what healthy iteration looks like
+  in the ledger.
