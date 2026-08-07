@@ -75,3 +75,33 @@
   (hero footer, bar labels, dropped meta line, dropped eyebrows,
   doc-idx position marker) each got a documented rationale + cheap
   reversal path instead of a silent guess.
+
+## Round 4b
+
+- **Lesson (why 4a died and 4b worked):** copy, surface, and nav
+  arrived as one pack with the script pre-approved verbatim — no
+  copy negotiation mid-build. "Content is contract, layout is mine"
+  is the cleanest division of labor this ticket has had; ask for
+  approved copy before a full-page revise round, not during.
+- **Pattern:** collapsing a two-surface system (ground/sheet) into
+  one is mostly token deletion, but the *hierarchy debt* has to be
+  repaid somewhere — here: opening whitespace, per-section rules +
+  mono index lines, hairline-bordered panels, and a bigger pitch/
+  closer size step. Name the replacement mechanisms explicitly
+  before deleting the surface split, or the page goes flat.
+- **Pattern (nav):** a "document-native" bar = same background as
+  the page + its own copy of the page grain + one rule. The grain
+  duplication matters — a solid-color sticky bar over a grained
+  body reads as chrome the moment it pins.
+- **Cheap win:** `user-select:all` on the install command gives
+  click-to-copy affordance with zero JS — fits a no-JS contract
+  page better than a clipboard button.
+- **Verbatim-copy gotcha:** scripts written as prose lists ("Install
+  — the command above…") don't map 1:1 onto name/description list
+  markup; the em-dash split forces a case change on the description.
+  Decide and flag it once, apply consistently.
+- **Contrast discipline:** recomputing WCAG ratios took one python
+  block and turned "retune ink tokens" from a vibe into arithmetic —
+  the existing inks passed on #f3f0e2 (5.40 soft) and only the panel
+  value needed choosing against the 4.5 floor (4.89). Always compute
+  before swapping surface colors; the answer may be "keep the ink".

@@ -1,9 +1,10 @@
 ---
 // WHA-130 · sagan.run v1 — single page, static, zero client JS required.
-// Extends the approved WHA-131 art-direction frame to sections 01–05.
-// Round 3 (structure): hero frame untouched; sections 02–05 merged into
-// one continuous paper surface; slim sticky mono index bar; single
-// end-of-document footer absorbed by the site footer.
+// Round 4b: canonical content script laid in verbatim (hero + 01 Get
+// started · 02 How it works · 03 The rules · 04 A real run · footer);
+// one continuous paper surface site-wide (no ground/sheet split, no
+// void); navigation rebuilt as a document-native pinned index row on
+// the paper. Engraving, evidence figures, grid, type system carried.
 import '../styles/global.css';
 ---
 <!doctype html>
@@ -12,8 +13,8 @@ import '../styles/global.css';
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="color-scheme" content="light dark" />
-<title>Sagan — evidence-based multi-agent orchestration</title>
-<meta name="description" content="Extraordinary claims require extraordinary evidence. One accountable PM agent, stateless specialist workers, fresh critics, non-builder verification — APPROVED means verified, not plausible." />
+<title>Sagan — extraordinary claims require extraordinary evidence</title>
+<meta name="description" content="Sagan is a standard for shipping work with AI agents where done has to be proven, not claimed. Specialist agents build; independent agents check; nothing ships until the checks ran against real output — and a human makes the final call." />
 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 <link rel="preload" href="/fonts/Geist-Regular.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="preload" href="/fonts/Geist-SemiBold.woff2" as="font" type="font/woff2" crossorigin />
@@ -21,21 +22,19 @@ import '../styles/global.css';
 </head>
 <body>
 
-<!-- sticky mono index bar — pure CSS sticky, functional without JS -->
+<!-- pinned index row — sits ON the paper; pure CSS sticky, no-JS functional -->
 <header class="topbar">
   <div class="topbar-in">
     <p class="tb-brand">Sagan</p>
     <div class="tb-right">
       <nav class="tb-nav" aria-label="Document sections">
-        <a href="#sagan">01<span class="tb-label"> — Sagan</span></a>
+        <a href="#get-started"><span class="tb-num">01</span><span class="tb-label"> Get started</span></a>
         <span class="tb-sep" aria-hidden="true">·</span>
-        <a href="#loop">02<span class="tb-label"> — The Loop</span></a>
+        <a href="#how-it-works"><span class="tb-num">02</span><span class="tb-label"> How it works</span></a>
         <span class="tb-sep" aria-hidden="true">·</span>
-        <a href="#rules">03<span class="tb-label"> — The Rules</span></a>
+        <a href="#rules"><span class="tb-num">03</span><span class="tb-label"> The rules</span></a>
         <span class="tb-sep" aria-hidden="true">·</span>
-        <a href="#receipts">04<span class="tb-label"> — The Receipts</span></a>
-        <span class="tb-sep" aria-hidden="true">·</span>
-        <a href="#install">05<span class="tb-label"> — Install</span></a>
+        <a href="#real-run"><span class="tb-num">04</span><span class="tb-label"> A real run</span></a>
       </nav>
       <button id="gridToggle" type="button" aria-pressed="false" title="Toggle the layout grid (G)">Grid · G</button>
     </div>
@@ -43,37 +42,322 @@ import '../styles/global.css';
 </header>
 
 <div class="wrap">
-
-  <!-- deliberate negative space: the top half belongs to the ground -->
-  <div class="void" aria-hidden="true"></div>
-
   <main>
-    <!-- ============ sheet 01 · hero (approved frame, untouched) ==== -->
-    <section class="sheet" id="sagan" aria-label="01 — Sagan">
+
+    <!-- ============ hero — top of the same continuous paper ======== -->
+    <section class="hero" aria-label="Sagan">
+      <div class="band">
+        <div class="c-1-8">
+          <h1>Sagan</h1>
+          <p class="tagline">Extraordinary claims require extraordinary evidence.</p>
+          <p class="pitch">Sagan is a standard for shipping work with AI agents
+            where &ldquo;done&rdquo; has to be proven, not claimed. Specialist
+            agents build; independent agents check; nothing ships until the
+            checks ran against real output &mdash; and a human makes the final
+            call.</p>
+          <p class="chip"><span class="chip-p" aria-hidden="true">$</span><code>npx skills add https://github.com/thewhatmatters/sagan --skill wire-sagan</code></p>
+          <div class="ctas">
+            <a class="cta" href="https://github.com/thewhatmatters/sagan">View on GitHub</a>
+            <a class="cta" href="#get-started">Get started <span aria-hidden="true">&darr;</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 01 · Get started =============================== -->
+    <section class="doc-sect" id="get-started" aria-label="01 — Get started">
+      <span id="install" class="alias" aria-hidden="true"></span><!-- alias anchor: README links to #install -->
+      <header class="doc-idx">
+        <span>01 · Get started</span>
+        <span aria-hidden="true">01 / 04</span>
+      </header>
+      <div class="band">
+        <div class="c-1-5">
+          <h2>Get started</h2>
+          <p class="body">Three steps, one directory.</p>
+        </div>
+        <ol class="doclist doclist--num doclist--split c-5-13 div-l">
+          <li><strong>Install</strong>
+            <span>The command above adds the <span class="mono">wire-sagan</span>
+              installer to your agent setup.</span></li>
+          <li><strong>Wire your project</strong>
+            <span>Say &ldquo;wire this project to sagan.&rdquo; It probes your
+              repo, captures your real test/build commands, and installs a
+              self-contained <span class="mono">.sagan/</span> folder. One
+              directory in; delete it to walk away.</span></li>
+          <li><strong>Run your first ticket</strong>
+            <span>Copy the example ticket, write what &ldquo;done&rdquo; means,
+              and tell your agent session to run it through the loop.</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ 02 · How it works ============================== -->
+    <section class="doc-sect" id="how-it-works" aria-label="02 — How it works">
+      <header class="doc-idx">
+        <span>02 · How it works</span>
+        <span aria-hidden="true">02 / 04</span>
+      </header>
+      <div class="band">
+
+        <div class="c-1-7">
+          <h2>How it works</h2>
+          <p class="body">Every piece of work travels the same circuit:</p>
+          <ol class="doclist doclist--num">
+            <li><strong>Acceptance criteria come first.</strong>
+              <span>Before any agent starts, the ticket says exactly what
+                &ldquo;done&rdquo; means. No criteria, no work.</span></li>
+            <li><strong>A builder builds.</strong>
+              <span>One specialist agent does the work and hands over the
+                result &mdash; it doesn&rsquo;t grade itself.</span></li>
+            <li><strong>A fresh critic reviews.</strong>
+              <span>A separate agent, which never saw the builder&rsquo;s
+                reasoning, judges the result against the criteria. If judging
+                requires running the thing, it says so and demands
+                proof.</span></li>
+            <li><strong>A verifier runs it.</strong>
+              <span>A third agent &mdash; never the builder &mdash; executes
+                the work: runs the tests, loads the page, takes the
+                screenshots, and records the results against the exact git
+                commit.</span></li>
+            <li><strong>You decide.</strong>
+              <span>Approved work reaches you with its proof attached. You
+                promote it or send it back.</span></li>
+          </ol>
+          <p class="coda">A critic answers with one of four words:
+            <code class="verdict">APPROVED</code> (verified, not plausible),
+            <code class="verdict">REVISE</code> (here&rsquo;s what&rsquo;s wrong),
+            <code class="verdict">NEEDS_EVIDENCE</code> (run it and show me), or
+            <code class="verdict">ESCALATE</code> (a human needs to look at
+            this).</p>
+        </div>
+
+        <figure class="c-7-13 div-l">
+          <div class="fig-head">
+            <span class="t">One ticket through the circuit</span>
+            <span class="f">svg</span>
+          </div>
+          <div class="panel panel--scroll">
+            <svg class="engraving" width="504" height="504" viewBox="-44 0 728 728"
+                 role="img" aria-labelledby="fig2t fig2d">
+              <title id="fig2t">The Sagan loop, drawn as a thin-line engraving</title>
+              <desc id="fig2d">A circular circuit of four stations — ticket plus
+                acceptance criteria, build, critique, promote gate — with a
+                verify satellite exchanging evidence with critique, a REVISE
+                return arc, an ESCALATE ray to a human, and radial lines binding
+                every station to the ledger at the center, in the manner of the
+                Voyager Golden Record cover.</desc>
+              <defs>
+                <path id="arw" d="M-9 -3.5 L0 0 L-9 3.5" fill="none" stroke="currentColor" stroke-width="1"/>
+              </defs>
+              <g fill="none" stroke="currentColor">
+
+                <!-- instrument bezel -->
+                <circle cx="310" cy="320" r="252" stroke-width="1" stroke-dasharray="1 11" opacity=".28"/>
+
+                <!-- hub: the ledger, engraved as record grooves -->
+                <g stroke-width=".7">
+                  <circle cx="310" cy="320" r="38" opacity=".9"/>
+                  <circle cx="310" cy="320" r="32" opacity=".75"/>
+                  <circle cx="310" cy="320" r="26" opacity=".6"/>
+                  <circle cx="310" cy="320" r="20" opacity=".5"/>
+                  <circle cx="310" cy="320" r="14" opacity=".4"/>
+                  <circle cx="310" cy="320" r="8"  opacity=".35"/>
+                </g>
+                <line x1="310" y1="320" x2="329" y2="287" stroke-width=".5" opacity=".7"/>
+                <circle cx="310" cy="320" r="1.6" fill="currentColor" stroke="none"/>
+                <!-- hub leader + label -->
+                <line x1="252" y1="252" x2="283" y2="293" stroke-width=".4" opacity=".55"/>
+                <text x="247" y="244" text-anchor="end" font-size="12" class="soft">.SAGAN/LEDGER/</text>
+                <text x="247" y="262" text-anchor="end" font-size="12" class="soft">EVENTS.JSONL</text>
+
+                <!-- radial filings: every station reports to the ledger -->
+                <g stroke-width=".6" opacity=".42">
+                  <g transform="rotate(0,310,320)"><line x1="310" y1="272" x2="310" y2="146"/></g>
+                  <g transform="rotate(90,310,320)"><line x1="310" y1="272" x2="310" y2="146"/></g>
+                  <g transform="rotate(180,310,320)"><line x1="310" y1="272" x2="310" y2="184"/></g>
+                  <g transform="rotate(270,310,320)"><line x1="310" y1="272" x2="310" y2="146"/></g>
+                  <g transform="rotate(145,310,320)"><line x1="310" y1="272" x2="310" y2="160"/></g>
+                </g>
+                <!-- binary ticks along the filings -->
+                <g stroke-width=".8" opacity=".55">
+                  <g transform="rotate(0,310,320)">
+                    <line x1="305" y1="256" x2="315" y2="256"/><line x1="305" y1="248" x2="315" y2="248"/><line x1="305" y1="232" x2="315" y2="232"/>
+                  </g>
+                  <g transform="rotate(90,310,320)">
+                    <line x1="305" y1="256" x2="315" y2="256"/><line x1="305" y1="240" x2="315" y2="240"/><line x1="305" y1="232" x2="315" y2="232"/><line x1="305" y1="216" x2="315" y2="216"/>
+                  </g>
+                  <g transform="rotate(180,310,320)">
+                    <line x1="305" y1="248" x2="315" y2="248"/><line x1="305" y1="224" x2="315" y2="224"/>
+                  </g>
+                  <g transform="rotate(270,310,320)">
+                    <line x1="305" y1="256" x2="315" y2="256"/><line x1="305" y1="244" x2="315" y2="244"/><line x1="305" y1="236" x2="315" y2="236"/>
+                  </g>
+                  <g transform="rotate(145,310,320)">
+                    <line x1="305" y1="252" x2="315" y2="252"/><line x1="305" y1="244" x2="315" y2="244"/><line x1="305" y1="228" x2="315" y2="228"/><line x1="305" y1="212" x2="315" y2="212"/>
+                  </g>
+                </g>
+
+                <!-- the ring: AC → BUILD → CRITIQUE → PROMOTE → (shipped) -->
+                <g stroke-width="1">
+                  <path d="M334.4 121.5 A200 200 0 0 1 508.5 295.6"/>
+                  <path d="M508.5 344.4 A200 200 0 0 1 334.4 518.5"/>
+                  <path d="M285.6 518.5 A200 200 0 0 1 111.5 344.4"/>
+                  <path d="M111.5 295.6 A200 200 0 0 1 285.6 121.5"/>
+                </g>
+                <use href="#arw" transform="translate(451.4,178.6) rotate(45)"/>
+                <use href="#arw" transform="translate(451.4,461.4) rotate(135)"/>
+                <use href="#arw" transform="translate(168.6,461.4) rotate(225)"/>
+                <use href="#arw" transform="translate(168.6,178.6) rotate(315)"/>
+                <text x="466" y="163" font-size="12" class="soft">DISPATCH</text>
+                <text x="466" y="486" font-size="12" class="soft">ARTIFACT @ DIGEST</text>
+                <text x="154" y="486" text-anchor="end" font-size="12" class="soft">APPROVED</text>
+                <text x="154" y="163" text-anchor="end" font-size="12" class="soft">SHIPPED @ SHA</text>
+
+                <!-- REVISE: inner return arc, critique → build -->
+                <path d="M330 505 A170 170 0 0 1 495 340" stroke-width=".9" stroke-dasharray="3 5"/>
+                <use href="#arw" transform="translate(495,340) rotate(-5)"/>
+                <text x="0" y="0" font-size="12" class="soft" text-anchor="middle"
+                      transform="translate(368,378) rotate(-45)">REVISE</text>
+
+                <!-- stations -->
+                <g stroke-width="1">
+                  <circle cx="310" cy="120" r="13"/><circle cx="310" cy="120" r="8.5" stroke-width=".6" opacity=".7"/><circle cx="310" cy="120" r="1.3" fill="currentColor" stroke="none"/>
+                  <circle cx="510" cy="320" r="13"/><circle cx="510" cy="320" r="8.5" stroke-width=".6" opacity=".7"/><circle cx="510" cy="320" r="1.3" fill="currentColor" stroke="none"/>
+                  <circle cx="310" cy="520" r="13"/><circle cx="310" cy="520" r="8.5" stroke-width=".6" opacity=".7"/><circle cx="310" cy="520" r="1.3" fill="currentColor" stroke="none"/>
+                  <circle cx="110" cy="320" r="13"/><circle cx="110" cy="320" r="8.5" stroke-width=".6" opacity=".7"/><circle cx="110" cy="320" r="1.3" fill="currentColor" stroke="none"/>
+                  <circle cx="505" cy="598" r="13"/><circle cx="505" cy="598" r="8.5" stroke-width=".6" opacity=".7"/><circle cx="505" cy="598" r="1.3" fill="currentColor" stroke="none"/>
+                </g>
+                <text x="310" y="74" text-anchor="middle" font-size="14">TICKET + AC</text>
+                <text x="310" y="92" text-anchor="middle" font-size="14" class="soft">WRITTEN BEFORE ANY WORK</text>
+                <text x="526" y="311" font-size="14">BUILD</text>
+                <text x="526" y="330" font-size="14" class="soft">ROLE-BOUND WORKER</text>
+                <text x="310" y="478" text-anchor="middle" font-size="14">CRITIQUE</text>
+                <text x="310" y="497" text-anchor="middle" font-size="14" class="soft">FRESH · ARTIFACT-ONLY</text>
+                <text x="88" y="311" text-anchor="end" font-size="14">PROMOTE GATE</text>
+                <text x="88" y="330" text-anchor="end" font-size="14" class="soft">HUMAN DECISION</text>
+                <text x="505" y="627" text-anchor="middle" font-size="14">VERIFY</text>
+                <text x="505" y="646" text-anchor="middle" font-size="14" class="soft">EXECUTES · NEVER THE BUILDER</text>
+
+                <!-- critique ⇄ verify: the evidence exchange -->
+                <g stroke-width=".9">
+                  <line x1="323.4" y1="529.6" x2="488.6" y2="595.8"/>
+                  <line x1="491.6" y1="588.4" x2="326.4" y2="522.2"/>
+                </g>
+                <use href="#arw" transform="translate(488.6,595.8) rotate(21.8) scale(.85)"/>
+                <use href="#arw" transform="translate(326.4,522.2) rotate(201.8) scale(.85)"/>
+                <text x="0" y="0" font-size="11" class="soft" text-anchor="middle"
+                      transform="translate(418,582) rotate(21.8)">NEEDS_EVIDENCE</text>
+                <text x="0" y="0" font-size="11" class="soft" text-anchor="middle"
+                      transform="translate(398,539) rotate(21.8)">EVIDENCE @ SHA</text>
+
+                <!-- ESCALATE: ray out of the system, to a human -->
+                <line x1="293" y1="536" x2="140" y2="625" stroke-width=".9"/>
+                <g stroke-width=".8" opacity=".6">
+                  <line x1="222" y1="572.5" x2="226" y2="579.5"/>
+                  <line x1="206.7" y1="581.5" x2="210.7" y2="588.5"/>
+                  <line x1="191.5" y1="590.5" x2="195.5" y2="597.5"/>
+                </g>
+                <rect x="128" y="625" width="12" height="12" stroke-width="1"/>
+                <text x="134" y="657" text-anchor="middle" font-size="14">ESCALATE</text>
+                <text x="134" y="676" text-anchor="middle" font-size="14" class="soft">ROUND CAPS &rarr; A HUMAN</text>
+
+              </g>
+            </svg>
+          </div>
+          <figcaption class="caption">The circuit, engraved · every station files to the ledger at center · after the Voyager Golden Record</figcaption>
+        </figure>
+
+      </div>
+    </section>
+
+    <!-- ============ 03 · The rules ================================= -->
+    <section class="doc-sect" id="rules" aria-label="03 — The rules">
+      <header class="doc-idx">
+        <span>03 · The rules</span>
+        <span aria-hidden="true">03 / 04</span>
+      </header>
+      <div class="band">
+        <div class="c-1-5">
+          <h2>The rules</h2>
+          <p class="body">Seven rules make it hold:</p>
+        </div>
+        <ul class="doclist doclist--split c-5-13 div-l">
+          <li><strong>Criteria before work.</strong>
+            <span>A review without criteria is an opinion.</span></li>
+          <li><strong>Critics flag, builders fix.</strong>
+            <span>Nobody grades their own homework.</span></li>
+          <li><strong>The verifier is never the builder.</strong>
+            <span>Separation is structural, not polite.</span></li>
+          <li><strong>Reading is not judging.</strong>
+            <span>Claims about how something runs require running it.</span></li>
+          <li><strong>Approved means verified.</strong>
+            <span>Sign-off needs proof recorded at a git commit.</span></li>
+          <li><strong>Limits are circuit breakers.</strong>
+            <span>When rounds run out, a human is asked &mdash; work never
+              quietly ships.</span></li>
+          <li><strong>Decisions come to you as questions.</strong>
+            <span>Open calls are surfaced as clear options, never buried in a
+              wall of text.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ 04 · A real run ================================ -->
+    <section class="doc-sect" id="real-run" aria-label="04 — A real run">
+      <header class="doc-idx">
+        <span>04 · A real run</span>
+        <span aria-hidden="true">04 / 04</span>
+      </header>
       <div class="band">
 
         <div class="c-1-6">
-          <p class="eyebrow">Evidence-based multi-agent orchestration</p>
-          <h1>Sagan</h1>
-          <p class="tagline">Extraordinary claims require extraordinary evidence.</p>
-          <p class="abstract">One accountable PM agent dispatches stateless
-            specialist workers — frontend, backend, research — against tickets
-            whose acceptance criteria are written before any work starts.
-            Nothing user-visible ships without a fresh critic&rsquo;s verdict and a
-            non-builder verifier recording commands, exit codes, and screenshots
-            at a git SHA. It installs as a self-contained
-            <span class="mono">.sagan/</span> directory; humans stay in the loop
-            at per-ticket promote gates.</p>
-          <p class="stamp">Approved = verified — not plausible</p>
-          <div class="ctas">
-            <a class="cta" href="https://github.com/thewhatmatters/sagan">&rarr; GitHub repository</a>
-            <a class="cta" href="#install">&rarr; Quick-start</a>
-          </div>
+          <h2>A real run</h2>
+          <p class="body body--wide">This site&rsquo;s repo ran the standard on
+            itself. Ticket T-001 asked for a web page; the critic refused to
+            approve what it couldn&rsquo;t see running; the verifier loaded the
+            page at two sizes in light and dark, measured it, and recorded
+            everything at commit <strong class="mono">03f2d22</strong>. Then
+            &mdash; and only then &mdash; it was approved.</p>
         </div>
 
-        <figure class="c-6-10 div-l">
+        <figure class="c-6-13 div-l">
           <div class="fig-head">
-            <span class="t">Evidence records</span>
+            <span class="t">What the verifier checked</span>
+            <span class="f">png · @ 03f2d22</span>
+          </div>
+          <div class="ev-grid">
+            <figure class="ev">
+              <img src="/evidence/t-001/1280-light.png" width="1280" height="900" decoding="sync"
+                   alt="Verify's screenshot of the T-001 page at 1280 by 900, light scheme: an Agent Fleet header, the heading 'A minimal test bed for contract-driven agent orchestration', a status pill reading 'v0 test run · T-001', three feature cards — Dispatch, Critique, Evidence — side by side, and a footer with the repo path." />
+              <figcaption>Checked at 1280&times;900, light &mdash; cards three across, nothing clipped · passed</figcaption>
+            </figure>
+            <figure class="ev">
+              <img src="/evidence/t-001/1280-dark.png" width="1280" height="900" decoding="sync"
+                   alt="The same T-001 page at 1280 by 900 in the dark scheme: near-black background, light text, the three feature cards still side by side — a visibly distinct dark palette, per AC7." />
+              <figcaption>Checked at 1280&times;900, dark &mdash; distinct dark palette · passed</figcaption>
+            </figure>
+            <figure class="ev">
+              <img src="/evidence/t-001/375-light.png" width="375" height="1062" decoding="sync"
+                   alt="T-001 at 375 pixels wide, light scheme: the Dispatch, Critique, and Evidence cards stack vertically and the footer repo path wraps onto two lines — no content clipped, no horizontal scroll." />
+              <figcaption>Checked at 375 wide, light &mdash; cards stack, nothing lost · passed</figcaption>
+            </figure>
+            <figure class="ev">
+              <img src="/evidence/t-001/375-dark.png" width="375" height="1062" decoding="sync"
+                   alt="T-001 at 375 pixels wide, dark scheme: the same stacked single-column layout on the dark palette; scrollWidth measured equal to the 375-pixel viewport." />
+              <figcaption>Checked at 375 wide, dark &mdash; no sideways scroll, measured · passed</figcaption>
+            </figure>
+          </div>
+          <figcaption class="caption">Verify&rsquo;s screenshots, committed at .sagan/ledger/T-001/ · evidence bound @ 03f2d22</figcaption>
+        </figure>
+
+      </div>
+
+      <div class="band">
+
+        <figure class="c-1-7">
+          <div class="fig-head">
+            <span class="t">The audit trail</span>
             <span class="f">jsonl</span>
           </div>
           <div class="panel">
@@ -105,496 +389,27 @@ import '../styles/global.css';
  "gate":"promote","decision":"promote",
  "by":"randy","ts":"2026-08-06"}</pre>
           </div>
-          <figcaption class="caption">Fig. 01 — .sagan/ledger/events.jsonl · ticket T-001, abridged · evidence bound @ 03f2d22</figcaption>
+          <figcaption class="caption">This is the audit trail the loop writes · .sagan/ledger/events.jsonl · ticket T-001, abridged</figcaption>
         </figure>
 
-        <div class="c-10-13 div-l">
-          <h2 class="clause"><span class="cnum">1.1</span> The rules</h2>
-          <ul class="rules">
-            <li><strong>AC before dispatch</strong>
-              <span>Critic without AC is opinion; critic against AC is a contract.</span></li>
-            <li><strong>Flags, never fixes</strong>
-              <span>The critic judges; the builder fixes; nobody self-approves.</span></li>
-            <li><strong>Builder &ne; verifier</strong>
-              <span>Structural, not cultural — the verifier is never the builder.</span></li>
-            <li><strong>Reading is not judging</strong>
-              <span>NEEDS_EVIDENCE exists so render and runtime claims require execution output.</span></li>
-            <li><strong>Approved = verified</strong>
-              <span>Ship requires critic approval and non-builder evidence at a git SHA.</span></li>
-            <li><strong>Caps are circuit breakers</strong>
-              <span>Round limits escalate to a human, never silent approval.</span></li>
-            <li><strong>Decisions surface structurally</strong>
-              <span>Open decisions arrive as batched questions with recommended defaults — never buried in prose.</span></li>
-          </ul>
+        <div class="c-7-13 div-l">
+          <p class="closer">Every run leaves this trail. That&rsquo;s the
+            point: you can always answer who built this, who checked it, and
+            what proof they had.</p>
         </div>
 
       </div>
-
-      <footer class="doc-foot">
-        <span>Sagan — Mission documentation · Rev 0</span>
-        <span>01</span>
-      </footer>
     </section>
 
-    <!-- ============ the document: 02–05 on one continuous paper ==== -->
-    <div class="sheet sheet--doc">
-
-      <!-- ---- 02 · the loop ---------------------------------------- -->
-      <section class="doc-sect" id="loop" aria-label="02 — The Loop">
-        <header class="doc-idx">
-          <span>02 — The Loop</span>
-          <span aria-hidden="true">02 / 05</span>
-        </header>
-        <div class="band">
-
-          <div class="c-1-7">
-            <h2>The Loop</h2>
-
-            <h3 class="clause clause--gap"><span class="cnum">2.1</span> The circuit</h3>
-            <p class="body">Acceptance criteria are written first. A role-bound
-              builder produces the artifact at a digest; a fresh, artifact-only
-              critic judges it against the AC. <strong>NEEDS_EVIDENCE</strong>
-              routes to a verifier that executes — never the builder — and binds
-              evidence to a git SHA. <strong>APPROVED</strong> moves the artifact
-              to a human promote gate. Every dispatch, verdict, and evidence
-              record lands in the ledger.</p>
-
-            <h3 class="clause clause--gap"><span class="cnum">2.2</span> Verdicts</h3>
-            <ul class="verdicts">
-              <li><code class="verdict">APPROVED</code>
-                <span>Verified, not plausible — critic approval plus non-builder evidence at a git SHA.</span></li>
-              <li><code class="verdict">REVISE</code>
-                <span>The critic flags; the builder fixes; nobody self-approves.</span></li>
-              <li><code class="verdict">NEEDS_EVIDENCE</code>
-                <span>Reading is not judging — render and runtime claims require execution output.</span></li>
-              <li><code class="verdict">ESCALATE</code>
-                <span>Round caps are circuit breakers — limits route to a human, never silent approval.</span></li>
-            </ul>
-          </div>
-
-          <figure class="c-7-13 div-l">
-            <div class="fig-head">
-              <span class="t">One ticket through the loop</span>
-              <span class="f">svg</span>
-            </div>
-            <div class="panel panel--scroll">
-              <svg class="engraving" width="504" height="504" viewBox="-44 0 728 728"
-                   role="img" aria-labelledby="fig2t fig2d">
-                <title id="fig2t">The Sagan loop, drawn as a thin-line engraving</title>
-                <desc id="fig2d">A circular circuit of four stations — ticket plus
-                  acceptance criteria, build, critique, promote gate — with a
-                  verify satellite exchanging evidence with critique, a REVISE
-                  return arc, an ESCALATE ray to a human, and radial lines binding
-                  every station to the ledger at the center, in the manner of the
-                  Voyager Golden Record cover.</desc>
-                <defs>
-                  <path id="arw" d="M-9 -3.5 L0 0 L-9 3.5" fill="none" stroke="currentColor" stroke-width="1"/>
-                </defs>
-                <g fill="none" stroke="currentColor">
-
-                  <!-- instrument bezel -->
-                  <circle cx="310" cy="320" r="252" stroke-width="1" stroke-dasharray="1 11" opacity=".28"/>
-
-                  <!-- hub: the ledger, engraved as record grooves -->
-                  <g stroke-width=".7">
-                    <circle cx="310" cy="320" r="38" opacity=".9"/>
-                    <circle cx="310" cy="320" r="32" opacity=".75"/>
-                    <circle cx="310" cy="320" r="26" opacity=".6"/>
-                    <circle cx="310" cy="320" r="20" opacity=".5"/>
-                    <circle cx="310" cy="320" r="14" opacity=".4"/>
-                    <circle cx="310" cy="320" r="8"  opacity=".35"/>
-                  </g>
-                  <line x1="310" y1="320" x2="329" y2="287" stroke-width=".5" opacity=".7"/>
-                  <circle cx="310" cy="320" r="1.6" fill="currentColor" stroke="none"/>
-                  <!-- hub leader + label -->
-                  <line x1="252" y1="252" x2="283" y2="293" stroke-width=".4" opacity=".55"/>
-                  <text x="247" y="244" text-anchor="end" font-size="12" class="soft">.SAGAN/LEDGER/</text>
-                  <text x="247" y="262" text-anchor="end" font-size="12" class="soft">EVENTS.JSONL</text>
-
-                  <!-- radial filings: every station reports to the ledger -->
-                  <g stroke-width=".6" opacity=".42">
-                    <g transform="rotate(0,310,320)"><line x1="310" y1="272" x2="310" y2="146"/></g>
-                    <g transform="rotate(90,310,320)"><line x1="310" y1="272" x2="310" y2="146"/></g>
-                    <g transform="rotate(180,310,320)"><line x1="310" y1="272" x2="310" y2="184"/></g>
-                    <g transform="rotate(270,310,320)"><line x1="310" y1="272" x2="310" y2="146"/></g>
-                    <g transform="rotate(145,310,320)"><line x1="310" y1="272" x2="310" y2="160"/></g>
-                  </g>
-                  <!-- binary ticks along the filings -->
-                  <g stroke-width=".8" opacity=".55">
-                    <g transform="rotate(0,310,320)">
-                      <line x1="305" y1="256" x2="315" y2="256"/><line x1="305" y1="248" x2="315" y2="248"/><line x1="305" y1="232" x2="315" y2="232"/>
-                    </g>
-                    <g transform="rotate(90,310,320)">
-                      <line x1="305" y1="256" x2="315" y2="256"/><line x1="305" y1="240" x2="315" y2="240"/><line x1="305" y1="232" x2="315" y2="232"/><line x1="305" y1="216" x2="315" y2="216"/>
-                    </g>
-                    <g transform="rotate(180,310,320)">
-                      <line x1="305" y1="248" x2="315" y2="248"/><line x1="305" y1="224" x2="315" y2="224"/>
-                    </g>
-                    <g transform="rotate(270,310,320)">
-                      <line x1="305" y1="256" x2="315" y2="256"/><line x1="305" y1="244" x2="315" y2="244"/><line x1="305" y1="236" x2="315" y2="236"/>
-                    </g>
-                    <g transform="rotate(145,310,320)">
-                      <line x1="305" y1="252" x2="315" y2="252"/><line x1="305" y1="244" x2="315" y2="244"/><line x1="305" y1="228" x2="315" y2="228"/><line x1="305" y1="212" x2="315" y2="212"/>
-                    </g>
-                  </g>
-
-                  <!-- the ring: AC → BUILD → CRITIQUE → PROMOTE → (shipped) -->
-                  <g stroke-width="1">
-                    <path d="M334.4 121.5 A200 200 0 0 1 508.5 295.6"/>
-                    <path d="M508.5 344.4 A200 200 0 0 1 334.4 518.5"/>
-                    <path d="M285.6 518.5 A200 200 0 0 1 111.5 344.4"/>
-                    <path d="M111.5 295.6 A200 200 0 0 1 285.6 121.5"/>
-                  </g>
-                  <use href="#arw" transform="translate(451.4,178.6) rotate(45)"/>
-                  <use href="#arw" transform="translate(451.4,461.4) rotate(135)"/>
-                  <use href="#arw" transform="translate(168.6,461.4) rotate(225)"/>
-                  <use href="#arw" transform="translate(168.6,178.6) rotate(315)"/>
-                  <text x="466" y="163" font-size="12" class="soft">DISPATCH</text>
-                  <text x="466" y="486" font-size="12" class="soft">ARTIFACT @ DIGEST</text>
-                  <text x="154" y="486" text-anchor="end" font-size="12" class="soft">APPROVED</text>
-                  <text x="154" y="163" text-anchor="end" font-size="12" class="soft">SHIPPED @ SHA</text>
-
-                  <!-- REVISE: inner return arc, critique → build -->
-                  <path d="M330 505 A170 170 0 0 1 495 340" stroke-width=".9" stroke-dasharray="3 5"/>
-                  <use href="#arw" transform="translate(495,340) rotate(-5)"/>
-                  <text x="0" y="0" font-size="12" class="soft" text-anchor="middle"
-                        transform="translate(368,378) rotate(-45)">REVISE</text>
-
-                  <!-- stations -->
-                  <g stroke-width="1">
-                    <circle cx="310" cy="120" r="13"/><circle cx="310" cy="120" r="8.5" stroke-width=".6" opacity=".7"/><circle cx="310" cy="120" r="1.3" fill="currentColor" stroke="none"/>
-                    <circle cx="510" cy="320" r="13"/><circle cx="510" cy="320" r="8.5" stroke-width=".6" opacity=".7"/><circle cx="510" cy="320" r="1.3" fill="currentColor" stroke="none"/>
-                    <circle cx="310" cy="520" r="13"/><circle cx="310" cy="520" r="8.5" stroke-width=".6" opacity=".7"/><circle cx="310" cy="520" r="1.3" fill="currentColor" stroke="none"/>
-                    <circle cx="110" cy="320" r="13"/><circle cx="110" cy="320" r="8.5" stroke-width=".6" opacity=".7"/><circle cx="110" cy="320" r="1.3" fill="currentColor" stroke="none"/>
-                    <circle cx="505" cy="598" r="13"/><circle cx="505" cy="598" r="8.5" stroke-width=".6" opacity=".7"/><circle cx="505" cy="598" r="1.3" fill="currentColor" stroke="none"/>
-                  </g>
-                  <text x="310" y="74" text-anchor="middle" font-size="14">TICKET + AC</text>
-                  <text x="310" y="92" text-anchor="middle" font-size="14" class="soft">WRITTEN BEFORE ANY WORK</text>
-                  <text x="526" y="311" font-size="14">BUILD</text>
-                  <text x="526" y="330" font-size="14" class="soft">ROLE-BOUND WORKER</text>
-                  <text x="310" y="478" text-anchor="middle" font-size="14">CRITIQUE</text>
-                  <text x="310" y="497" text-anchor="middle" font-size="14" class="soft">FRESH · ARTIFACT-ONLY</text>
-                  <text x="88" y="311" text-anchor="end" font-size="14">PROMOTE GATE</text>
-                  <text x="88" y="330" text-anchor="end" font-size="14" class="soft">HUMAN DECISION</text>
-                  <text x="505" y="627" text-anchor="middle" font-size="14">VERIFY</text>
-                  <text x="505" y="646" text-anchor="middle" font-size="14" class="soft">EXECUTES · NEVER THE BUILDER</text>
-
-                  <!-- critique ⇄ verify: the evidence exchange -->
-                  <g stroke-width=".9">
-                    <line x1="323.4" y1="529.6" x2="488.6" y2="595.8"/>
-                    <line x1="491.6" y1="588.4" x2="326.4" y2="522.2"/>
-                  </g>
-                  <use href="#arw" transform="translate(488.6,595.8) rotate(21.8) scale(.85)"/>
-                  <use href="#arw" transform="translate(326.4,522.2) rotate(201.8) scale(.85)"/>
-                  <text x="0" y="0" font-size="11" class="soft" text-anchor="middle"
-                        transform="translate(418,582) rotate(21.8)">NEEDS_EVIDENCE</text>
-                  <text x="0" y="0" font-size="11" class="soft" text-anchor="middle"
-                        transform="translate(398,539) rotate(21.8)">EVIDENCE @ SHA</text>
-
-                  <!-- ESCALATE: ray out of the system, to a human -->
-                  <line x1="293" y1="536" x2="140" y2="625" stroke-width=".9"/>
-                  <g stroke-width=".8" opacity=".6">
-                    <line x1="222" y1="572.5" x2="226" y2="579.5"/>
-                    <line x1="206.7" y1="581.5" x2="210.7" y2="588.5"/>
-                    <line x1="191.5" y1="590.5" x2="195.5" y2="597.5"/>
-                  </g>
-                  <rect x="128" y="625" width="12" height="12" stroke-width="1"/>
-                  <text x="134" y="657" text-anchor="middle" font-size="14">ESCALATE</text>
-                  <text x="134" y="676" text-anchor="middle" font-size="14" class="soft">ROUND CAPS &rarr; A HUMAN</text>
-
-                </g>
-              </svg>
-            </div>
-            <figcaption class="caption">Fig. 02 — the loop, engraved · every station files to the ledger at center · after the Voyager Golden Record</figcaption>
-          </figure>
-
-        </div>
-      </section>
-
-      <!-- ---- 03 · the rules as clauses ----------------------------- -->
-      <section class="doc-sect" id="rules" aria-label="03 — The Rules">
-        <header class="doc-idx">
-          <span>03 — The Rules</span>
-          <span aria-hidden="true">03 / 05</span>
-        </header>
-        <div class="band">
-          <div class="c-1-7">
-            <h2>The Rules</h2>
-            <p class="body">Seven clauses, each enforced structurally rather than
-              by good intentions — and each with a receipt in the ledger of this
-              repo&rsquo;s own first run. Verdicts:
-              <span class="mono">APPROVED&thinsp;|&thinsp;REVISE&thinsp;|&thinsp;NEEDS_EVIDENCE&thinsp;|&thinsp;ESCALATE</span>.</p>
-          </div>
-        </div>
-
-        <div class="band" style="margin-top:48px;">
-          <div class="c-1-13">
-            <div class="rt-head band">
-              <span class="c-1-4">Clause</span>
-              <span class="c-4-9">Meaning</span>
-              <span class="c-10-13">Receipt — ledger, T-001 run</span>
-            </div>
-            <ul class="rt">
-              <li class="band">
-                <h3 class="rt-name c-1-4"><span class="cnum">3.1</span> AC before dispatch</h3>
-                <p class="rt-mean c-4-9">Critic without AC is opinion; critic against
-                  AC is a contract. No work is dispatched before the ticket&rsquo;s
-                  acceptance-criteria block is written.</p>
-                <p class="rt-ref c-10-13 div-l"><span class="rlabel">Receipt</span>
-                  tickets/T-001.md · AC committed before dispatch · sagan.yaml
-                  <b>ac_before_dispatch: required</b></p>
-              </li>
-              <li class="band">
-                <h3 class="rt-name c-1-4"><span class="cnum">3.2</span> Flags, never fixes</h3>
-                <p class="rt-mean c-4-9">The critic judges; the builder fixes; nobody
-                  self-approves. Findings route back to the builder — the critic
-                  never patches the artifact.</p>
-                <p class="rt-ref c-10-13 div-l"><span class="rlabel">Receipt</span>
-                  critique.verdict · round 1 · <b>"findings":4</b> — flagged to the
-                  builder, fixed by the builder</p>
-              </li>
-              <li class="band">
-                <h3 class="rt-name c-1-4"><span class="cnum">3.3</span> Builder &ne; verifier</h3>
-                <p class="rt-mean c-4-9">Structural, not cultural — the verifier is
-                  never the builder, so evidence cannot be produced by the party
-                  whose work it certifies.</p>
-                <p class="rt-ref c-10-13 div-l"><span class="rlabel">Receipt</span>
-                  builder <b>"frontend-claude-subagent"</b> &ne; verifier
-                  <b>"verify-claude"</b></p>
-              </li>
-              <li class="band">
-                <h3 class="rt-name c-1-4"><span class="cnum">3.4</span> Reading is not judging</h3>
-                <p class="rt-mean c-4-9"><strong>NEEDS_EVIDENCE</strong> exists so
-                  render and runtime claims require execution output — a critic
-                  cannot approve a layout from source code.</p>
-                <p class="rt-ref c-10-13 div-l"><span class="rlabel">Receipt</span>
-                  round 1 <b>"NEEDS_EVIDENCE"</b> — 375px legibility and dark
-                  rendering refused on a read</p>
-              </li>
-              <li class="band">
-                <h3 class="rt-name c-1-4"><span class="cnum">3.5</span> Approved = verified</h3>
-                <p class="rt-mean c-4-9">Ship requires critic approval
-                  <strong>and</strong> non-builder evidence at a git SHA — approval
-                  on plausibility alone does not exist.</p>
-                <p class="rt-ref c-10-13 div-l"><span class="rlabel">Receipt</span>
-                  evidence.recorded @ <b>03f2d22</b> · 7/7 checks <b>"PASS"</b> ·
-                  then round 2 <b>"APPROVED"</b></p>
-              </li>
-              <li class="band">
-                <h3 class="rt-name c-1-4"><span class="cnum">3.6</span> Caps are circuit breakers</h3>
-                <p class="rt-mean c-4-9">Round limits escalate to a human, never to
-                  silent approval. Repeated identical failures escalate too — the
-                  strategy may be wrong.</p>
-                <p class="rt-ref c-10-13 div-l"><span class="rlabel">Receipt</span>
-                  sagan.yaml · max_rounds <b>correctness: 5, quality: 3</b> ·
-                  on_cap <b>ESCALATE</b></p>
-              </li>
-              <li class="band">
-                <h3 class="rt-name c-1-4"><span class="cnum">3.7</span> Decisions surface structurally</h3>
-                <p class="rt-mean c-4-9">Open decisions arrive as batched questions
-                  with recommended defaults — never buried in prose, never
-                  one-at-a-time when they can batch.</p>
-                <p class="rt-ref c-10-13 div-l"><span class="rlabel">Receipt</span>
-                  decision.needed &rarr; decision.made · gate <b>"promote"</b> ·
-                  by <b>"randy"</b></p>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <!-- ---- 04 · the worked example ------------------------------- -->
-      <section class="doc-sect" id="receipts" aria-label="04 — The Receipts">
-        <header class="doc-idx">
-          <span>04 — The Receipts</span>
-          <span aria-hidden="true">04 / 05</span>
-        </header>
-        <div class="band">
-
-          <div class="c-1-6">
-            <h2>The Receipts</h2>
-
-            <h3 class="clause clause--gap"><span class="cnum">4.1</span> Worked example — T-001</h3>
-            <p class="body">This repo ran its own first ticket, and the whole trail
-              is committed. The critic refused to approve 375px legibility and
-              dark-mode rendering from reading source; verify executed instead,
-              and bound the evidence to commit
-              <strong class="mono">03f2d22</strong>.</p>
-            <ol class="trail">
-              <li><code class="verdict">DISPATCH</code>
-                <span>Frontend lane · role-bound builder <b>frontend-claude-subagent</b>, context pack of pointers.</span></li>
-              <li><code class="verdict">BUILD</code>
-                <span><b>src/index.html</b> at a digest · two ambiguities flagged on the ticket, not guessed silently.</span></li>
-              <li><code class="verdict">CRITIQUE · R1</code>
-                <span>Fresh critic, artifact-only isolation: <b>NEEDS_EVIDENCE</b>, 4 findings.</span></li>
-              <li><code class="verdict">VERIFY</code>
-                <span>Never the builder. Playwright screenshots at 375&times;800 and 1280&times;900, both schemes; measured <b>scrollWidth 375 = innerWidth 375</b>; 7/7 AC checks <b>PASS</b>, bound @ <b>03f2d22</b>.</span></li>
-              <li><code class="verdict">CRITIQUE · R2</code>
-                <span>Second fresh critic, artifact plus evidence: <b>APPROVED</b>, zero findings.</span></li>
-              <li><code class="verdict">PROMOTE</code>
-                <span>Human decision at the gate · <b>by: randy</b>.</span></li>
-            </ol>
-          </div>
-
-          <figure class="c-6-13 div-l">
-            <div class="fig-head">
-              <span class="t">The committed evidence</span>
-              <span class="f">png · @ 03f2d22</span>
-            </div>
-            <div class="ev-grid">
-              <figure class="ev">
-                <img src="/evidence/t-001/1280-light.png" width="1280" height="900" decoding="sync"
-                     alt="Verify's screenshot of the T-001 page at 1280 by 900, light scheme: an Agent Fleet header, the heading 'A minimal test bed for contract-driven agent orchestration', a status pill reading 'v0 test run · T-001', three feature cards — Dispatch, Critique, Evidence — side by side, and a footer with the repo path." />
-                <figcaption>04·A — 1280&times;900 · light · cards three-across</figcaption>
-              </figure>
-              <figure class="ev">
-                <img src="/evidence/t-001/1280-dark.png" width="1280" height="900" decoding="sync"
-                     alt="The same T-001 page at 1280 by 900 in the dark scheme: near-black background, light text, the three feature cards still side by side — a visibly distinct dark palette, per AC7." />
-                <figcaption>04·B — 1280&times;900 · dark · distinct palette</figcaption>
-              </figure>
-              <figure class="ev">
-                <img src="/evidence/t-001/375-light.png" width="375" height="1062" decoding="sync"
-                     alt="T-001 at 375 pixels wide, light scheme: the Dispatch, Critique, and Evidence cards stack vertically and the footer repo path wraps onto two lines — no content clipped, no horizontal scroll." />
-                <figcaption>04·C — 375&times;1062 · light · cards stack</figcaption>
-              </figure>
-              <figure class="ev">
-                <img src="/evidence/t-001/375-dark.png" width="375" height="1062" decoding="sync"
-                     alt="T-001 at 375 pixels wide, dark scheme: the same stacked single-column layout on the dark palette; scrollWidth measured equal to the 375-pixel viewport." />
-                <figcaption>04·D — 375&times;1062 · dark · scrollwidth = 375</figcaption>
-              </figure>
-            </div>
-            <figcaption class="caption">Fig. 04 — verify&rsquo;s screenshots, committed at .sagan/ledger/T-001/ · evidence bound @ 03f2d22</figcaption>
-          </figure>
-
-        </div>
-
-        <div class="band">
-          <div class="c-1-6">
-            <h3 class="clause"><span class="cnum">4.2</span> The loop is self-hosting</h3>
-            <p class="body">The art direction of the page you are reading was
-              itself a ticket — <strong>WHA-131</strong> — through the same loop.
-              Round 1: <strong>NEEDS_EVIDENCE</strong> — the critic demanded
-              grid-overlay renders before judging the lattice. Round 2:
-              <strong>APPROVED</strong>, findings non-blocking. Then a human
-              approved the direction at the gate. Same ledger, same rules.</p>
-          </div>
-          <figure class="c-6-13 div-l">
-            <div class="fig-head">
-              <span class="t">This page&rsquo;s own trail</span>
-              <span class="f">jsonl</span>
-            </div>
-            <div class="panel">
-<pre class="ledger" is:raw>{"event":"critique.verdict","ticket":"WHA-131","round":1,
- "critic":"critic-claude-fresh","verdict":<b>"NEEDS_EVIDENCE"</b>,
- "findings":4,"evidence_needed":"grid-overlay-on renders"}
-
-{"event":"evidence.recorded","ticket":"WHA-131","producer":"pm-render",
- "artifacts":[".sagan/refs/wha-131-renders/light-grid-on.png",
-   ".sagan/refs/wha-131-renders/dark-grid-on.png"]}
-
-{"event":"critique.verdict","ticket":"WHA-131","round":2,
- "verdict":<b>"APPROVED"</b>,"findings":4,"blocking":0}
-
-{"event":"decision.made","ticket":"WHA-131",
- "gate":"art-direction-approval","decision":<b>"approve"</b>,"by":"randy"}</pre>
-            </div>
-            <figcaption class="caption">Fig. 04·E — ticket WHA-131 in the same ledger, abridged · the frame this page extends</figcaption>
-          </figure>
-        </div>
-      </section>
-
-      <!-- ---- 05 · install / quick-start ---------------------------- -->
-      <section class="doc-sect" id="install" aria-label="05 — Install">
-        <header class="doc-idx">
-          <span>05 — Install</span>
-          <span aria-hidden="true">05 / 05</span>
-        </header>
-        <div class="band">
-
-          <div class="c-1-6">
-            <h2>Install</h2>
-
-            <h3 class="clause clause--gap"><span class="cnum">5.1</span> Quick start</h3>
-            <p class="body">Sagan v0 is files plus protocol — any capable coding
-              agent session can act as the PM by reading
-              <span class="mono">sagan.yaml</span> and the role specs.</p>
-            <ol class="steps">
-              <li><strong>Install the overlay</strong>
-                <span>With the <span class="mono">wire-sagan</span> installer (a
-                Claude Code skill) — it probes your project&rsquo;s entry point and
-                captures your real gate commands — or copy
-                <span class="mono">.sagan/</span> from the repo and empty the
-                ledger and tickets.</span></li>
-              <li><strong>Set your gates</strong>
-                <span>Put your project&rsquo;s real test / typecheck / build commands
-                in <span class="mono">.sagan/sagan.yaml</span>.</span></li>
-              <li><strong>Write the AC</strong>
-                <span>Copy <span class="mono">tickets/T-000-example.md</span> and
-                write the acceptance criteria — before any dispatch.</span></li>
-              <li><strong>Run the loop</strong>
-                <span>Tell your agent session to run the ticket through the loop;
-                promote gates keep you in the decision seat.</span></li>
-            </ol>
-          </div>
-
-          <figure class="c-6-10 div-l">
-            <div class="fig-head">
-              <span class="t">The overlay</span>
-              <span class="f">tree</span>
-            </div>
-            <div class="panel">
-<pre class="ledger" is:raw>.sagan/
-  sagan.yaml   <b>#</b> wiring: bindings, critique
-               <b>#</b>   policy, round caps, gates,
-               <b>#</b>   your real gate commands
-  roles/       <b>#</b> provider-neutral role specs
-  tickets/     <b>#</b> work contracts: AC +
-               <b>#</b>   per-role blocks + decisions
-  memory/      <b>#</b> per-task retros, pruned
-               <b>#</b>   after synthesis
-  MEMORY.md    <b>#</b> rolling project learnings
-  ledger/      <b>#</b> events.jsonl + evidence</pre>
-            </div>
-            <figcaption class="caption">Fig. 05 — one directory to add · delete it to un-wire</figcaption>
-          </figure>
-
-          <div class="c-10-13 div-l">
-            <h3 class="clause"><span class="cnum">5.2</span> Status — v0, honest</h3>
-            <ul class="status">
-              <li><strong>Validated</strong>
-                <span>The contract-shaped loop — AC-first, isolated critique, evidence-bound verification, promote gates — proven by the T-001 run.</span></li>
-              <li><strong>Not built yet</strong>
-                <span>Runtime enforcement. Round caps and gates are interpreted by the PM model, not enforced by code — treated as the first real infrastructure work.</span></li>
-              <li><strong>Roadmap</strong>
-                <span>Enforced caps, isolation, and containment floors as code; provider-heterogeneous bindings; event store and team surface.</span></li>
-            </ul>
-          </div>
-
-        </div>
-      </section>
-
-    </div>
   </main>
 
-  <!-- ---- site footer, on the ground — absorbs the doc footer ---- -->
+  <!-- ---- footer — same paper, one closing rule ------------------- -->
   <footer class="foot">
-    <div class="foot-doc">
-      <span>Sagan — Mission documentation · Rev 0</span>
-      <span>End of document · 05 / 05</span>
-    </div>
-    <div class="foot-grid">
-      <p class="foot-item c-1-4"><span class="fl">Repository</span>
-        <a href="https://github.com/thewhatmatters/sagan">github.com/thewhatmatters/sagan</a></p>
-      <p class="foot-item c-4-9"><span class="fl">The name</span>
-        Named for Carl Sagan&rsquo;s standard — extraordinary claims require
-        extraordinary evidence. In Sagan, APPROVED means verified, not
-        plausible.</p>
-      <p class="foot-item c-9-13"><span class="fl">Provenance</span>
-        This page is ticket WHA-130 in the ledger it documents; its art
-        direction shipped as WHA-131. Geist &amp; Geist Mono (OFL, vendored) ·
-        no third-party requests.</p>
-    </div>
-    <p class="tail">A fleet of small vessels, steered by evidence. — sagan.run</p>
+    <p class="foot-line">Sagan &mdash; named for Carl Sagan&rsquo;s rule about
+      extraordinary claims. A fleet of small vessels, steered by evidence.</p>
+    <p class="foot-links"><a href="https://github.com/thewhatmatters/sagan">GitHub</a>
+      <span aria-hidden="true">·</span>
+      <a href="https://sagan.run">sagan.run</a></p>
   </footer>
 
   <!-- grid overlay: same content box as the content -->

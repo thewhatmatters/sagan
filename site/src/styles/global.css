@@ -1,18 +1,20 @@
 /* ============================================================
    WHA-130 · sagan.run v1 — extends the approved WHA-131 frame
-   ("Sagan as mission documentation"). All tokens, the sheet
-   formula, the type scale, and the grid are the frame's values —
-   carried over, not reinvented. New in this build: sections
-   03/04/05 components, site footer, designed 375px pass,
-   reduced-motion guards, evidence-figure styles.
-   Round 3 (structure): sticky mono index bar (.topbar), sections
-   02–05 merged onto one paper (.sheet--doc / .doc-sect / .doc-idx),
-   single end-of-document footer absorbed by the site footer.
+   ("Sagan as mission documentation").
+   Round 4b (surface + nav): ONE continuous paper site-wide —
+   the ground IS the sheet (#f3f0e2 light; single dark paper in
+   the instrument translation). No void, no floating hero sheet,
+   no ground tokens: --ground/--sheet collapse into --paper, with
+   --panel the only elevation step (hairline-bordered). The nav is
+   a document-native pinned index row ON the paper: paper backdrop,
+   one hairline rule, mono numbered real section names.
    Grid: 12 col · 24 gutter · 72 margin · 1296 type area · 8px
    baseline (leading = 3×). Toggle the overlay with G (desktop).
    Type: Geist 400/500/600 · Geist Mono 400 (vendored, OFL).
-   Palette: warm cream sheet on cool putty ground, ink navy.
-   No accent color — hierarchy is weight, scale, mono vs sans.
+   No accent color — hierarchy is weight, scale, rules, spacing.
+   Contrast (computed, WCAG): light ink 12.5:1 paper / 11.3:1
+   panel; ink-soft 5.4:1 paper / 4.9:1 panel. Dark ink 14.4/12.3;
+   ink-soft 6.7/5.8. All ≥ 4.5.
    ============================================================ */
 
 @font-face{font-family:"Geist";src:url("/fonts/Geist-Regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap;}
@@ -23,19 +25,14 @@
 :root{
   /* grid — one source of truth */
   --cols:12; --bl:8px; --lh:24px; --gutter:24px; --margin:72px; --maxw:1296px;
-  /* scheme: warm paper on cool putty ground (light) */
-  --ground:#d3d4cf;
-  --ground-ink:#34374b;
-  --ground-soft:#6a6d75;
-  --sheet:#f8f5e6;
-  --panel:#efeada;
+  /* scheme: one continuous paper (light) */
+  --paper:#f3f0e2;
+  --panel:#eae5d2;
   --ink:#23284a;
   --ink-soft:#5d6076;
   --hair:rgba(35,40,74,.26);
   --hair-strong:rgba(35,40,74,.45);
-  --shadow:0 2px 6px rgba(28,30,48,.10), 0 32px 64px rgba(28,30,48,.17);
-  --sheet-edge:transparent;
-  --grain-opacity:.11;
+  --grain-opacity:.07;
   --grain-invert:0;
   /* overlay diagnostics (instrumentation, not palette) */
   --g-col:rgba(228,0,43,.07); --g-edge:rgba(228,0,43,.38);
@@ -44,43 +41,39 @@
 }
 @media (prefers-color-scheme:dark){
   :root{
-    /* instrument panel — accepted by the human gate; kept as the frame has it */
-    --ground:#101114;
-    --ground-ink:#c6c5ba;
-    --ground-soft:#83837b;
-    --sheet:#1d1f25;
-    --panel:#262931;
+    /* instrument panel — same single-surface logic: one dark paper,
+       panels slightly elevated */
+    --paper:#16171b;
+    --panel:#23252c;
     --ink:#e9e7da;
     --ink-soft:#a19f94;
     --hair:rgba(233,231,218,.22);
     --hair-strong:rgba(233,231,218,.42);
-    --shadow:0 2px 6px rgba(0,0,0,.55), 0 32px 72px rgba(0,0,0,.5);
-    --sheet-edge:rgba(233,231,218,.08);
-    --grain-opacity:.14;
+    --grain-opacity:.10;
     --grain-invert:1;
   }
 }
 
 *{box-sizing:border-box;margin:0;padding:0;}
-html{background:var(--ground);}
+html{background:var(--paper);}
 @media (prefers-reduced-motion:no-preference){
   html{scroll-behavior:smooth;}
 }
 body{
-  background:var(--ground);
+  background:var(--paper);
   color:var(--ink);
   font:400 16px/24px "Geist",-apple-system,"Helvetica Neue",Arial,sans-serif;
   -webkit-font-smoothing:antialiased;
   position:relative;
 }
-/* paper grain on the ground — anisotropic, faint vertical streak */
+/* paper grain — anisotropic, faint vertical streak, full-bleed */
 body::before{
   content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
   background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="280" height="280"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9 0.12" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.55 0"/></filter><rect width="280" height="280" filter="url(%23n)"/></svg>');
   opacity:var(--grain-opacity);
   filter:invert(var(--grain-invert));
 }
-::selection{background:var(--ink);color:var(--sheet);}
+::selection{background:var(--ink);color:var(--paper);}
 :focus-visible{outline:2px solid var(--ink);outline-offset:2px;}
 
 .mono{font-family:"Geist Mono",ui-monospace,"SF Mono",Menlo,monospace;}
@@ -90,17 +83,25 @@ body::before{
   position:relative;z-index:1;
   max-width:calc(var(--maxw) + 2*var(--margin));
   margin:0 auto;
-  padding:24px var(--margin) 96px;
+  padding:0 var(--margin) 96px;
 }
 
-/* ---- sticky mono index bar (round 3) ------------------------- */
-/* pure CSS position:sticky — functional without JS */
+/* ---- pinned index row — the document's running header -------- */
+/* sits ON the paper: paper backdrop (with its own grain so it
+   blends), a single hairline rule below. Pure CSS sticky, no JS. */
 .topbar{
   position:sticky;top:0;z-index:40;
-  background:var(--ground);
-  border-bottom:1px dashed var(--ground-soft);
+  background:var(--paper);
+  border-bottom:1px solid var(--hair-strong);
+}
+.topbar::before{ /* match the body grain so the pinned row reads as the same paper */
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="280" height="280"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9 0.12" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.55 0"/></filter><rect width="280" height="280" filter="url(%23n)"/></svg>');
+  opacity:var(--grain-opacity);
+  filter:invert(var(--grain-invert));
 }
 .topbar-in{
+  position:relative;
   max-width:calc(var(--maxw) + 2*var(--margin));
   margin:0 auto;
   padding:15px var(--margin) 16px;
@@ -110,7 +111,7 @@ body::before{
   font-family:"Geist Mono",ui-monospace,monospace;
   font-size:13px;line-height:16px;font-weight:400;
   letter-spacing:.22em;text-transform:uppercase;
-  color:var(--ground-ink);
+  color:var(--ink);
 }
 .tb-right{display:flex;align-items:baseline;gap:24px;}
 .tb-nav{
@@ -118,57 +119,76 @@ body::before{
   font-family:"Geist Mono",ui-monospace,monospace;
   font-size:11px;line-height:16px;letter-spacing:.12em;text-transform:uppercase;
 }
-.tb-nav a{color:var(--ground-ink);text-decoration:none;white-space:nowrap;}
+.tb-nav a{color:var(--ink);text-decoration:none;white-space:nowrap;}
 .tb-nav a:hover{text-decoration:underline;text-underline-offset:3px;}
-.tb-sep{color:var(--ground-soft);}
+.tb-num{color:var(--ink-soft);}
+.tb-sep{color:var(--ink-soft);}
 .topbar button{
   font-family:"Geist Mono",ui-monospace,monospace;
   font-size:11px;line-height:16px;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--ground-soft);
-  background:none;border:1px solid var(--ground-soft);
+  color:var(--ink-soft);
+  background:none;border:1px solid var(--hair-strong);
   padding:3px 10px;cursor:pointer;border-radius:2px;
 }
-.topbar button[aria-pressed="true"]{color:var(--ground-ink);border-color:var(--ground-ink);}
+.topbar button[aria-pressed="true"]{color:var(--ink);border-color:var(--ink);}
 
-/* anchor targets clear the sticky bar (48px tall) */
-#sagan,.doc-sect{scroll-margin-top:72px;}
+/* anchor targets clear the pinned row (48px tall) */
+.doc-sect,.alias{scroll-margin-top:88px;}
+.alias{display:block;height:0;}
 
-/* ---- the vast negative space above the first sheet ----------- */
-.void{height:400px;}
-
-/* ---- the printed sheet --------------------------------------- */
-.sheet{
-  position:relative;
-  margin-inline:-48px;            /* paper bleeds 48px past the type area */
-  padding:64px 48px 56px;         /* interior content box == 1296 grid   */
-  background:var(--sheet);
-  border-radius:16px;
-  /* dark-mode edge as an inset ring, not a border — the border-box
-     border inset the sheet interior 1px off the lattice (carried
-     critique finding); box-shadow takes no layout space */
-  box-shadow:inset 0 0 0 1px var(--sheet-edge), var(--shadow);
+/* ---- hero — the top of the same continuous document ---------- */
+/* presence comes from space + scale, not a separate surface */
+.hero{padding-top:120px;}
+h1{
+  font-size:96px;line-height:96px;font-weight:600;letter-spacing:-.035em;
 }
-.sheet::before{
-  content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;
-  background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="280" height="280"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9 0.12" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.55 0"/></filter><rect width="280" height="280" filter="url(%23n)"/></svg>');
-  opacity:.05;filter:invert(var(--grain-invert));
+.tagline{
+  font-size:28px;line-height:40px;font-weight:400;letter-spacing:-.015em;
+  margin-top:24px;max-width:19ch;
 }
-.sheet>*{position:relative;}
+.pitch{
+  font-size:20px;line-height:32px;
+  margin-top:32px;max-width:46ch;color:var(--ink-soft);
+}
+.chip{
+  display:inline-flex;align-items:baseline;gap:12px;
+  margin-top:40px;max-width:100%;overflow-x:auto;
+  background:var(--panel);
+  border:1px solid var(--hair-strong);border-radius:2px;
+  padding:11px 16px;
+}
+.chip .chip-p{
+  font-family:"Geist Mono",ui-monospace,monospace;
+  font-size:13px;line-height:16px;color:var(--ink-soft);
+  user-select:none;-webkit-user-select:none;
+}
+.chip code{
+  font-family:"Geist Mono",ui-monospace,monospace;
+  font-size:13px;line-height:16px;color:var(--ink);
+  white-space:nowrap;
+  user-select:all;-webkit-user-select:all; /* one click selects the whole command */
+}
+.ctas{margin-top:24px;display:flex;gap:16px;flex-wrap:wrap;}
+.cta{
+  font-family:"Geist Mono",ui-monospace,monospace;
+  font-size:12px;line-height:16px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink);text-decoration:none;
+  border:1px solid var(--hair-strong);border-radius:2px;
+  padding:11px 15px;
+}
+.cta:hover{background:var(--panel);}
 
-/* ---- the merged document: 02–05 on one continuous paper ------ */
-.sheet--doc{margin-top:96px;}
-.doc-sect + .doc-sect{margin-top:88px;}
-/* in-document mono section headers — on the paper, ink-colored */
+/* ---- document sections on the one paper ---------------------- */
+.doc-sect{margin-top:128px;}
 .doc-idx{
   display:flex;align-items:baseline;justify-content:space-between;gap:16px;
   font-family:"Geist Mono",ui-monospace,monospace;
   font-size:13px;line-height:16px;font-weight:400;
   letter-spacing:.14em;text-transform:uppercase;
   color:var(--ink-soft);
-  margin-bottom:40px;
-}
-.doc-sect + .doc-sect .doc-idx{
-  border-top:1px solid var(--hair-strong);padding-top:23px;
+  border-top:1px solid var(--hair-strong);
+  padding-top:23px;
+  margin-bottom:48px;
 }
 
 /* ---- grid bands (place by column line) ----------------------- */
@@ -179,15 +199,13 @@ body::before{
   align-items:start;
 }
 .band + .band{margin-top:64px;}
+.c-1-5{grid-column:1/5;}
 .c-1-6{grid-column:1/6;}
-.c-6-10{grid-column:6/10;}
-.c-10-13{grid-column:10/13;}
 .c-1-7{grid-column:1/7;}
-.c-7-13{grid-column:7/13;}
+.c-1-8{grid-column:1/8;}
+.c-5-13{grid-column:5/13;}
 .c-6-13{grid-column:6/13;}
-.c-1-4{grid-column:1/4;}
-.c-4-9{grid-column:4/9;}
-.c-9-13{grid-column:9/13;}
+.c-7-13{grid-column:7/13;}
 .c-1-13{grid-column:1/-1;}
 @supports not (display:grid){.band{display:block;}}
 
@@ -195,55 +213,49 @@ body::before{
 .div-l{border-left:1px dashed var(--hair);margin-left:-12px;padding-left:11px;}
 
 /* ---- type ----------------------------------------------------- */
-.eyebrow{
-  font-family:"Geist Mono",ui-monospace,monospace;
-  font-size:12px;line-height:16px;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--ink-soft);
-}
-h1{
-  font-size:96px;line-height:96px;font-weight:600;letter-spacing:-.035em;
-  margin-top:24px;
-}
-.tagline{
-  font-size:28px;line-height:40px;font-weight:400;letter-spacing:-.015em;
-  margin-top:24px;max-width:19ch;
-}
-.abstract{
-  margin-top:32px;max-width:50ch;color:var(--ink-soft);
-}
-.stamp{
-  display:inline-block;margin-top:32px;
-  font-family:"Geist Mono",ui-monospace,monospace;
-  font-size:12px;line-height:16px;letter-spacing:.1em;text-transform:uppercase;
-  border:1px solid var(--hair-strong);border-radius:2px;
-  padding:11px 15px;
-}
-.ctas{margin-top:32px;display:flex;gap:16px;flex-wrap:wrap;}
-.cta{
-  font-family:"Geist Mono",ui-monospace,monospace;
-  font-size:12px;line-height:16px;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--ink);text-decoration:none;
-  border:1px solid var(--hair-strong);border-radius:2px;
-  padding:11px 15px;
-}
-.cta:hover{background:var(--panel);}
-
 h2{
   font-size:44px;line-height:48px;font-weight:600;letter-spacing:-.02em;
-  margin-top:16px;
 }
-.clause{
-  font-size:16px;line-height:24px;font-weight:600;
-  display:flex;gap:12px;align-items:baseline;
-}
-.clause .cnum{
-  font-family:"Geist Mono",ui-monospace,monospace;
-  font-size:13px;font-weight:400;color:var(--ink-soft);
-}
-.clause--gap{margin-top:48px;}
 .body{margin-top:16px;color:var(--ink-soft);max-width:44ch;}
+.body--wide{max-width:48ch;}
 .body strong{color:var(--ink);font-weight:500;}
 .body a{color:var(--ink);text-decoration-color:var(--hair-strong);text-underline-offset:3px;}
+.closer{
+  font-size:20px;line-height:32px;color:var(--ink);max-width:36ch;
+}
+
+/* ---- document lists (steps · circuit · rules) ---------------- */
+.doclist{list-style:none;}
+.doclist>li{padding:20px 0 19px;}
+.doclist>li:first-child{padding-top:0;}
+.doclist>li + li{border-top:1px solid var(--hair);}
+.doclist strong{display:block;font-size:16px;line-height:24px;font-weight:600;}
+.doclist span{display:block;margin-top:8px;font-size:16px;line-height:24px;color:var(--ink-soft);max-width:52ch;}
+.doclist span .mono{font-size:14px;}
+/* numbered variant — mono figures, document idiom */
+.doclist--num{counter-reset:dstep;}
+.doclist--num>li{counter-increment:dstep;}
+.doclist--num strong::before{
+  content:"0" counter(dstep) "  ";
+  font-family:"Geist Mono",ui-monospace,monospace;
+  font-size:12px;font-weight:400;letter-spacing:.1em;color:var(--ink-soft);
+}
+/* split variant — name | meaning, spec-table feel (desktop) */
+@media (min-width:1101px){
+  .doclist--split>li{display:grid;grid-template-columns:2fr 3fr;column-gap:var(--gutter);}
+  .doclist--split span{margin-top:0;}
+}
+
+/* coda — the four verdict words, inline in running text */
+.coda{margin-top:40px;color:var(--ink-soft);max-width:48ch;line-height:28px;}
+.verdict{
+  display:inline-block;
+  font-family:"Geist Mono",ui-monospace,monospace;
+  font-size:11px;line-height:16px;letter-spacing:.1em;
+  color:var(--ink);
+  border:1px solid var(--hair-strong);border-radius:2px;
+  padding:3px 8px;
+}
 
 /* ---- figure / specimen panels -------------------------------- */
 .fig-head{
@@ -256,7 +268,7 @@ h2{
   font-size:11px;line-height:16px;letter-spacing:.08em;color:var(--ink-soft);
 }
 .panel{
-  background:var(--panel);border-radius:8px;padding:24px;
+  background:var(--panel);border:1px solid var(--hair);border-radius:8px;padding:24px;
 }
 .panel--scroll{
   overflow-x:auto;
@@ -288,27 +300,8 @@ h2{
   color:var(--ink-soft);
 }
 
-/* ---- rule / verdict lists (hero + loop) ---------------------- */
-.rules{list-style:none;margin-top:16px;}
-.rules li{padding:8px 0;}
-.rules li + li{border-top:1px solid var(--hair);padding-top:7px;}
-.rules strong{display:block;font-size:14px;line-height:16px;font-weight:500;}
-.rules span{display:block;font-size:13px;line-height:16px;color:var(--ink-soft);}
-
-.verdicts{list-style:none;margin-top:16px;max-width:44ch;}
-.verdicts li{padding:12px 0;}
-.verdicts li + li{border-top:1px solid var(--hair);padding-top:11px;}
-.verdict{
-  display:inline-block;
-  font-family:"Geist Mono",ui-monospace,monospace;
-  font-size:11px;line-height:16px;letter-spacing:.1em;
-  border:1px solid var(--hair-strong);border-radius:2px;
-  padding:3px 8px;
-}
-.verdicts span{display:block;margin-top:8px;font-size:13px;line-height:16px;color:var(--ink-soft);}
-
 /* ---- loop diagram (engraving) -------------------------------- */
-/* fixed 504×504 (viewBox 720 → 0.7 scale): fits the 509px panel measure
+/* fixed 504×504 (viewBox 728 → 0.692 scale): fits the panel measure
    at 1280 without shrinking; at 375 it holds size and the panel scrolls */
 .engraving{display:block;margin:0 auto;color:var(--ink);}
 .engraving text{
@@ -317,47 +310,13 @@ h2{
 }
 .engraving .soft{opacity:.62;}
 
-/* ---- 03 · the rules as clauses ------------------------------- */
-.rt-head{
-  font-family:"Geist Mono",ui-monospace,monospace;
-  font-size:10px;line-height:16px;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--ink-soft);
-  padding-bottom:15px;border-bottom:1px solid var(--hair-strong);
-}
-.rt{list-style:none;}
-.rt>li{padding:24px 0 23px;border-bottom:1px solid var(--hair);}
-.rt-name{font-size:16px;line-height:24px;font-weight:600;
-  display:flex;gap:12px;align-items:baseline;}
-.rt-name .cnum{
-  font-family:"Geist Mono",ui-monospace,monospace;
-  font-size:13px;font-weight:400;color:var(--ink-soft);
-}
-.rt-mean{color:var(--ink-soft);max-width:44ch;}
-.rt-mean strong{color:var(--ink);font-weight:500;}
-.rt-ref{
-  font-family:"Geist Mono",ui-monospace,monospace;
-  font-size:11px;line-height:16px;
-  color:var(--ink-soft);
-}
-.rt-ref b{font-weight:400;color:var(--ink);}
-.rt-ref .rlabel{
-  display:block;font-size:10px;letter-spacing:.14em;text-transform:uppercase;
-  margin-bottom:8px;opacity:.8;
-}
-
-/* ---- 04 · receipts ------------------------------------------- */
-.trail{list-style:none;margin-top:16px;max-width:46ch;}
-.trail li{padding:12px 0;}
-.trail li + li{border-top:1px solid var(--hair);padding-top:11px;}
-.trail span{display:block;margin-top:8px;font-size:13px;line-height:16px;color:var(--ink-soft);}
-.trail span b{font-weight:500;color:var(--ink);}
-
+/* ---- evidence figures (04) ----------------------------------- */
 .ev-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
-.ev{background:var(--panel);border-radius:8px;padding:16px;}
+.ev{background:var(--panel);border:1px solid var(--hair);border-radius:8px;padding:16px;}
 .ev img{
   display:block;width:100%;height:auto;
   border:1px solid var(--hair);border-radius:4px;
-  background:var(--sheet); /* scheme-appropriate pre-paint placeholder, not #fff */
+  background:var(--paper); /* scheme-appropriate pre-paint placeholder */
 }
 .ev figcaption{
   margin-top:8px;
@@ -366,72 +325,22 @@ h2{
   color:var(--ink-soft);
 }
 
-/* ---- 05 · install -------------------------------------------- */
-.steps{list-style:none;margin-top:16px;counter-reset:step;}
-.steps li{padding:12px 0;counter-increment:step;}
-.steps li + li{border-top:1px solid var(--hair);padding-top:11px;}
-.steps strong{
-  display:block;font-size:14px;line-height:16px;font-weight:500;
-}
-.steps strong::before{
-  content:"0" counter(step) "  ";
-  font-family:"Geist Mono",ui-monospace,monospace;
-  font-size:11px;font-weight:400;letter-spacing:.1em;color:var(--ink-soft);
-}
-.steps span{display:block;margin-top:4px;font-size:13px;line-height:16px;color:var(--ink-soft);max-width:40ch;}
-.steps .mono{font-size:12px;}
-
-.status{list-style:none;margin-top:16px;}
-.status li{padding:8px 0;}
-.status li + li{border-top:1px solid var(--hair);padding-top:7px;}
-.status strong{display:block;font-size:14px;line-height:16px;font-weight:500;}
-.status span{display:block;font-size:13px;line-height:16px;color:var(--ink-soft);}
-
-/* ---- sheet footers ------------------------------------------- */
-.doc-foot{
-  margin-top:48px;
-  border-top:1px solid var(--hair);
-  padding-top:15px;
-  display:flex;justify-content:space-between;gap:16px;
-  font-family:"Geist Mono",ui-monospace,monospace;
-  font-size:10px;line-height:16px;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--ink-soft);
-}
-
-/* ---- site footer (on the ground) ----------------------------- */
+/* ---- footer — same paper, one closing rule ------------------- */
 .foot{
-  margin-top:160px;
-  border-top:1px dashed var(--ground-soft);
-  padding-top:39px;
-  color:var(--ground-ink);
+  margin-top:144px;
+  border-top:1px solid var(--hair-strong);
+  padding-top:31px;
+  display:flex;justify-content:space-between;align-items:baseline;
+  gap:24px;flex-wrap:wrap;
 }
-/* the single page-number-style doc footer, absorbed here (round 3) */
-.foot-doc{
-  display:flex;justify-content:space-between;gap:16px;
-  margin-bottom:40px;
+.foot-line{font-size:13px;line-height:20px;color:var(--ink-soft);max-width:56ch;}
+.foot-links{
   font-family:"Geist Mono",ui-monospace,monospace;
-  font-size:10px;line-height:16px;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--ground-soft);
+  font-size:11px;line-height:16px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-soft);white-space:nowrap;
 }
-.foot-grid{
-  display:grid;
-  grid-template-columns:repeat(var(--cols),1fr);
-  column-gap:var(--gutter);row-gap:40px;
-}
-.foot-item{font-size:13px;line-height:16px;}
-.foot-item .fl{
-  display:block;margin-bottom:8px;
-  font-family:"Geist Mono",ui-monospace,monospace;
-  font-size:10px;line-height:16px;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--ground-soft);
-}
-.foot-item a{color:var(--ground-ink);text-decoration-color:var(--ground-soft);text-underline-offset:3px;}
-.tail{
-  margin-top:64px;
-  font-family:"Geist Mono",ui-monospace,monospace;
-  font-size:11px;line-height:16px;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--ground-soft);
-}
+.foot-links a{color:var(--ink);text-decoration:none;}
+.foot-links a:hover{text-decoration:underline;text-underline-offset:3px;}
 
 /* ---- grid overlay (toggle: G) — same content box as content -- */
 .guides{position:absolute;inset:0;pointer-events:none;z-index:60;opacity:0;}
@@ -455,19 +364,18 @@ body.grid-on .guides{opacity:1;}
 .guides .mline.l{left:var(--margin);}
 .guides .mline.r{right:var(--margin);}
 
-/* ---- responsive: tablet / narrow desktop --------------------- */
-/* ---- responsive: hide bar labels once they would crowd ------- */
+/* ---- responsive: hide index-row labels once they would crowd - */
 @media (max-width:860px){
   .tb-label{display:none;}
 }
 
+/* ---- responsive: tablet / narrow desktop --------------------- */
 @media (max-width:1100px){
   .wrap{padding-inline:32px;}
   .topbar-in{padding-inline:32px;}
-  .void{height:200px;}
-  .sheet--doc{margin-top:72px;}
-  .doc-sect + .doc-sect{margin-top:64px;}
-  .sheet{margin-inline:-16px;padding:48px 32px 40px;}
+  .hero{padding-top:72px;}
+  .doc-sect{margin-top:88px;}
+  .doc-idx{margin-bottom:40px;}
   .band{display:block;}
   .band>*+*{margin-top:48px;}
   .band + .band{margin-top:48px;}
@@ -475,35 +383,28 @@ body.grid-on .guides{opacity:1;}
     border-top:1px dashed var(--hair);padding-top:47px;}
   h1{font-size:64px;line-height:64px;}
   .tagline{font-size:24px;line-height:32px;}
+  .pitch{font-size:18px;line-height:28px;}
   h2{font-size:36px;line-height:40px;}
-  .rt>li{padding:16px 0 15px;}
-  .rt>li>*+*{margin-top:8px;}
-  .rt-ref{margin-top:16px;}
-  .rt .div-l{border-top:0;padding-top:0;}
-  .rt-head{display:none;}
-  .foot-grid{display:block;}
-  .foot-grid>*+*{margin-top:32px;}
+  .foot{margin-top:96px;}
   /* the overlay is a desktop drafting instrument */
   .guides,.topbar button{display:none;}
 }
 
-/* ---- responsive: 375px — sheets near-full-bleed, void compresses */
+/* ---- responsive: 375px --------------------------------------- */
 @media (max-width:560px){
-  .wrap{padding:24px 20px 64px;}
+  .wrap{padding:0 20px 64px;}
   .topbar-in{padding:11px 20px 12px;}
-  .void{height:96px;}
-  .sheet--doc{margin-top:56px;}
-  .doc-sect + .doc-sect{margin-top:56px;}
-  .doc-idx{font-size:12px;margin-bottom:32px;}
-  .doc-sect + .doc-sect .doc-idx{padding-top:19px;}
-  .sheet{margin-inline:-12px;padding:40px 20px 32px;border-radius:12px;}
+  .doc-sect,.alias{scroll-margin-top:72px;}
+  .hero{padding-top:56px;}
+  .doc-sect{margin-top:72px;}
+  .doc-idx{font-size:12px;margin-bottom:32px;padding-top:19px;}
   .band>*+*{margin-top:40px;}
   .div-l{padding-top:39px;}
   h1{font-size:56px;line-height:56px;}
   .tagline{font-size:22px;line-height:32px;}
+  .chip{display:flex;}
   h2{font-size:30px;line-height:32px;}
-  .clause--gap{margin-top:40px;}
+  .doclist>li{padding:16px 0 15px;}
   .ev-grid{grid-template-columns:1fr;gap:16px;}
-  .foot{margin-top:96px;}
-  .tail{margin-top:48px;}
+  .foot{margin-top:80px;}
 }
