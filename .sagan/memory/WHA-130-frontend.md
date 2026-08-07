@@ -47,3 +47,31 @@
   the box edge and forced a second viewBox widening (−36→−44). Same
   retro point as round 1, now proven twice: size engraving labels for
   legibility at the frame stage.
+
+## Round 3
+
+- **Lesson (why this round exists):** the extended-sheet formula
+  (per-section void + sheet + footer) scaled the *hero's* drama to
+  every section and read as slides. A hero frame approved in isolation
+  doesn't license repeating its ground/paper rhythm — the frame stage
+  should decide the document model (one paper vs many) before a full
+  build, not leave it implied by the hero.
+- **Went well:** the merge was almost pure structure — bands, clause
+  system, figures, and all round-2 fixes moved into the single
+  `.sheet--doc` untouched; the aesthetic/structure separation in the
+  CSS (tokens + components vs page scaffolding) made "slides → one
+  document" a scaffolding-only edit.
+- **Conflict pattern worth naming:** "keep X exactly" + "only one Y on
+  the page" collided (hero doc-foot vs single end footer). Resolved by
+  scoping the global rule to the merged document and documenting the
+  one-line fallback — packs should state which AC wins when a preserved
+  artifact contains an instance of a thing being globally removed.
+- **Pattern:** body-level `position:sticky` bar + `scroll-margin-top`
+  on targets is a complete no-JS anchor-nav system; the only design
+  decisions are bar height arithmetic (keep it on the 8px baseline)
+  and a label-compression breakpoint (860px here, measured from mono
+  advance widths, not eyeballed).
+- **Ambiguity flag habit paid off again:** five structure decisions
+  (hero footer, bar labels, dropped meta line, dropped eyebrows,
+  doc-idx position marker) each got a documented rationale + cheap
+  reversal path instead of a silent guess.

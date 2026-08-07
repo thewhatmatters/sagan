@@ -5,6 +5,9 @@
    carried over, not reinvented. New in this build: sections
    03/04/05 components, site footer, designed 375px pass,
    reduced-motion guards, evidence-figure styles.
+   Round 3 (structure): sticky mono index bar (.topbar), sections
+   02–05 merged onto one paper (.sheet--doc / .doc-sect / .doc-idx),
+   single end-of-document footer absorbed by the site footer.
    Grid: 12 col · 24 gutter · 72 margin · 1296 type area · 8px
    baseline (leading = 3×). Toggle the overlay with G (desktop).
    Type: Geist 400/500/600 · Geist Mono 400 (vendored, OFL).
@@ -87,35 +90,48 @@ body::before{
   position:relative;z-index:1;
   max-width:calc(var(--maxw) + 2*var(--margin));
   margin:0 auto;
-  padding:48px var(--margin) 96px;
+  padding:24px var(--margin) 96px;
 }
 
-/* ---- ground index header ("01 — SAGAN") ---------------------- */
-.idx{
-  display:flex;align-items:baseline;justify-content:space-between;
-  gap:16px;flex-wrap:wrap;
+/* ---- sticky mono index bar (round 3) ------------------------- */
+/* pure CSS position:sticky — functional without JS */
+.topbar{
+  position:sticky;top:0;z-index:40;
+  background:var(--ground);
+  border-bottom:1px dashed var(--ground-soft);
+}
+.topbar-in{
+  max-width:calc(var(--maxw) + 2*var(--margin));
+  margin:0 auto;
+  padding:15px var(--margin) 16px;
+  display:flex;align-items:baseline;justify-content:space-between;gap:24px;
+}
+.tb-brand{
+  font-family:"Geist Mono",ui-monospace,monospace;
+  font-size:13px;line-height:16px;font-weight:400;
+  letter-spacing:.22em;text-transform:uppercase;
   color:var(--ground-ink);
 }
-.idx-title{
+.tb-right{display:flex;align-items:baseline;gap:24px;}
+.tb-nav{
+  display:flex;align-items:baseline;gap:12px;
   font-family:"Geist Mono",ui-monospace,monospace;
-  font-size:20px;line-height:24px;font-weight:400;
-  letter-spacing:.14em;text-transform:uppercase;
+  font-size:11px;line-height:16px;letter-spacing:.12em;text-transform:uppercase;
 }
-.idx-meta{
-  display:flex;gap:16px;align-items:baseline;
+.tb-nav a{color:var(--ground-ink);text-decoration:none;white-space:nowrap;}
+.tb-nav a:hover{text-decoration:underline;text-underline-offset:3px;}
+.tb-sep{color:var(--ground-soft);}
+.topbar button{
   font-family:"Geist Mono",ui-monospace,monospace;
   font-size:11px;line-height:16px;letter-spacing:.12em;text-transform:uppercase;
   color:var(--ground-soft);
-}
-.idx-meta button{
-  font:inherit;color:inherit;letter-spacing:inherit;text-transform:inherit;
   background:none;border:1px solid var(--ground-soft);
   padding:3px 10px;cursor:pointer;border-radius:2px;
 }
-.idx-meta button[aria-pressed="true"]{color:var(--ground-ink);border-color:var(--ground-ink);}
+.topbar button[aria-pressed="true"]{color:var(--ground-ink);border-color:var(--ground-ink);}
 
-/* section-break ground headers */
-.idx--sect{margin-top:160px;margin-bottom:40px;}
+/* anchor targets clear the sticky bar (48px tall) */
+#sagan,.doc-sect{scroll-margin-top:72px;}
 
 /* ---- the vast negative space above the first sheet ----------- */
 .void{height:400px;}
@@ -138,6 +154,22 @@ body::before{
   opacity:.05;filter:invert(var(--grain-invert));
 }
 .sheet>*{position:relative;}
+
+/* ---- the merged document: 02–05 on one continuous paper ------ */
+.sheet--doc{margin-top:96px;}
+.doc-sect + .doc-sect{margin-top:88px;}
+/* in-document mono section headers — on the paper, ink-colored */
+.doc-idx{
+  display:flex;align-items:baseline;justify-content:space-between;gap:16px;
+  font-family:"Geist Mono",ui-monospace,monospace;
+  font-size:13px;line-height:16px;font-weight:400;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-soft);
+  margin-bottom:40px;
+}
+.doc-sect + .doc-sect .doc-idx{
+  border-top:1px solid var(--hair-strong);padding-top:23px;
+}
 
 /* ---- grid bands (place by column line) ----------------------- */
 .band{
@@ -373,6 +405,14 @@ h2{
   padding-top:39px;
   color:var(--ground-ink);
 }
+/* the single page-number-style doc footer, absorbed here (round 3) */
+.foot-doc{
+  display:flex;justify-content:space-between;gap:16px;
+  margin-bottom:40px;
+  font-family:"Geist Mono",ui-monospace,monospace;
+  font-size:10px;line-height:16px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ground-soft);
+}
 .foot-grid{
   display:grid;
   grid-template-columns:repeat(var(--cols),1fr);
@@ -416,10 +456,17 @@ body.grid-on .guides{opacity:1;}
 .guides .mline.r{right:var(--margin);}
 
 /* ---- responsive: tablet / narrow desktop --------------------- */
+/* ---- responsive: hide bar labels once they would crowd ------- */
+@media (max-width:860px){
+  .tb-label{display:none;}
+}
+
 @media (max-width:1100px){
   .wrap{padding-inline:32px;}
+  .topbar-in{padding-inline:32px;}
   .void{height:200px;}
-  .idx--sect{margin-top:112px;}
+  .sheet--doc{margin-top:72px;}
+  .doc-sect + .doc-sect{margin-top:64px;}
   .sheet{margin-inline:-16px;padding:48px 32px 40px;}
   .band{display:block;}
   .band>*+*{margin-top:48px;}
@@ -437,15 +484,18 @@ body.grid-on .guides{opacity:1;}
   .foot-grid{display:block;}
   .foot-grid>*+*{margin-top:32px;}
   /* the overlay is a desktop drafting instrument */
-  .guides,.idx-meta button{display:none;}
+  .guides,.topbar button{display:none;}
 }
 
 /* ---- responsive: 375px — sheets near-full-bleed, void compresses */
 @media (max-width:560px){
   .wrap{padding:24px 20px 64px;}
+  .topbar-in{padding:11px 20px 12px;}
   .void{height:96px;}
-  .idx--sect{margin-top:80px;margin-bottom:32px;}
-  .idx-title{font-size:16px;line-height:24px;}
+  .sheet--doc{margin-top:56px;}
+  .doc-sect + .doc-sect{margin-top:56px;}
+  .doc-idx{font-size:12px;margin-bottom:32px;}
+  .doc-sect + .doc-sect .doc-idx{padding-top:19px;}
   .sheet{margin-inline:-12px;padding:40px 20px 32px;border-radius:12px;}
   .band>*+*{margin-top:40px;}
   .div-l{padding-top:39px;}
