@@ -116,13 +116,14 @@ brief says **what** (the task), **how** (approach + constraints), and
 **done** (the bar) — what stays as the description verbatim, how becomes
 `## Method` (items, lane, round-1 evidence, reference), done becomes
 `## AC` (judgeable criteria; a comparative bar with a named reference
-when the ask is quality-shaped). A brief written to the full template —
-DONE as grouped pass/fail checks ("any single no means not done") —
-compiles line by line: each DONE line becomes one AC item, mechanical
-checks routed to verify, judgment checks to the critic with verify's
-evidence; HOW's hard constraints also land as mechanical AC. The brief's
-"stop and say which item" clause maps to ESCALATE. A brief missing one
-of the three parts is a needs-you question, not a guess.
+when the ask is quality-shaped). The done-paragraph compiles clause by
+clause — each clause becomes one AC item, mechanical checks routed to
+verify, judgment checks ("still reads premium") to the critic with
+verify's evidence (e.g. an accent-stripped capture); the how-paragraph's
+hard constraints also land as mechanical AC. Anything the brief leaves
+open (the exact headline) is proposed at the gate, not guessed. A
+closing "stop and tell me which" line maps to ESCALATE. A brief missing
+what, how, or done entirely is a needs-you question.
 
 Collect every open decision across the selected tickets — drafted AC/Method
 awaiting confirmation, AC ambiguities from Step 3, `blocked_by` chains,

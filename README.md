@@ -147,77 +147,40 @@ The toolkit is three skills, one per phase:
 
 ### What a ticket looks like
 
-**You never author this file.** You brief the PM in plain prose with
-three parts — WHAT, HOW, DONE — like briefing a person. Here's the
-shape at full depth; copy it and fill the brackets:
+**You never author this file.** You brief the PM the way you'd brief a
+person: a paragraph on what, a paragraph on how, a paragraph on what
+done means, and one closing line. A real one, in full:
 
 ```text
-WHAT
-Build the hero section for [product].
+Build the hero for sagan.run. Headline eight words or fewer,
+a subhead, one CTA saying "Get started" → /docs. No secondary.
 
-It says: [one sentence — what the visitor should understand
-after three seconds].
+Only the shadcn primitives we have installed. Type-led — type
+carries the hierarchy, whitespace is the design. One accent
+color, used once. Everything from tokens. Nothing animates on
+load.
 
-On the page: a headline (8 words or fewer), a subhead (20 or
-fewer), and a single call to action reading "[label]" that
-goes to [destination]. No secondary CTA.
+Done means all of these: delete the accent and it still reads
+premium; nothing's filling space; a stranger knows what we do
+from the headline and subhead alone; every value traces to a
+token; buttons are buttons; one h1, heading order in sequence;
+focus visible, tab order follows reading order; alt text or
+explicitly decorative; tap targets 44 by 44.
 
-HOW
-Use only the shadcn primitives already installed: [list them].
-Install nothing new.
-
-The look is calm and type-led: type carries the hierarchy —
-one family, two weights at most, with size and spacing doing
-the work that color and decoration usually do. Whitespace is
-the design element, not filler.
-
-Specifically: no gradients, glows, meshes, or decorative
-backgrounds. One accent color, used exactly once. Motion only
-in response to interaction — nothing animates on load.
-
-Voice: [your 3–5 voice rules].
-Colors, spacing, and type come from [token list]. No
-hardcoded values.
-
-DONE
-It's done when all of these are true. Any single "no" means
-not done.
-
-Craft
-- Deleting the accent color entirely would still leave a page
-  that reads as premium.
-- Nothing on the page exists to fill space.
-- A stranger can state what [product] does after reading only
-  the headline and subhead.
-
-Brand
-- Every color, spacing, and type value traces to a token.
-- No component outside the installed list.
-- No forbidden words or patterns from the voice rules.
-
-Accessibility
-- Every interactive element is the correct semantic tag — a
-  button is a <button>, not a styled div.
-- Heading order is sequential; the hero has exactly one h1.
-- Focus is visible on every interactive element, and tab
-  order follows reading order.
-- Images have alt text, or are explicitly marked decorative.
-- Tap targets are at least 44×44px.
-- Any aria-* attribute is necessary and correct.
-
-If something here can't be met, stop and say which item and
-why. Don't ship a near-miss and mention it afterward.
+Any one of those you can't hit, stop and tell me which and why.
 ```
 
-The PM compiles that brief into the ticket's contract, same spine:
-WHAT stays as the description, verbatim. HOW becomes `## Method`, and
-its hard constraints (tokens only, one accent, no load animation)
-become mechanical AC items. Every DONE line becomes an enumerated AC
-item — mechanical checks route to verify, judgment checks route to the
-fresh critic with verify-supplied evidence. The closing "stop and say
-which item" clause is Sagan's ESCALATE rule in your words: work never
-quietly ships as a near-miss. You approve or edit the compiled contract
-at a gate before any agent starts.
+The PM compiles that into the ticket's contract, same spine: your
+words stay as the description, verbatim. The how-paragraph becomes
+`## Method`, and its hard constraints (tokens only, one accent, no
+load animation) become mechanical AC items. Every clause of your
+done-paragraph becomes one enumerated AC item — mechanical checks
+route to verify, judgment checks ("still reads premium") route to the
+fresh critic with verify-supplied evidence like an accent-stripped
+capture. Your closing line is Sagan's ESCALATE rule in your own words:
+work never quietly ships as a near-miss. You approve or edit the
+compiled contract at a gate before any agent starts — including
+anything the brief left open, like the exact headline.
 
 The compiled ticket follows a What → How → Bar spine: your prose
 description says what, `## Method` says how *this* ticket gets built
@@ -239,31 +202,32 @@ verifier_id: verify-claude-r1     # never the builder
 evidence_sha: 9be4459             # proof binds to this commit
 ---
 
-<!-- your brief, verbatim (abridged here) -->
-WHAT — the hero for sagan.run: headline ≤ 8 words, one CTA
-"Get started" → /docs, no secondary.
-HOW — installed primitives only; one accent, used once;
-tokens only; nothing animates on load.
-DONE — craft, brand, and a11y checks; any single "no" means
-not done.
+<!-- your prompt, verbatim (abridged here) -->
+Build the hero for sagan.run. Headline eight words or fewer,
+a subhead, one CTA saying "Get started" → /docs. No secondary.
+Only the shadcn primitives we have installed. One accent, used
+once. Everything from tokens. … Any one you can't hit, stop
+and tell me which and why.
 
 <!-- the PM compiled everything below from that brief;
      you confirmed it at a gate before any work -->
 
 ## AC
-1. `h1` exact text `Ship work you can prove.` — the page's
-   only h1; ONE CTA `Get started` → /docs.
+1. `h1` exact text `Ship work you can prove.` — proposed at
+   the gate, approved; the page's only h1; ONE CTA
+   `Get started` → /docs.
 2. Only installed primitives; tokens only — no new hex,
    accent exactly once, no load animation.
-3. Semantic tags; visible focus; targets ≥ 44px; axe zero
-   critical.
+3. Buttons are buttons; one h1, heading order in sequence;
+   focus visible; targets ≥ 44px; axe zero critical.
 4. `npm run build` + `npm run typecheck` exit 0.
-5. Blind vs linear.app at 1440px: critic prefers ours;
-   accent-stripped capture still reads premium.
+5. Craft, on verify's captures: accent-stripped still reads
+   premium; nothing fills space; a stranger gets it from
+   headline + subhead.
 
 ## Method
 items: copy · CTA · tokens · a11y
-lane: quality (cap 3) · reference: linear.app
+lane: quality (cap 3)
 round-1 evidence: 375/1440 light+dark · accent-off · axe run
 
 ## Frontend

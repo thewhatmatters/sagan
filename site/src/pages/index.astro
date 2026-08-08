@@ -104,17 +104,20 @@ import '../styles/global.css';
             <div class="composer-meta" aria-hidden="true"><span>main</span><span>·</span><span>sagan wired</span></div>
             <div aria-hidden="true">
               <div class="composer-row"><span class="composer-k">what</span>
-                <p class="composer-prompt">Build the hero for sagan.run &mdash;
-                  headline &le; 8 words, one CTA &ldquo;Get started&rdquo;
-                  &rarr; /docs, no secondary.</p></div>
+                <p class="composer-prompt">Build the hero for sagan.run.
+                  Headline eight words or fewer, a subhead, one CTA saying
+                  &ldquo;Get started&rdquo; &rarr; /docs. No secondary.</p></div>
               <div class="composer-row"><span class="composer-k">how</span>
-                <p class="composer-prompt">Only the shadcn primitives already
-                  installed. Type carries the hierarchy; one accent, used
-                  exactly once; tokens only, nothing animates on load.</p></div>
+                <p class="composer-prompt">Only the shadcn primitives we have
+                  installed. Type-led &mdash; whitespace is the design. One
+                  accent color, used once. Everything from tokens. Nothing
+                  animates on load.</p></div>
               <div class="composer-row"><span class="composer-k">done</span>
-                <p class="composer-prompt">Craft, brand, and a11y checks &mdash;
-                  any single &ldquo;no&rdquo; means not done. Can&rsquo;t meet
-                  one? Stop and say why.</p></div>
+                <p class="composer-prompt">Delete the accent and it still reads
+                  premium; a stranger knows what we do from the headline and
+                  subhead alone; buttons are buttons; one h1; focus visible;
+                  tap targets 44 by 44. Any one you can&rsquo;t hit, stop and
+                  tell me which and why.</p></div>
             </div>
             <div class="composer-bar" aria-hidden="true">
               <span>Claude &middot; PM</span>
@@ -138,28 +141,30 @@ evidence_sha: 9be4459           <span class="soft"># proof binds here</span>
 ---
 
 <span class="soft">&lt;!-- your prompt, verbatim (abridged) --&gt;</span>
-WHAT — the hero for sagan.run: headline &le; 8 words,
-one CTA `Get started` &rarr; /docs, no secondary.
-HOW — installed primitives only; one accent, once;
-tokens only; nothing animates on load.
-DONE — craft, brand, and a11y checks; any single
-&ldquo;no&rdquo; means not done.
+Build the hero for sagan.run. Headline eight words
+or fewer, a subhead, one CTA saying &ldquo;Get started&rdquo;
+&rarr; /docs. No secondary. Only the shadcn primitives
+we have installed. One accent, used once. Everything
+from tokens. &hellip; Any one you can&rsquo;t hit, stop and
+tell me which and why.
 
 <span class="soft">&lt;!-- the PM compiled everything below from it;
      you confirmed at a gate before any work --&gt;</span>
 ## AC
-1. `h1` exact text `Ship work you can prove.` — the
-   page&rsquo;s only h1; ONE CTA `Get started` &rarr; /docs.
+1. `h1` exact text `Ship work you can prove.` —
+   proposed at the gate, approved; the page&rsquo;s only
+   h1; ONE CTA `Get started` &rarr; /docs.
 2. Only installed primitives; tokens only — no new
    hex, accent exactly once, no load animation.
-3. Semantic tags; visible focus; targets &ge; 44px;
-   axe zero critical.
-4. Blind vs linear.app at 1440px: critic prefers
-   ours; accent-stripped capture still reads premium.
+3. Buttons are buttons; one h1, order in sequence;
+   focus visible; targets &ge; 44px; axe zero critical.
+4. Craft, on verify&rsquo;s captures: accent-stripped
+   still reads premium; nothing fills space; a
+   stranger gets it from headline + subhead.
 
 ## Method
 items: copy &middot; CTA &middot; tokens &middot; a11y
-lane: quality (cap 3) &middot; reference: linear.app
+lane: quality (cap 3)
 round-1 evidence: 375/1440 light+dark &middot; accent-off &middot; axe
 
 ## Frontend
