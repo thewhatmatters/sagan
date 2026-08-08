@@ -152,43 +152,49 @@ What → How → Bar spine: the description says what, `## Method` says how
 round-1 evidence, a comparison reference when the bar is comparative),
 and `## AC` is the bar — mechanical criteria, or a blind comparison
 against a named reference for quality-shaped work. Never adjectives.
-Abridged from WHA-151, the run that shipped the site's footer link (full
-anatomy: [`tickets/T-000-example.md`](tickets/T-000-example.md)):
+Abridged from the worked example, a landing hero built from shadcn
+primitives (full ticket: [`tickets/T-000-example.md`](tickets/T-000-example.md)):
 
 ```markdown
 ---
-id: WHA-151
-title: Footer design.md link on sagan.run
-status: Done
+id: T-000
+title: Marketing hero (shadcn primitives)
+status: Backlog
 # repo-owned — set by the run, carried across every fetch
 builder_id: frontend-claude-r1
 verifier_id: verify-claude-r1     # never the builder
-evidence_sha: d4e6fc9             # proof binds to this commit
+evidence_sha: 9be4459             # proof binds to this commit
 ---
 
 <!-- sagan:linear-owned:start — regenerated on every fetch -->
-The description, mirrored verbatim from the tracker.
+Build the landing hero from existing shadcn/ui primitives —
+Badge, Button — nothing new installed.
 <!-- sagan:linear-owned:end -->
 
 <!-- sagan:repo-owned:start — agents write here; a fetch never touches it -->
 ## AC
-1. Exact visible label `design.md`, href `/design.md`, placed after
-   the sagan.run link, using the row's existing separator idiom.
-2. `npm run build` exits 0; dist contains `href="/design.md"`.
-3. At 375px and 1280px: all three links, no horizontal overflow.
+1. `h1` exact text `Ship work you can prove.`; Badge eyebrow
+   `Now in public beta`.
+2. CTAs use the existing shadcn `Button` — no new deps, no
+   custom button CSS.
+3. No arbitrary values, no new hex colors in the diff.
+4. `npm run build` + `npm run typecheck` exit 0.
+5. Blind vs linear.app's hero at 1440px: the critic must prefer
+   ours on hierarchy and whitespace.
 
 ## Method
-items: footer row · lane: correctness
-round-1 evidence: 375/1280px captures, JS-disabled render
+items: structure · CTAs · tokens · a11y
+lane: quality (cap 3) · reference: linear.app
+round-1 evidence: 375/1440px captures light+dark · axe run
 
 ## Frontend
 r1 build note — what was built, key choices, nothing self-approved.
 
 ## QA
-r1 verify — per-AC PASS/FAIL with evidence at `d4e6fc9`.
+r1 verify — per-AC PASS/FAIL with evidence at `9be4459`.
 
 ## Decisions
-2026-08-07 — promote gate (human): promote.
+2026-08-08 — promote gate (human): promote.
 <!-- sagan:repo-owned:end -->
 ```
 
