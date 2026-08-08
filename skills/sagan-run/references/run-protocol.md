@@ -21,8 +21,11 @@ source supplements the original, never substitutes for it.
 
 ## The Method block
 
-Read the ticket's `## Method` block before the first dispatch — it is the
-per-ticket "how" (What → How → Bar; the AC is the bar):
+The human briefs in prose; the PM compiles AC + Method from it and the
+human confirms at a gate (sagan-start Step 5) — blocks are never the
+human's homework. Read the ticket's `## Method` block before the first
+dispatch — it is the per-ticket "how" (What → How → Bar; the AC is the
+bar):
 
 - **items** shape the builder's dispatch (and, in sprint scope, the split
   into tickets); each item must trace to an AC item.

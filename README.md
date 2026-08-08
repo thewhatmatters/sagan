@@ -134,8 +134,10 @@ The toolkit is three skills, one per phase:
   `sagan.yaml`, mirror the ticket store into local markdown, check every
   ticket's AC (no criteria → non-zero exit, not a reminder), ask whether
   this is one ticket or a sprint, log `run.started`, and hand back a
-  dispatch-ready brief. `--writeback=<ID>` sends a ticket's repo blocks
-  back to the tracker verbatim.
+  dispatch-ready brief. A ticket that's still plain prose isn't your
+  homework: the PM drafts its AC and Method from your description and
+  you confirm or edit them in the question round. `--writeback=<ID>`
+  sends a ticket's repo blocks back to the tracker verbatim.
 - **`sagan-run` drives.** It consumes the brief and owns the circuit:
   dispatches the builder with pointer packs, a fresh artifact-only critic
   (verdict envelope schema-validated), a verifier that is never the
@@ -145,15 +147,19 @@ The toolkit is three skills, one per phase:
 
 ### What a ticket looks like
 
-One markdown file per ticket, frontmatter split by owner, two regions —
-the tracker's and the repo's. The repo-owned blocks follow a
-What → How → Bar spine: the description says what, `## Method` says how
-*this* ticket gets built (item decomposition, correctness-or-quality lane,
-round-1 evidence, a comparison reference when the bar is comparative),
-and `## AC` is the bar — mechanical criteria, or a blind comparison
-against a named reference for quality-shaped work. Never adjectives.
-Abridged from the worked example, a landing hero built from shadcn
-primitives (full ticket: [`tickets/T-000-example.md`](tickets/T-000-example.md)):
+**You never author this file.** You brief the PM in plain prose — what
+you want, how you'd like it approached, when it's done, exactly like
+briefing a person — and the PM compiles that brief into the ticket's
+contract, which you approve or edit at a gate before any agent starts.
+
+The compiled ticket follows a What → How → Bar spine: your prose
+description says what, `## Method` says how *this* ticket gets built
+(item decomposition, correctness-or-quality lane, round-1 evidence, a
+comparison reference when the bar is comparative), and `## AC` is the
+bar — mechanical criteria, or a blind comparison against a named
+reference for quality-shaped work. Never adjectives. Abridged from the
+worked example (full ticket:
+[`tickets/T-000-example.md`](tickets/T-000-example.md)):
 
 ```markdown
 ---
@@ -166,12 +172,14 @@ verifier_id: verify-claude-r1     # never the builder
 evidence_sha: 9be4459             # proof binds to this commit
 ---
 
-<!-- sagan:linear-owned:start — regenerated on every fetch -->
-Build the landing hero from existing shadcn/ui primitives —
-Badge, Button — nothing new installed.
-<!-- sagan:linear-owned:end -->
+<!-- you wrote this — plain words, like briefing a person -->
+I want a hero that feels like linear.app's — calm, type-led,
+from the shadcn primitives we already have. Done when a harsh
+reviewer, seeing both side by side blind, prefers ours.
 
-<!-- sagan:repo-owned:start — agents write here; a fetch never touches it -->
+<!-- the PM agent drafted everything below from that brief;
+     you confirmed it at a gate before any work -->
+
 ## AC
 1. `h1` exact text `Ship work you can prove.`; Badge eyebrow
    `Now in public beta`.
@@ -195,7 +203,6 @@ r1 verify — per-AC PASS/FAIL with evidence at `9be4459`.
 
 ## Decisions
 2026-08-08 — promote gate (human): promote.
-<!-- sagan:repo-owned:end -->
 ```
 
 ## Status — v0, honest

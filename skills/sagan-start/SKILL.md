@@ -107,8 +107,17 @@ two builders editing the same file.
 
 ## Step 5 — Surface decisions
 
-Collect every open decision across the selected tickets — AC ambiguities from
-Step 3, `blocked_by` chains, unresolved `## Decisions` entries — and put them in
+A ticket that is still plain prose is never the human's homework. When a
+selected ticket has a description but no enumerated AC, the PM **drafts**
+the AC and Method blocks from that prose (What → How → Bar: judgeable
+criteria, items, lane, round-1 evidence, a comparative bar with a named
+reference when the ask is quality-shaped) and presents the draft for
+confirmation in this round — the human approves or edits, never authors
+blocks from scratch.
+
+Collect every open decision across the selected tickets — drafted AC/Method
+awaiting confirmation, AC ambiguities from Step 3, `blocked_by` chains,
+unresolved `## Decisions` entries — and put them in
 **one** structured question round with a recommended default each. Batching them
 is the PM requirement in `sagan.yaml` (`surface_decisions: structured-questions`),
 not a convenience. Log each as `decision.needed` via `scripts/ledger.py`.

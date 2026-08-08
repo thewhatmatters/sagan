@@ -24,25 +24,30 @@ evidence_sha:
 
 <!-- sagan:linear-owned:start — regenerated on every fetch; edit in Linear -->
 
-Build the landing-page hero: eyebrow badge, headline, supporting copy, and a
-primary/secondary CTA pair — composed from our existing shadcn/ui primitives
-and Tailwind tokens, nothing new installed. Type-led and calm; the reference
-for the comparative bar is linear.app's hero.
+<!-- THIS is all the human wrote. A ticket starts as plain prose — what you
+     want, how you'd like it approached, when it's done — like briefing a
+     person. Everything below this region was drafted BY the PM agent from
+     this brief and confirmed by the human at a gate before any work. -->
 
-Local-store projects (`ticket.store: local`): you author this whole file by
-hand — keep both regions so the file stays fetch-safe if you attach a tracker
-later.
+I want a landing-page hero that feels like linear.app's — calm, type-led,
+confident. Headline "Ship work you can prove.", a small "public beta"
+eyebrow, a short supporting line, and two buttons: get started, and view
+on GitHub. Build it from the shadcn primitives we already have — don't
+install anything new. It's done when a harsh reviewer, seeing ours and
+linear.app's side by side without knowing which is which, prefers ours.
 
 <!-- sagan:linear-owned:end -->
 
 <!-- sagan:repo-owned:start — agents write below; a fetch never touches this region -->
 ## AC
 
-<!-- The bar. Rules learned the hard way: every clause judgeable from some
-     role's declared input set (external docs ship in the critic's pack or
-     route to verify as quoted attestations); exact strings pinned where
-     wording matters; each item testable by command or observation; and an
-     adjective is never a criterion — quality gets the comparative bar. -->
+<!-- The bar — compiled by the PM from the prose brief above, confirmed by
+     the human at the needs-you gate. Rules learned the hard way: every
+     clause judgeable from some role's declared input set (external docs
+     ship in the critic's pack or route to verify as quoted attestations);
+     exact strings pinned where wording matters; each item testable by
+     command or observation; and an adjective is never a criterion —
+     quality gets the comparative bar. -->
 
 1. `src/components/marketing/hero.tsx` exports `Hero`, rendered at the top
    of `/`. It contains, in order: a `Badge` eyebrow with exact text
@@ -68,9 +73,10 @@ later.
 
 ## Method
 
-<!-- The per-ticket how, authored with the AC, before dispatch. Only what
-     varies per ticket — fan-out, fresh critic, verify, and caps are
-     standing machinery in sagan.yaml and the role specs, never here. -->
+<!-- The per-ticket how — also drafted by the PM with the AC, before
+     dispatch. Only what varies per ticket: fan-out, fresh critic, verify,
+     and caps are standing machinery in sagan.yaml and the role specs,
+     never here. -->
 
 - **items:** (1) semantic structure + pinned copy (AC 1), (2) CTA pair
   wired to routes (AC 2), (3) token-clean responsive styling (AC 3, 5),
