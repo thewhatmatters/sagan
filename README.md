@@ -40,6 +40,7 @@ accepted.*
 | Rule | Meaning |
 |---|---|
 | AC before dispatch | Critic without AC is opinion; critic against AC is a contract |
+| Adjectives are not criteria | Quality bars name a reference and are judged blind by the critic — mechanical or comparative, never "looks great" |
 | Flags, never fixes | The critic judges; the builder fixes; nobody self-approves |
 | Builder ≠ verifier | Structural, not cultural — the verifier is never the builder |
 | Reading is not judging | `NEEDS_EVIDENCE` exists so render/runtime claims require execution output |
