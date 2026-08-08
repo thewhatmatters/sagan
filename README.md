@@ -147,20 +147,77 @@ The toolkit is three skills, one per phase:
 
 ### What a ticket looks like
 
-**You never author this file.** You brief the PM in plain prose, and a
-good brief has exactly three parts, like briefing a person:
+**You never author this file.** You brief the PM in plain prose with
+three parts — WHAT, HOW, DONE — like briefing a person. Here's the
+shape at full depth; copy it and fill the brackets:
 
-1. **What** — the task. "I want a hero that feels like linear.app's —
-   calm, type-led."
-2. **How** — the approach and constraints. "Use the shadcn primitives we
-   already have; install nothing new."
-3. **Done** — the bar. "A harsh reviewer, seeing both side by side
-   blind, prefers ours."
+```text
+WHAT
+Build the hero section for [product].
 
-The PM compiles that brief into the ticket's contract — same spine, one
-block each: what stays as the description (verbatim), how becomes
-`## Method`, done becomes `## AC` — and you approve or edit it at a gate
-before any agent starts.
+It says: [one sentence — what the visitor should understand
+after three seconds].
+
+On the page: a headline (8 words or fewer), a subhead (20 or
+fewer), and a single call to action reading "[label]" that
+goes to [destination]. No secondary CTA.
+
+HOW
+Use only the shadcn primitives already installed: [list them].
+Install nothing new.
+
+The look is calm and type-led: type carries the hierarchy —
+one family, two weights at most, with size and spacing doing
+the work that color and decoration usually do. Whitespace is
+the design element, not filler.
+
+Specifically: no gradients, glows, meshes, or decorative
+backgrounds. One accent color, used exactly once. Motion only
+in response to interaction — nothing animates on load.
+
+Voice: [your 3–5 voice rules].
+Colors, spacing, and type come from [token list]. No
+hardcoded values.
+
+DONE
+It's done when all of these are true. Any single "no" means
+not done.
+
+Craft
+- Deleting the accent color entirely would still leave a page
+  that reads as premium.
+- Nothing on the page exists to fill space.
+- A stranger can state what [product] does after reading only
+  the headline and subhead.
+
+Brand
+- Every color, spacing, and type value traces to a token.
+- No component outside the installed list.
+- No forbidden words or patterns from the voice rules.
+
+Accessibility
+- Every interactive element is the correct semantic tag — a
+  button is a <button>, not a styled div.
+- Heading order is sequential; the hero has exactly one h1.
+- Focus is visible on every interactive element, and tab
+  order follows reading order.
+- Images have alt text, or are explicitly marked decorative.
+- Tap targets are at least 44×44px.
+- Any aria-* attribute is necessary and correct.
+
+If something here can't be met, stop and say which item and
+why. Don't ship a near-miss and mention it afterward.
+```
+
+The PM compiles that brief into the ticket's contract, same spine:
+WHAT stays as the description, verbatim. HOW becomes `## Method`, and
+its hard constraints (tokens only, one accent, no load animation)
+become mechanical AC items. Every DONE line becomes an enumerated AC
+item — mechanical checks route to verify, judgment checks route to the
+fresh critic with verify-supplied evidence. The closing "stop and say
+which item" clause is Sagan's ESCALATE rule in your words: work never
+quietly ships as a near-miss. You approve or edit the compiled contract
+at a gate before any agent starts.
 
 The compiled ticket follows a What → How → Bar spine: your prose
 description says what, `## Method` says how *this* ticket gets built
@@ -182,29 +239,32 @@ verifier_id: verify-claude-r1     # never the builder
 evidence_sha: 9be4459             # proof binds to this commit
 ---
 
-<!-- you wrote this — plain words: what, how, done -->
-I want a hero that feels like linear.app's — calm, type-led.
-Use the shadcn primitives we already have; install nothing
-new. A harsh reviewer, seeing both side by side blind,
-prefers ours.
+<!-- your brief, verbatim (abridged here) -->
+WHAT — the hero for sagan.run: headline ≤ 8 words, one CTA
+"Get started" → /docs, no secondary.
+HOW — installed primitives only; one accent, used once;
+tokens only; nothing animates on load.
+DONE — craft, brand, and a11y checks; any single "no" means
+not done.
 
-<!-- the PM agent drafted everything below from that brief;
+<!-- the PM compiled everything below from that brief;
      you confirmed it at a gate before any work -->
 
 ## AC
-1. `h1` exact text `Ship work you can prove.`; Badge eyebrow
-   `Now in public beta`.
-2. CTAs use the existing shadcn `Button` — no new deps, no
-   custom button CSS.
-3. No arbitrary values, no new hex colors in the diff.
+1. `h1` exact text `Ship work you can prove.` — the page's
+   only h1; ONE CTA `Get started` → /docs.
+2. Only installed primitives; tokens only — no new hex,
+   accent exactly once, no load animation.
+3. Semantic tags; visible focus; targets ≥ 44px; axe zero
+   critical.
 4. `npm run build` + `npm run typecheck` exit 0.
-5. Blind vs linear.app's hero at 1440px: the critic must prefer
-   ours on hierarchy and whitespace.
+5. Blind vs linear.app at 1440px: critic prefers ours;
+   accent-stripped capture still reads premium.
 
 ## Method
-items: structure · CTAs · tokens · a11y
+items: copy · CTA · tokens · a11y
 lane: quality (cap 3) · reference: linear.app
-round-1 evidence: 375/1440px captures light+dark · axe run
+round-1 evidence: 375/1440 light+dark · accent-off · axe run
 
 ## Frontend
 r1 build note — what was built, key choices, nothing self-approved.
