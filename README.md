@@ -145,8 +145,14 @@ The toolkit is three skills, one per phase:
 ### What a ticket looks like
 
 One markdown file per ticket, frontmatter split by owner, two regions —
-the tracker's and the repo's. Abridged from WHA-151, the run that shipped
-the site's footer link (full anatomy: [`tickets/T-000-example.md`](tickets/T-000-example.md)):
+the tracker's and the repo's. The repo-owned blocks follow a
+What → How → Bar spine: the description says what, `## Method` says how
+*this* ticket gets built (item decomposition, correctness-or-quality lane,
+round-1 evidence, a comparison reference when the bar is comparative),
+and `## AC` is the bar — mechanical criteria, or a blind comparison
+against a named reference for quality-shaped work. Never adjectives.
+Abridged from WHA-151, the run that shipped the site's footer link (full
+anatomy: [`tickets/T-000-example.md`](tickets/T-000-example.md)):
 
 ```markdown
 ---
@@ -169,6 +175,10 @@ The description, mirrored verbatim from the tracker.
    the sagan.run link, using the row's existing separator idiom.
 2. `npm run build` exits 0; dist contains `href="/design.md"`.
 3. At 375px and 1280px: all three links, no horizontal overflow.
+
+## Method
+items: footer row · lane: correctness
+round-1 evidence: 375/1280px captures, JS-disabled render
 
 ## Frontend
 r1 build note — what was built, key choices, nothing self-approved.

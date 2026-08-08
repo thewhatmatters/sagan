@@ -19,6 +19,24 @@ worker receiving it. Auth-gated or JS-walled sources get materialized to a
 local (gitignored when third-party) path first; the PM's own reading of a
 source supplements the original, never substitutes for it.
 
+## The Method block
+
+Read the ticket's `## Method` block before the first dispatch — it is the
+per-ticket "how" (What → How → Bar; the AC is the bar):
+
+- **items** shape the builder's dispatch (and, in sprint scope, the split
+  into tickets); each item must trace to an AC item.
+- **lane** (`correctness` | `quality`) picks the round cap from
+  `critique.circuit_breakers.max_rounds` — do not leave lane selection to
+  mid-run judgment.
+- **round-1 evidence** is verify's standing list for the first round.
+- **reference** feeds the critic's comparative bar: verify captures both
+  artifacts, the critic judges blind on the AC's named axes. The builder
+  never runs the comparison.
+
+An empty Method block is legal for trivially single-item tickets; lane
+defaults to `correctness`.
+
 ## Station contracts
 
 | Station | Isolation | Returns | PM validates |
@@ -91,9 +109,10 @@ separate worker — PM-direct never extends to self-verification.
   worker dispatches; sync block edits (Frontend/QA/Decisions) back after
   each station.
 - **Local:** `tickets/<id>.md` is canonical; blocks are edited in place.
-- Either way the ticket carries the four blocks: `## AC`, `## Frontend`
-  (build notes), `## QA` (evidence summary), `## Decisions` (dated entries:
-  builder_id, verifier_id, evidence_sha, amendments, promote decision).
+- Either way the ticket carries the five blocks: `## AC` (the bar),
+  `## Method` (the per-ticket how), `## Frontend` (build notes), `## QA`
+  (evidence summary), `## Decisions` (dated entries: builder_id,
+  verifier_id, evidence_sha, amendments, promote decision).
 
 ## AC amendments
 

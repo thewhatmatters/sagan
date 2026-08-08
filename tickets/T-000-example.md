@@ -59,6 +59,28 @@ Shaped like the real thing (from WHA-151, approved round 1):
 5. Rendered at 375px and 1280px: `<observable>` with no horizontal overflow.
 6. `<the artifact>` works with JavaScript disabled.
 
+Quality-shaped work gets a **comparative bar**, never adjectives — name a
+reference and make the judgment a procedure:
+
+7. The fresh critic views verify-supplied captures of `<the artifact>` and
+   `<named reference>` blind, and must prefer ours on `<explicit axes>`.
+   ("Visually beautiful" is not a criterion; losing a blind comparison is.)
+
+## Method
+
+Authored with the AC, before dispatch. Only what varies per ticket — the
+circuit itself (fan-out, fresh critic, verify, caps) lives in `sagan.yaml`
+and the role specs, never here.
+
+- **items:** the independently buildable pieces, each traceable to an AC
+  item, each checked on its own
+- **lane:** correctness | quality — picks the round cap from `sagan.yaml`
+- **round-1 evidence:** what verify ships with the first build (renders,
+  captures, comparisons), so critique never burns a round asking for
+  predictable proof
+- **reference:** `<comparison artifact>` — only when the AC carries a
+  comparative bar
+
 ## Frontend
 
 (builder appends its build note here — what was built, key choices,

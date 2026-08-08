@@ -30,6 +30,7 @@ evidence_sha: 9be4459
 
 <!-- sagan:repo-owned:start … -->
 ## AC
+## Method
 ## Frontend
 ## QA
 ## Decisions
@@ -45,7 +46,7 @@ evidence_sha: 9be4459
 | `builder_id`, `verifier_id`, `evidence_sha`, `blocked_by`, `sagan_status` | repo | preserved |
 | `ac_seeded_from`, `migrated_at`, `last_writeback`, `last_writeback_at` | mirror script (once) | preserved |
 | `sagan:linear-owned` region | Linear | overwritten |
-| `sagan:repo-owned` region (AC / Frontend / QA / Decisions) | repo | **never touched** |
+| `sagan:repo-owned` region (AC / Method / Frontend / QA / Decisions) | repo | **never touched** |
 
 The authoritative list is `REPO_OWNED_FM` in `scripts/_sagan.py`. Adding a
 repo-owned frontmatter key means adding it there — nowhere else.

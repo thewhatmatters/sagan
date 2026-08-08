@@ -60,7 +60,7 @@ memory:
 
 ticket:
   store: {{TICKET_STORE}}           # local-files (.sagan/tickets/) or linear
-  blocks: [ac, frontend, qa, decisions]
+  blocks: [ac, method, frontend, qa, decisions]
   required_fields: [ac, builder_id, verifier_id, evidence_sha]
   mirror:                           # tracker -> local markdown (read by /sagan-start),
     path: .sagan/tickets            #   so every worker resolves the ticket as a POINTER
@@ -71,7 +71,7 @@ ticket:
     # assignee/description); the repo owns execution (the blocks below +
     # builder_id, verifier_id, evidence_sha). A fetch regenerates the first and
     # never touches the second.
-    owned_by_repo: [ac, frontend, qa, decisions]
+    owned_by_repo: [ac, method, frontend, qa, decisions]
 
 scope:
   modes: [ticket, sprint]

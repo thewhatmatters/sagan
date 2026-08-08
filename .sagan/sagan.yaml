@@ -56,7 +56,7 @@ memory:
 ticket:
   store: linear                     # Linear project "Sagan" (Whatmatters); local tickets/ kept for T-000/T-001 history
   project: Sagan                    # the Linear project the mirror fetch is scoped to
-  blocks: [ac, frontend, qa, decisions]
+  blocks: [ac, method, frontend, qa, decisions]
   required_fields: [ac, builder_id, verifier_id, evidence_sha]
   mirror:                           # tracker -> local markdown, so every worker
     path: tickets                   #   can resolve the ticket as a POINTER
@@ -67,7 +67,7 @@ ticket:
     # description); the repo owns execution (the blocks below + builder_id,
     # verifier_id, evidence_sha). A fetch regenerates the first and never touches
     # the second — enforced in sagan-start's mirror.py, not remembered by the PM.
-    owned_by_repo: [ac, frontend, qa, decisions]
+    owned_by_repo: [ac, method, frontend, qa, decisions]
 
 scope:
   modes: [ticket, sprint]

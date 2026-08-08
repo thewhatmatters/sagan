@@ -31,9 +31,9 @@ LINEAR_END = "<!-- sagan:linear-owned:end -->"
 REPO_START = "<!-- sagan:repo-owned:start — agents write below; a fetch never touches this region -->"
 REPO_END = "<!-- sagan:repo-owned:end -->"
 
-DEFAULT_BLOCKS = ("ac", "frontend", "qa", "decisions")
-BLOCK_TITLES = {"ac": "AC", "frontend": "Frontend", "qa": "QA",
-                "decisions": "Decisions"}
+DEFAULT_BLOCKS = ("ac", "method", "frontend", "qa", "decisions")
+BLOCK_TITLES = {"ac": "AC", "method": "Method", "frontend": "Frontend",
+                "qa": "QA", "decisions": "Decisions"}
 
 
 # ---------------------------------------------------------------- paths ----

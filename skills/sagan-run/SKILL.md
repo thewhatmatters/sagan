@@ -118,8 +118,11 @@ do not double-log — append `dispatch` events from here on. Otherwise append
 
 Per `references/run-protocol.md` (read it before the first dispatch):
 
-1. **Build** — dispatch the builder as a subagent with a pointer pack
-   (repo root, ticket path/id, role spec path). Access-check every pointer
+1. **Build** — read the ticket's `## Method` block first: items shape the
+   dispatch, lane picks the round cap, round-1 evidence goes to verify's
+   standing list, reference (if any) feeds the critic's comparative bar.
+   Then dispatch the builder as a subagent with a pointer pack (repo
+   root, ticket path/id, role spec path). Access-check every pointer
    first. PM-direct execution is legal only for credentialed infra the
    builder can't reach — log `builder_id: pm-direct` with rationale.
 2. **Critique** — fresh subagent, artifact-only inputs (artifact paths, AC
