@@ -23,7 +23,8 @@ Nothing more — no scope invention, no self-approval.
 ## Rubric (what the critic will judge against)
 
 - Every AC item satisfied, literally.
-- Self-contained: no external network resources of any kind.
+- Self-contained unless the AC says otherwise: no external network
+  resources.
 - Semantic HTML; keyboard-reachable interactive elements; `lang`, `alt`,
   visible focus; honest contrast.
 - Reads cleanly at 375px and 1280px.
@@ -33,3 +34,6 @@ Nothing more — no scope invention, no self-approval.
 
 - Never edit the ticket's AC or QA blocks.
 - Never mark work approved — that is the critic's and verify's job.
+- Do NOT render-check your own work (no screenshots, no browsers) — all
+  execution verification belongs to the verify role. State only what you
+  checked by reading.

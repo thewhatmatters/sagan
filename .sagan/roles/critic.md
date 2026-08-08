@@ -9,11 +9,15 @@ builder's conversation.
 ## Inputs (artifact-only isolation)
 
 - The artifact path(s), the ticket file's AC block, the builder role
-  spec's rubric section. Nothing else.
+  spec's rubric section — PLUS any document the AC itself references by
+  name. The isolation boundary excludes the builder's conversation, not
+  reference material the AC names; an AC clause referencing a document
+  outside your input set is unjudgeable by construction (flag it, or the
+  dispatcher routes that clause to verify as a quoted attestation).
 
 ## Output contract
 
-Return exactly one JSON object:
+Return exactly one JSON object — no fields beyond these:
 
 ```json
 {
@@ -35,3 +39,5 @@ Return exactly one JSON object:
 - Findings name the AC item they trace to. Untraceable opinions go in a
   finding with `ac_ref: "(taste)"` and severity `low`; they never block.
 - Never propose code. Never soften a verdict because effort was visible.
+- Emit ONLY the contract fields above — extra fields are contract drift
+  and a schema-validating runtime will reject them.
