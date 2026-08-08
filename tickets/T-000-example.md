@@ -1,7 +1,7 @@
 ---
 # ── tracker-owned (regenerated on every /sagan-start fetch; edit in Linear) ──
 id: T-000
-title: Example ticket (copy me)
+title: Marketing hero — headline, subcopy, CTA pair (shadcn primitives)
 status: Backlog
 priority: Medium
 assignee:
@@ -24,9 +24,10 @@ evidence_sha:
 
 <!-- sagan:linear-owned:start — regenerated on every fetch; edit in Linear -->
 
-The ticket's description, mirrored verbatim from the tracker. If you write an
-`## AC` section here in Linear, the first fetch seeds it into the repo-owned
-block below (once) and stamps `ac_seeded_from: linear-description`.
+Build the landing-page hero: eyebrow badge, headline, supporting copy, and a
+primary/secondary CTA pair — composed from our existing shadcn/ui primitives
+and Tailwind tokens, nothing new installed. Type-led and calm; the reference
+for the comparative bar is linear.app's hero.
 
 Local-store projects (`ticket.store: local`): you author this whole file by
 hand — keep both regions so the file stays fetch-safe if you attach a tracker
@@ -37,49 +38,50 @@ later.
 <!-- sagan:repo-owned:start — agents write below; a fetch never touches this region -->
 ## AC
 
-Write acceptance criteria BEFORE any dispatch — no criteria, no work. Rules
-learned the hard way:
+<!-- The bar. Rules learned the hard way: every clause judgeable from some
+     role's declared input set (external docs ship in the critic's pack or
+     route to verify as quoted attestations); exact strings pinned where
+     wording matters; each item testable by command or observation; and an
+     adjective is never a criterion — quality gets the comparative bar. -->
 
-1. Every clause must be judgeable from some role's declared input set — a
-   clause referencing an external document must either ship that document
-   in the critic's pack or be routed to verify as a quoted attestation.
-2. Pin exact strings where wording matters; explicitly permit paraphrase
-   or local variation where it doesn't. Ambiguities multiple workers flag
-   independently are AC bugs.
-3. Prefer criteria testable by command or observation (verify must be able
-   to mark each item PASS/FAIL with evidence).
-
-Shaped like the real thing (from WHA-151, approved round 1):
-
-1. `<file>` gains `<exact element>` with exact visible label `<string>`,
-   placed `<exact position>`, using `<the existing idiom, quoted verbatim>`.
-2. No new CSS, no JavaScript, no new external network resources.
-3. The change is confined to `<file>`.
-4. `<build command>` exits 0 and the built output contains `<exact string>`.
-5. Rendered at 375px and 1280px: `<observable>` with no horizontal overflow.
-6. `<the artifact>` works with JavaScript disabled.
-
-Quality-shaped work gets a **comparative bar**, never adjectives — name a
-reference and make the judgment a procedure:
-
-7. The fresh critic views verify-supplied captures of `<the artifact>` and
-   `<named reference>` blind, and must prefer ours on `<explicit axes>`.
-   ("Visually beautiful" is not a criterion; losing a blind comparison is.)
+1. `src/components/marketing/hero.tsx` exports `Hero`, rendered at the top
+   of `/`. It contains, in order: a `Badge` eyebrow with exact text
+   `Now in public beta`, an `h1` with exact text `Ship work you can
+   prove.`, one supporting paragraph (wording free, ≤ 160 characters, must
+   name the product), and two CTAs.
+2. CTAs use the existing shadcn `Button`: primary `Get started` linking to
+   `/docs`; secondary `variant="outline"` `View on GitHub` linking to the
+   repo URL from `package.json#repository`. No new dependencies, no custom
+   button CSS — only primitives already under `@/components/ui/`.
+3. Styling uses existing Tailwind tokens only: no arbitrary values
+   (`[…]`) and no new hex colors anywhere in the diff (`git show` is the
+   check). The `h1` uses the largest type step already present in the
+   codebase; if none exists, `text-5xl md:text-7xl tracking-tight`.
+4. `npm run build` and `npm run typecheck` both exit 0.
+5. At 375px and 1440px: no horizontal overflow; both CTAs keep ≥ 44px
+   touch-target height; body text ≥ 16px computed.
+6. Keyboard: both CTAs reachable in DOM order with the project's visible
+   focus ring; `axe` reports zero critical violations on `/`.
+7. **Comparative bar:** the fresh critic views verify's 1440px captures of
+   our hero and the reference blind, and must prefer ours on hierarchy and
+   whitespace discipline — or return REVISE naming the axis that lost.
 
 ## Method
 
-Authored with the AC, before dispatch. Only what varies per ticket — the
-circuit itself (fan-out, fresh critic, verify, caps) lives in `sagan.yaml`
-and the role specs, never here.
+<!-- The per-ticket how, authored with the AC, before dispatch. Only what
+     varies per ticket — fan-out, fresh critic, verify, and caps are
+     standing machinery in sagan.yaml and the role specs, never here. -->
 
-- **items:** the independently buildable pieces, each traceable to an AC
-  item, each checked on its own
-- **lane:** correctness | quality — picks the round cap from `sagan.yaml`
-- **round-1 evidence:** what verify ships with the first build (renders,
-  captures, comparisons), so critique never burns a round asking for
-  predictable proof
-- **reference:** `<comparison artifact>` — only when the AC carries a
-  comparative bar
+- **items:** (1) semantic structure + pinned copy (AC 1), (2) CTA pair
+  wired to routes (AC 2), (3) token-clean responsive styling (AC 3, 5),
+  (4) a11y pass (AC 6) — built and checked individually.
+- **lane:** quality — the comparative bar governs, round cap 3.
+- **round-1 evidence:** 375px and 1440px captures in light and dark,
+  keyboard-focus capture, the axe run, and a 1440px capture of the
+  reference — shipped with the first build so critique never waits.
+- **reference:** https://linear.app hero. Third-party captures stay out of
+  the public repo — verify materializes them under `.sagan/ledger/<id>/`
+  (gitignored evidence media).
 
 ## Frontend
 
