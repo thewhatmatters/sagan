@@ -119,7 +119,7 @@ Grid: `band`, `c-1-5`, `c-1-6`, `c-1-7`, `c-1-8`, `c-5-13`, `c-7-13`, `c-1-13`, 
 
 Type and content: `tagline`, `pitch`, `body`, `mono`, `coda`, `verdict`, `chip`, `chip-p`, `ctas`, `cta`, `doclist` with modifiers `doclist--num` and `doclist--split`.
 
-Figures: `fig-head` (with `t` title and `f` format tag), `panel`, `panel--scroll`, `engraving`, `soft`, `caption`, `fig-flow` (mono connector line between stacked figures), and the composer specimen set `composer`, `composer-meta`, `composer-prompt`, `composer-bar`, `composer-send`.
+Figures: `fig-head` (with `t` title and `f` format tag), `panel`, `panel--scroll`, `engraving`, `soft`, `caption`, `fig-flow` (mono connector line between stacked figures), and the composer specimen set `composer`, `composer-meta`, `composer-prompt`, `composer-row`, `composer-k`, `composer-bar`, `composer-send` (`composer-row`/`composer-k` label a brief's three parts — what / how / done).
 
 Tokens: `--paper`, `--panel`, `--ink`, `--ink-soft`, `--hair`, `--hair-strong`, `--grain-opacity`, `--grain-invert`, and the grid set `--cols`, `--bl`, `--lh`, `--gutter`, `--margin`, `--maxw`. Never invent a parallel token; new needs extend these in `global.css` with the same naming voice.
 

@@ -102,16 +102,23 @@ import '../styles/global.css';
           </div>
           <div class="composer" role="img" aria-label="A chat message to the PM agent: the plain-prose brief that becomes the ticket below">
             <div class="composer-meta" aria-hidden="true"><span>main</span><span>·</span><span>sagan wired</span></div>
-            <p class="composer-prompt" aria-hidden="true">I want a hero that feels
-              like linear.app&rsquo;s &mdash; calm, type-led, from the shadcn
-              primitives we already have. Done when a harsh reviewer, seeing
-              both side by side blind, prefers ours.</p>
+            <div aria-hidden="true">
+              <div class="composer-row"><span class="composer-k">what</span>
+                <p class="composer-prompt">I want a hero that feels like
+                  linear.app&rsquo;s &mdash; calm, type-led.</p></div>
+              <div class="composer-row"><span class="composer-k">how</span>
+                <p class="composer-prompt">Use the shadcn primitives we already
+                  have; install nothing new.</p></div>
+              <div class="composer-row"><span class="composer-k">done</span>
+                <p class="composer-prompt">A harsh reviewer, seeing both side by
+                  side blind, prefers ours.</p></div>
+            </div>
             <div class="composer-bar" aria-hidden="true">
               <span>Claude &middot; PM</span>
               <span class="composer-send">&uarr;</span>
             </div>
           </div>
-          <p class="fig-flow" aria-hidden="true">&darr; the PM compiles it into the ticket &mdash; your words stay at the top, verbatim</p>
+          <p class="fig-flow" aria-hidden="true">&darr; same spine, compiled: what &rarr; description (verbatim) &middot; how &rarr; Method &middot; done &rarr; AC</p>
           <div class="fig-head">
             <span class="t">What a ticket looks like</span>
             <span class="f">md</span>
@@ -129,9 +136,9 @@ evidence_sha: 9be4459           <span class="soft"># proof binds here</span>
 
 <span class="soft">&lt;!-- your prompt, verbatim --&gt;</span>
 I want a hero that feels like linear.app&rsquo;s — calm,
-type-led, from the shadcn primitives we already have.
-Done when a harsh reviewer, seeing both side by side
-blind, prefers ours.
+type-led. Use the shadcn primitives we already have;
+install nothing new. A harsh reviewer, seeing both
+side by side blind, prefers ours.
 
 <span class="soft">&lt;!-- the PM drafted everything below from it;
      you confirmed at a gate before any work --&gt;</span>

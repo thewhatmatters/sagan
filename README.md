@@ -147,10 +147,20 @@ The toolkit is three skills, one per phase:
 
 ### What a ticket looks like
 
-**You never author this file.** You brief the PM in plain prose — what
-you want, how you'd like it approached, when it's done, exactly like
-briefing a person — and the PM compiles that brief into the ticket's
-contract, which you approve or edit at a gate before any agent starts.
+**You never author this file.** You brief the PM in plain prose, and a
+good brief has exactly three parts, like briefing a person:
+
+1. **What** — the task. "I want a hero that feels like linear.app's —
+   calm, type-led."
+2. **How** — the approach and constraints. "Use the shadcn primitives we
+   already have; install nothing new."
+3. **Done** — the bar. "A harsh reviewer, seeing both side by side
+   blind, prefers ours."
+
+The PM compiles that brief into the ticket's contract — same spine, one
+block each: what stays as the description (verbatim), how becomes
+`## Method`, done becomes `## AC` — and you approve or edit it at a gate
+before any agent starts.
 
 The compiled ticket follows a What → How → Bar spine: your prose
 description says what, `## Method` says how *this* ticket gets built
@@ -172,10 +182,11 @@ verifier_id: verify-claude-r1     # never the builder
 evidence_sha: 9be4459             # proof binds to this commit
 ---
 
-<!-- you wrote this — plain words, like briefing a person -->
-I want a hero that feels like linear.app's — calm, type-led,
-from the shadcn primitives we already have. Done when a harsh
-reviewer, seeing both side by side blind, prefers ours.
+<!-- you wrote this — plain words: what, how, done -->
+I want a hero that feels like linear.app's — calm, type-led.
+Use the shadcn primitives we already have; install nothing
+new. A harsh reviewer, seeing both side by side blind,
+prefers ours.
 
 <!-- the PM agent drafted everything below from that brief;
      you confirmed it at a gate before any work -->

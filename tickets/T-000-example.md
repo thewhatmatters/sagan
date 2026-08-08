@@ -24,17 +24,23 @@ evidence_sha:
 
 <!-- sagan:linear-owned:start — regenerated on every fetch; edit in Linear -->
 
-<!-- THIS is all the human wrote. A ticket starts as plain prose — what you
-     want, how you'd like it approached, when it's done — like briefing a
-     person. Everything below this region was drafted BY the PM agent from
-     this brief and confirmed by the human at a gate before any work. -->
+<!-- THIS is all the human wrote, and it has the three parts every good
+     brief has — WHAT (the task), HOW (approach + constraints), DONE (the
+     bar) — like briefing a person. Everything below this region was
+     drafted BY the PM agent from this brief, same spine (what stays here
+     verbatim, how becomes ## Method, done becomes ## AC), and confirmed
+     by the human at a gate before any work. -->
 
 I want a landing-page hero that feels like linear.app's — calm, type-led,
 confident. Headline "Ship work you can prove.", a small "public beta"
 eyebrow, a short supporting line, and two buttons: get started, and view
-on GitHub. Build it from the shadcn primitives we already have — don't
-install anything new. It's done when a harsh reviewer, seeing ours and
-linear.app's side by side without knowing which is which, prefers ours.
+on GitHub.
+
+Build it from the shadcn primitives we already have — don't install
+anything new.
+
+It's done when a harsh reviewer, seeing ours and linear.app's side by
+side without knowing which is which, prefers ours.
 
 <!-- sagan:linear-owned:end -->
 

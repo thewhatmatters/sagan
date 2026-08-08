@@ -300,6 +300,18 @@ h2{
   margin-bottom:12px;
 }
 .composer-prompt{font-size:16px;line-height:24px;max-width:52ch;}
+/* a good brief has three parts — label each row of the prompt */
+.composer-row{
+  display:grid;grid-template-columns:48px 1fr;column-gap:12px;
+  align-items:baseline;
+}
+.composer-row + .composer-row{margin-top:8px;}
+.composer-k{
+  font-family:"Geist Mono",ui-monospace,monospace;
+  font-size:10px;line-height:24px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-soft);
+}
+.composer-row .composer-prompt{margin:0;}
 .composer-bar{
   margin-top:16px;
   display:flex;align-items:center;justify-content:space-between;gap:16px;

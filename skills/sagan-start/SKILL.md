@@ -109,11 +109,15 @@ two builders editing the same file.
 
 A ticket that is still plain prose is never the human's homework. When a
 selected ticket has a description but no enumerated AC, the PM **drafts**
-the AC and Method blocks from that prose (What → How → Bar: judgeable
-criteria, items, lane, round-1 evidence, a comparative bar with a named
-reference when the ask is quality-shaped) and presents the draft for
+the AC and Method blocks from that prose and presents the draft for
 confirmation in this round — the human approves or edits, never authors
-blocks from scratch.
+blocks from scratch. The compile follows the brief's own spine: a good
+brief says **what** (the task), **how** (approach + constraints), and
+**done** (the bar) — what stays as the description verbatim, how becomes
+`## Method` (items, lane, round-1 evidence, reference), done becomes
+`## AC` (judgeable criteria; a comparative bar with a named reference
+when the ask is quality-shaped). A brief missing one of the three parts
+is a needs-you question, not a guess.
 
 Collect every open decision across the selected tickets — drafted AC/Method
 awaiting confirmation, AC ambiguities from Step 3, `blocked_by` chains,
