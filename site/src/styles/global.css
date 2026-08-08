@@ -200,6 +200,7 @@ h1{
 }
 .band + .band{margin-top:64px;}
 .c-1-5{grid-column:1/5;}
+.c-1-6{grid-column:1/6;} /* text column beside a figure: 5 cols + 1 spacer */
 .c-1-7{grid-column:1/7;}
 .c-1-8{grid-column:1/8;}
 .c-5-13{grid-column:5/13;}

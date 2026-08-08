@@ -45,7 +45,7 @@ There is no accent color. Hierarchy is weight, scale, rules, and spacing — not
 
 One source of truth in `:root`: `--cols: 12`, `--gutter: 24px`, `--margin: 72px`, `--maxw: 1296px`, `--bl: 8px` baseline with body leading at exactly 3 baselines (24px). Every line-height in the system is a multiple of 8.
 
-- Content sits in `.wrap`; grid bands are `.band` (a 12-column grid) with placement classes named by column line: `.c-1-5`, `.c-1-7`, `.c-1-8`, `.c-5-13`, `.c-7-13`, `.c-1-13`.
+- Content sits in `.wrap`; grid bands are `.band` (a 12-column grid) with placement classes named by column line: `.c-1-5`, `.c-1-6`, `.c-1-7`, `.c-1-8`, `.c-5-13`, `.c-7-13`, `.c-1-13`. Beside a figure, text takes 5 columns (`.c-1-6`) with column 6 left empty as a spacer and the figure on 7–13.
 - Prose columns hold 44–56ch max-width; wide evidence (figures, split lists) takes the right span or the full band.
 - The layout is inspectable: the `G` key (desktop) toggles a drafting overlay showing columns, gutters, margins, and both baseline pitches. New work must survive that inspection — text baselines on the 24px rhythm, edges on column lines.
 - Below 1100px, bands stack; the overlay and its toggle retire. Margins step 72 → 32 → 20px.
@@ -114,7 +114,7 @@ Restraint here is not minimalism for its own sake. The pages should feel dense w
 
 Structure and shell: `wrap`, `topbar`, `topbar-in`, `tb-brand`, `tb-right`, `tb-nav`, `tb-num`, `tb-label`, `tb-sep`, `hero`, `doc-sect`, `doc-idx`, `alias`, `foot`, `foot-line`, `foot-links`.
 
-Grid: `band`, `c-1-5`, `c-1-7`, `c-1-8`, `c-5-13`, `c-7-13`, `c-1-13`, and the overlay set `guides`, `cols`, `col`, `rows`, `mline`.
+Grid: `band`, `c-1-5`, `c-1-6`, `c-1-7`, `c-1-8`, `c-5-13`, `c-7-13`, `c-1-13`, and the overlay set `guides`, `cols`, `col`, `rows`, `mline`.
 
 Type and content: `tagline`, `pitch`, `body`, `mono`, `coda`, `verdict`, `chip`, `chip-p`, `ctas`, `cta`, `doclist` with modifiers `doclist--num` and `doclist--split`.
 
