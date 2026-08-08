@@ -78,6 +78,7 @@ Spacing is relational and baseline-true: a heading and its lede are one unit (8p
 - Small interactive or labelled objects — CTAs, the command chip, verdict chips, the grid toggle — share one control grammar: mono type, 1px strong-hairline border, 2px radius. Hover fills with `--panel` or upgrades the border to full ink; nothing glows, lifts, or transitions color.
 - Commands are presented in a chip with a non-selectable `$` prompt and a one-click-selects-all `code` payload.
 - Verdict words (`APPROVED`, `REVISE`, `NEEDS_EVIDENCE`, `ESCALATE`) are typeset as small bordered mono chips inline in running text — instrument readouts, not badges.
+- The composer specimen (`.composer`) depicts the human's chat brief as document furniture, never as a vendor screenshot: panel surface, sans prompt at body size, mono apparatus rows, and a bordered 2px-radius send chip. Monochrome, no icons, no product chrome; a `.fig-flow` mono line connects it to the artifact it compiles into.
 - The footer is the same paper: one strong rule, one line of provenance text, mono links. The page ends; it does not fade out.
 
 ## Engravings
@@ -118,7 +119,7 @@ Grid: `band`, `c-1-5`, `c-1-6`, `c-1-7`, `c-1-8`, `c-5-13`, `c-7-13`, `c-1-13`, 
 
 Type and content: `tagline`, `pitch`, `body`, `mono`, `coda`, `verdict`, `chip`, `chip-p`, `ctas`, `cta`, `doclist` with modifiers `doclist--num` and `doclist--split`.
 
-Figures: `fig-head` (with `t` title and `f` format tag), `panel`, `panel--scroll`, `engraving`, `soft`, `caption`.
+Figures: `fig-head` (with `t` title and `f` format tag), `panel`, `panel--scroll`, `engraving`, `soft`, `caption`, `fig-flow` (mono connector line between stacked figures), and the composer specimen set `composer`, `composer-meta`, `composer-prompt`, `composer-bar`, `composer-send`.
 
 Tokens: `--paper`, `--panel`, `--ink`, `--ink-soft`, `--hair`, `--hair-strong`, `--grain-opacity`, `--grain-invert`, and the grid set `--cols`, `--bl`, `--lh`, `--gutter`, `--margin`, `--maxw`. Never invent a parallel token; new needs extend these in `global.css` with the same naming voice.
 

@@ -97,6 +97,22 @@ import '../styles/global.css';
 
         <figure class="c-7-13">
           <div class="fig-head">
+            <span class="t">You prompt your PM</span>
+            <span class="f">chat</span>
+          </div>
+          <div class="composer" role="img" aria-label="A chat message to the PM agent: the plain-prose brief that becomes the ticket below">
+            <div class="composer-meta" aria-hidden="true"><span>main</span><span>·</span><span>sagan wired</span></div>
+            <p class="composer-prompt" aria-hidden="true">I want a hero that feels
+              like linear.app&rsquo;s &mdash; calm, type-led, from the shadcn
+              primitives we already have. Done when a harsh reviewer, seeing
+              both side by side blind, prefers ours.</p>
+            <div class="composer-bar" aria-hidden="true">
+              <span>Claude &middot; PM</span>
+              <span class="composer-send">&uarr;</span>
+            </div>
+          </div>
+          <p class="fig-flow" aria-hidden="true">&darr; the PM compiles it into the ticket &mdash; your words stay at the top, verbatim</p>
+          <div class="fig-head">
             <span class="t">What a ticket looks like</span>
             <span class="f">md</span>
           </div>
@@ -111,14 +127,14 @@ verifier_id: verify-claude-r1   <span class="soft"># never the builder</span>
 evidence_sha: 9be4459           <span class="soft"># proof binds here</span>
 ---
 
-<span class="soft">&lt;!-- you wrote this — plain words, like briefing a person --&gt;</span>
+<span class="soft">&lt;!-- your prompt, verbatim --&gt;</span>
 I want a hero that feels like linear.app&rsquo;s — calm,
 type-led, from the shadcn primitives we already have.
 Done when a harsh reviewer, seeing both side by side
 blind, prefers ours.
 
-<span class="soft">&lt;!-- the PM agent drafted everything below from that
-     brief; you confirmed it at a gate before any work --&gt;</span>
+<span class="soft">&lt;!-- the PM drafted everything below from it;
+     you confirmed at a gate before any work --&gt;</span>
 ## AC
 1. `h1` exact text `Ship work you can prove.`;
    Badge eyebrow `Now in public beta`.
